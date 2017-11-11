@@ -1,0 +1,43 @@
+{
+  "name": "joint-docs",
+  "version": "0.0.0",
+  "description": "Joint Kit Guide & API Reference",
+  "author": "|M| <manicprone@gmail.com>",
+  "license": "MIT",
+  "main": "src/server.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:manicprone/joint-docs.git"
+  },
+  "scripts": {
+    "dev": "babel-node src/server.js",
+    "start": "cross-env NODE_ENV=production babel-node src/server.js",
+    "lint": "eslint ./ --cache --ignore-pattern .gitignore",
+    "precommit-message": "echo 'Pre-commit checks (linting)...' && exit 0"
+  },
+  "pre-commit": [
+    "precommit-message",
+    "lint"
+  ],
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "compression": "^1.7.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.3",
+    "lodash": "^4.17.4",
+    "serve-favicon": "^2.4.5"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-eslint": "^7.2.3",
+    "babel-preset-env": "^1.5.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-register": "^6.24.1",
+    "cross-env": "^5.1.1",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.3.0",
+    "pre-commit": "^1.2.2"
+  }
+}
