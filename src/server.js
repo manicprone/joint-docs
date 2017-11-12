@@ -3,12 +3,13 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import favicon from 'serve-favicon';
 import compression from 'compression';
+import nunjucks from 'nunjucks';
 import serverConfig from './config/server-config';
-import apiConfig from './config/api-config';
-import testRoutes from './routers/test';
+import appConfig from './config/app-config';
+import viewRouter from './routers/view';
 
-const appName = apiConfig.name;
-const appAlias = apiConfig.alias;
+const appName = appConfig.name;
+const appAlias = appConfig.alias;
 const basePath = serverConfig.basePaths;
 
 const app = express();
@@ -20,11 +21,26 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// -------------------
-// Load API routers...
-// -------------------
-const apiBaseURI = basePath.api + apiConfig.path.module + apiConfig.path.version;
-app.use(apiBaseURI, testRoutes);
+// ------------------------------
+// Configure templating engine...
+// ------------------------------
+const viewDirs = [
+  `${__dirname}/templates`,
+  `${__dirname}/pages`,
+];
+app.set('views', viewDirs);
+app.set('view engine', 'njk');
+nunjucks.configure(app.get('views'), {
+  autoescape: true,
+  noCache: true,
+  // watch: true,
+  express: app,
+});
+
+// --------------------
+// Load router logic...
+// --------------------
+app.use('/', viewRouter);
 app.disable('view cache');
 
 // --------------------------------
