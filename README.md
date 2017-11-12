@@ -1,8 +1,14 @@
 # Joint Docs
 
-Joint Kit Guide & API Reference
+Joint | Guide & API Reference
 
 [TBC]
+
+<br />
+
+## WIP
+
+Not ready for public use until version 0.1.0 - Syntax and logic are in frequent flux.
 
 <br />
 
