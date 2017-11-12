@@ -1,8 +1,8 @@
 export default {
 
-  // -------------------
-  // API server settings
-  // -------------------
+  // ---------------
+  // Server settings
+  // ---------------
   host: '127.0.0.1',
   port: 3000,
 
@@ -11,7 +11,6 @@ export default {
     assets: '/public',
     auth: '/auth',
     api: '/api',
-    apiDoc: '/api/doc',
   },
 
   // -------------
