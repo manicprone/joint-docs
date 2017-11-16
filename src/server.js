@@ -25,8 +25,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Configure templating engine...
 // ------------------------------
 const viewDirs = [
-  `${__dirname}/templates`,
   `${__dirname}/pages`,
+  `${__dirname}/components`,
+  `${__dirname}/content`,
 ];
 app.set('views', viewDirs);
 app.set('view engine', 'njk');
@@ -37,18 +38,19 @@ nunjucks.configure(app.get('views'), {
   express: app,
 });
 
-// --------------------
-// Load router logic...
-// --------------------
-app.use('/', viewRouter);
-app.disable('view cache');
-
 // --------------------------------
 // Configure static repositories...
 // --------------------------------
 app.use(compression({ threshold: 0 }));
 app.use(favicon('./public/3d-box-48.png'));
 app.use(basePath.assets, express.static('./public'));
+app.use(basePath.styles, express.static('./src/styles'));
+
+// --------------------
+// Load router logic...
+// --------------------
+app.use('/', viewRouter);
+app.disable('view cache');
 
 // -----------------
 // Serve requests...

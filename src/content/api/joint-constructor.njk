@@ -1,0 +1,86 @@
+{% extends "main.njk" %}
+
+{% block content %}
+
+<h2>Joint Constructor</h2>
+
+<p>
+  The Joint Kit module is an instantiable Class. Its instances are <i>Joints</i>.
+</p>
+
+<p>
+  Multiple Joint instances can be utilized within a single application.
+</p>
+
+
+<h3>Example Instantiation</h3>
+
+<div class="code-block">
+<pre>
+import express from 'express';
+import Joint from 'joint-lib';
+import bookshelf from './services/bookshelf'; // your configured bookshelf service
+
+const joint = new Joint({
+  service: bookshelf,
+  server: express,
+  output: 'json-api',
+});
+</pre>
+</div>
+
+<h3>Constructor Parameters</h3>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Required?</th>
+  </tr>
+  <tr>
+    <td><a href="#constructor-param-service"><code>service</code></a></td>
+    <td>The configured service instance for your persistence solution.</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td><a href="#constructor-param-server"><code>server</code></a></td>
+    <td>The server instance for your HTTP router handling.</td>
+    <td>No</td>
+  </tr>
+  <tr>
+    <td><a href="#constructor-param-output"><code>output</code></a></td>
+    <td>The format of the returned data payloads. (defaults to <code class="code-ref">'native'</code>)</td>
+    <td>No</td>
+  </tr>
+  <tr>
+    <td><a href="#constructor-param-settings"><code>settings</code></a></td>
+    <td>The configurable settings available for a Joint instance.</td>
+    <td>No</td>
+  </tr>
+</table>
+
+<h4 id="constructor-param-service">service</h4>
+
+<p>
+  [TBC]
+</p>
+
+<h4 id="constructor-param-server">server</h4>
+
+<p>
+  [TBC]
+</p>
+
+<h4 id="constructor-param-output">output</h4>
+
+<p>
+  [TBC]
+</p>
+
+<h4 id="constructor-param-settings">settings</h4>
+
+<p>
+  [TBC]
+</p>
+
+{% endblock %}

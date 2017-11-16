@@ -1,6 +1,6 @@
 # Joint Docs
 
-Joint | Guide & API Reference
+Joint JS | Guide & API Reference
 
 [TBC]
 

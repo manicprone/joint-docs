@@ -1,0 +1,25 @@
+{% extends "index.njk" %}
+
+{% block page %}
+
+  <div class="app-header">
+    <div class="title">
+      <h1>Joint Docs</h1>
+    </div>
+
+    <div class="app-nav-container">
+      {% include "navs/app-nav.njk" %}
+    </div>
+  </div>
+
+  <aside class="page-nav-container">
+    {% include "navs/page-nav_" + section + ".njk" %}
+  </aside>
+
+  <div class="page-content">
+    {% block content %}
+      Page Content
+    {% endblock %}
+  </div>
+
+{% endblock %}

@@ -1,4 +1,7 @@
 import express from 'express';
+import appConfig from '../config/app-config';
+
+const basePaths = appConfig.basePaths;
 
 // -----------------------------------------------------------------------------
 // Main Nav:
@@ -21,23 +24,15 @@ router.route('/')
     res.render('splash');
   });
 
-router.route('/guide/:page?')
+router.route(`${basePaths.docs}/:section/:content?`)
   .get((req, res) => {
-    const page = req.params.page || 'start';
-    const pageURI = `guide/${page}`;
-    const context = { message: 'dynamic data here' };
+    const section = req.params.section || 'guide';
+    const content = req.params.content || 'start';
+    const contentURI = `${section}/${content}`;
+    const leadingURI = `${basePaths.docs}/${section}`;
+    const context = { section, content, rootURI: basePaths.docs, leadingURI };
 
-    res.render(pageURI, context);
+    res.render(contentURI, context);
   });
-
-// router.route('api')
-//   .get((req, res) => {
-//     res.render('api');
-//   });
-//
-// router.route('examples')
-//   .get((req, res) => {
-//     res.render('api');
-//   });
 
 module.exports = router;

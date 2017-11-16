@@ -11,4 +11,11 @@ export default {
   // -----------
   version: '0.0.0',
 
+  // ------------------
+  // App URI base paths
+  // ------------------
+  basePaths: {
+    docs: '/docs',
+  },
+
 };
