@@ -9,18 +9,319 @@
 </p>
 
 <p>
-Each Joint instance provides a robust set of abstract data actions that hook
-directly to your persistence layer, handling the core logic for common data operations.
+  Each Joint instance provides a robust set of abstract data actions that hook directly to your persistence layer, handling the core logic for common data operations.
 </p>
 
 <p>
-The actions are implemented using a config-like JSON syntax.
+  The actions are implemented using a config-like JSON syntax.
 </p>
+
+<h3>Action Syntax</h3>
+
+<p>
+  All Joint Actions return Promises, and have the signature:
+</p>
+
+<div class="code-block">
+<pre>
+joint.<action>(spec, input, output)
+  .then((payload) => { ... })
+  .catch((error) => { ... });
+</pre>
+</div>
+
+<p>
+  Action Parameters:
+</p>
+<table>
+  <tr>
+    <th>Parameter</th>
+    <th>Description</th>
+    <th style="text-align:center;">Required?</th>
+  </tr>
+  <tr>
+    <td><a href="#joint-action-spec"><code>spec</code></a></td>
+    <td>Defines the functionality of the action.</td>
+    <td style="text-align:center;">Yes</td>
+  </tr>
+  <tr>
+    <td><a href="#joint-action-input"><code>input</code></td>
+    <td>Supplies the data for an individual action request.</td>
+    <td style="text-align:center;">Yes</td>
+  </tr>
+  <tr>
+    <td><a href="#joint-action-output"><code>output</code></td>
+    <td>Specifies the format of the returned payload. Defaults to <code class="code-ref">'native'</code>.</td>
+    <td style="text-align:center;">No</td>
+  </tr>
+</table>
 
 <h3>Base Actions (CRUD)</h3>
 
+<table>
+  <tr>
+    <th>Action</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><a href="#joint-action-createItem"><code>createItem</code></a></td>
+    <td>Create operation for a single item.</td>
+  </tr>
+  <tr>
+    <td><a href="#joint-action-upsertItem"><code>upsertItem</code></a></td>
+    <td>Upsert operation for a single item.</td>
+  </tr>
+  <tr>
+    <td><a href="#joint-action-updateItem"><code>updateItem</code></a></td>
+    <td>Update operation for a single item.</td>
+  </tr>
+  <tr>
+    <td><a href="#joint-action-getItem"><code>getItem</code></a></td>
+    <td>Read operation for retrieving a single item.</td>
+  </tr>
+  <tr>
+    <td><a href="#joint-action-getItems"><code>getItems</code></a></td>
+    <td>Read operation for retrieving a collection of items.</td>
+  </tr>
+  <tr>
+    <td><a href="#joint-action-deleteItem"><code>deleteItem</code></a></td>
+    <td>Delete operation for single item.</td>
+  </tr>
+</table>
 
+<h4 id="joint-action-createItem">createItem</h4>
+
+<p>
+  [TBC]
+</p>
+
+<h4 id="joint-action-upsertItem">upsertItem</h4>
+
+<p>
+  [TBC]
+</p>
+
+<h4 id="joint-action-updateItem">updateItem</h4>
+
+<p>
+  [TBC]
+</p>
+
+<h4 id="joint-action-getItem">getItem</h4>
+
+<p>
+  [TBC]
+</p>
+
+<h4 id="joint-action-getItems">getItems</h4>
+
+<p>
+  [TBC]
+</p>
+
+<h4 id="joint-action-deleteItem">deleteItem</h4>
+
+<p>
+  [TBC]
+</p>
 
 <h3>Association Actions (Relational)</h3>
+
+<table>
+  <tr>
+    <th>Action</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><a href="#joint-action-addAssociatedItems"><code>addAssociatedItems</code></a></td>
+    <td>Operation for associating one to many items of a type to a main resource.</td>
+  </tr>
+  <tr>
+    <td><a href="#joint-action-hasAssociatedItem"><code>hasAssociatedItem</code></a></td>
+    <td>Operation for checking the existence of an association on a main resource.</td>
+  </tr>
+  <tr>
+    <td><a href="#joint-action-getAllAssociatedItems"><code>getAllAssociatedItems</code></a></td>
+    <td>Operation for retrieving all associations of a type from a main resource.</td>
+  </tr>
+  <tr>
+    <td><a href="#joint-action-removeAssociatedItems"><code>removeAssociatedItems</code></a></td>
+    <td>Operation for disassociating one to many items of a type from a main resource.</td>
+  </tr>
+  <tr>
+    <td><a href="#joint-action-removeAllAssociatedItems"><code>removeAllAssociatedItems</code></a></td>
+    <td>Operation for removing all associations of a type from a main resource.</td>
+  </tr>
+</table>
+
+<h4 id="joint-action-addAssociatedItems">addAssociatedItems</h4>
+
+<p>
+  [TBC]
+</p>
+
+<h4 id="joint-action-hasAssociatedItem">hasAssociatedItem</h4>
+
+<p>
+  [TBC]
+</p>
+
+<h4 id="joint-action-getAllAssociatedItems">getAllAssociatedItems</h4>
+
+<p>
+  [TBC]
+</p>
+
+<h4 id="joint-action-removeAssociatedItems">removeAssociatedItems</h4>
+
+<p>
+  [TBC]
+</p>
+
+<h4 id="joint-action-removeAllAssociatedItems">removeAllAssociatedItems</h4>
+
+<p>
+  [TBC]
+</p>
+
+<h3 id="joint-action-spec">Spec Options</h3>
+
+<table>
+  <tr>
+    <th>Option</th>
+    <th>Description</th>
+    <th style="text-align:center;">Type</th>
+    <th>Actions Supported</th>
+    <th style="text-align:center;">Required?</th>
+  </tr>
+  <tr>
+    <td><a href="#spec-opt-modelName"><code>modelName</code></a></td>
+    <td>The model name of the resource for the action.</td>
+    <td style="text-align:center;"><i>String</i></td>
+    <td><i>all</i></td>
+    <td style="text-align:center;">Yes</td>
+  </tr>
+  <tr>
+    <td><a href="#spec-opt-fields"><code>fields</code></a></td>
+    <td>The root property for defining accepted fields.</td>
+    <td style="text-align:center;"><i>Array</i></td>
+    <td><i>all</i></td>
+    <td style="text-align:center;">Yes <is>(*except <code>getItems</code>)</is></td>
+  </tr>
+  <tr>
+    <td><a href="#spec-opt-fieldsToReturn"><code>fieldsToReturn</code></a></td>
+    <td>The fields to return with the payload. Returns all fields when not provided.</td>
+    <td style="text-align:center;"><i>Array</i><br />-or-<br /><i>Object</i></td>
+    <td><code>getItem, getItems</code></td>
+    <td style="text-align:center;">No</td>
+  </tr>
+  <tr>
+    <td><a href="#spec-opt-defaultOrderBy"><code>defaultOrderBy</code></a></td>
+    <td>The default sort order for a collection payload.</td>
+    <td style="text-align:center;"><i>String</i></td>
+    <td><code>getItems</code></td>
+    <td style="text-align:center;">No</td>
+  </tr>
+  <tr>
+    <td><a href="#spec-opt-forceAssociations"><code>forceAssociations</code></a></td>
+    <td>Binds the <code class="code-ref">associations</code> to return for all action requests.</td>
+    <td style="text-align:center;"><i>Array</i></td>
+    <td><code>getItem, getItems</code></td>
+    <td style="text-align:center;">No</td>
+  </tr>
+  <tr>
+    <td><a href="#spec-opt-forceLoadDirect"><code>forceLoadDirect</code></a></td>
+    <td>Binds the <code class="code-ref">loadDirect</code> associations to return for all action requests.</td>
+    <td style="text-align:center;"><i>Array</i></td>
+    <td><code>getItem, getItems</code></td>
+    <td style="text-align:center;">No</td>
+  </tr>
+  <tr>
+    <td><a href="#spec-opt-auth"><code>auth</code></a></td>
+    <td>The root property for defining authorization on the action.</td>
+    <td style="text-align:center;"><i>Object</i></td>
+    <td><i>all</i></td>
+    <td style="text-align:center;">No</td>
+  </tr>
+  <tr>
+    <td><a href="#spec-opt-main"><code>main</code></a></td>
+    <td>The root property to wrap the <code class="code-ref">spec</code> options for the main resource, in an association action.</td>
+    <td style="text-align:center;"><i>Object</i></td>
+    <td><i>all association actions</i></td>
+    <td style="text-align:center;">Yes</td>
+  </tr>
+  <tr>
+    <td><a href="#spec-opt-association"><code>association</code></a></td>
+    <td>The root property to wrap the <code class="code-ref">spec</code> options for the associated resource, in an association action.</td>
+    <td style="text-align:center;"><i>Object</i></td>
+    <td><i>all association actions</i></td>
+    <td style="text-align:center;">Yes</td>
+  </tr>
+</table>
+
+<h4 id="spec-opt-modelName">modelName</h4>
+
+<p>
+  [TBC]
+</p>
+
+<h4 id="spec-opt-fields">fields</h4>
+
+<p>
+  [TBC]
+</p>
+
+{# fields.name | The field name. | _String_ | (_all_) | Yes #}
+{# fields.type | The field data type. | _String_ | (_all_) | Yes |
+{# fields.required | If the field is required for the action. | _Boolean_ | (_all_) | No #}
+{# fields.requiredOr | If the field is required for the action (within an OR set). | _Boolean_ | (_all_) | No #}
+{# fields.lookup | Denotes the field is required to pre-fetch the resource before an update can occur. | _Boolean_ | upsertItem, updateItem, deleteItem | Yes for upsertItem, updateItem #}
+{# fields.lookupOr | Denotes the field is required (within an OR set) to pre-fetch the resource before an update can occur. | _Boolean_ | upsertItem, updateItem, deleteItem | Yes for upsertItem, updateItem #}
+{# fields.locked | Denotes the field cannot be updated by user input. Instead, the `defaultValue` option is set by hand-rolling method logic or by use of dynamic values. | _Boolean_ | createItem, upsertItem, updateItem, getItem, getItems | No #}
+{# fields.defaultValue | The default value to persist, if the field is not provided in the input. Supports dynamic values. | _Mixed_ | createItem, upsertItem, updateItem, getItem, getItems | No #}
+
+<h4 id="spec-opt-fieldsToReturn">fieldsToReturn</h4>
+
+<p>
+  [TBC]
+</p>
+
+<h4 id="spec-opt-defaultOrderBy">defaultOrderBy</h4>
+
+<p>
+  [TBC]
+</p>
+
+<h4 id="spec-opt-forceAssociations">forceAssociations</h4>
+
+<p>
+  [TBC]
+</p>
+
+<h4 id="spec-opt-forceLoadDirect">forceLoadDirect</h4>
+
+<p>
+  [TBC]
+</p>
+
+<h4 id="spec-opt-auth">auth</h4>
+
+<p>
+  [TBC]
+</p>
+
+{# auth.ownerCreds | Specifies the fields that can verify resource ownership (for owner auth rules). | _Array_ | (_all_) | No #}
+
+<h4 id="spec-opt-main">main</h4>
+
+<p>
+  [TBC]
+</p>
+
+<h4 id="spec-opt-association">association</h4>
+
+<p>
+  [TBC]
+</p>
 
 {% endblock %}

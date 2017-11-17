@@ -36,6 +36,10 @@ a.disabled {
   cursor: not-allowed;
 }
 
+pre {
+  margin: 10px;
+}
+
 code {
   font-size: 15px;
 }
@@ -222,16 +226,28 @@ validation {
   font-style: italic;
   text-align: right;
   border-bottom: 1px solid #7799dd;
-  margin: 0 30px 8px 0;
+  margin: 0 60px 8px 0;
   padding-right: 4px;
 }
 .page-nav .nav-item {
   font-size: 15px;
   margin: 0 0 7px 4px;
 }
+.page-nav .nav-item a {
+  color: #252525;
+}
+.page-nav .nav-item a:hover {
+  color: #525252;
+}
 .page-nav .nav-sub-item {
   font-size: 14px;
   margin: 0 0 7px 4px;
+}
+.page-nav .nav-sub-item a {
+  color: #252525;
+}
+.page-nav .nav-sub-item a:hover {
+  color: #525252;
 }
 
 /* ------------------------------------------------------------  Page Content */
@@ -241,11 +257,15 @@ validation {
   z-index: 10;
   background-color: #ffffff;
   margin: 0 0 0 300px;
-  padding: 40px;
+  padding: 30px 40px 40px 40px;
   max-width: 780px;
 }
 .page-content h1, h2 {
   margin-bottom: 25px;
+}
+.page-content h2 {
+  color: #0b5693;
+  font-size: 28px;
 }
 .page-content h3, h4, h5 {
   margin-top: 35px;
@@ -268,6 +288,9 @@ validation {
 .page-content table {
   margin-top: 10px;
 }
+.page-content th, td {
+  font-size: 14px;
+}
 
 /* ----------------------------------------------------  Page Content Formats */
 .code-filename {
@@ -286,7 +309,7 @@ validation {
   font-size: 90%;
   background-color: #f8f8f8;
   border: 1px solid #e2e2e2;
-  padding: 3px 6px;
+  padding: 0;
   border-radius: 3px;
   overflow-x: scroll;
 }
