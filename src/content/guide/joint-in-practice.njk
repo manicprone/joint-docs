@@ -1,0 +1,354 @@
+{% extends "main.njk" %}
+
+{% block content %}
+
+<h2>Joint in Practice</h2>
+
+<p>
+  To implement solutions with the Joint Kit, you create <i>Joints</i>.
+</p>
+
+<p>
+  A Joint connects to:
+</p>
+<ul>
+  <li>your persistence service &nbsp;&nbsp;-&nbsp;&nbsp; to implement a data method layer</li>
+  <li>your server framework &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp; to implement an HTTP API layer</li>
+</ul>
+
+<p>
+  The Joint Kit provides a set of data actions that are abstracted to handle common data operations for your resources.
+  Actions are implemented using a config-like JSON syntax, making development simple and quick.
+</p>
+
+<p>
+  Leverage the built-in features to satisfy 100% of your required functionality, or use them as a base to augment with your own specialized logic.
+</p>
+
+<h3>Create a Joint</h3>
+
+<div class="code-block">
+<pre>
+import Joint from 'joint-kit';
+import bookshelf from './services/bookshelf'; // your configured bookshelf service
+
+const joint = new Joint({
+  service: bookshelf,
+});
+</pre>
+</div>
+
+<h3>Define Data Models</h3>
+
+<p>
+  You can continue configuring data models with your service natively, or you can dynamically generate them with Joint using a JSON descriptor:
+</p>
+
+<div class="code-filename">
+  <span>/model-config.js</span>
+</div>
+
+<div class="code-block">
+<pre>
+export default {
+  models: {
+    // Define a model named: "Profile"
+    Profile: {
+      tableName: 'blog_profiles',
+      timestamps: { created: 'created_at', updated: 'updated_at' },
+      associations: {
+        user: {
+          type: 'toOne',
+          path: 'user_id => User.id', // one-to-one
+        },
+        posts: {
+          type: 'toMany',
+          path: 'id => BlogPost.profile_id', // one-to-many
+        },
+        tags: {
+          type: 'toMany',
+          path: 'id => ProfileTag.profile_id => ProfileTag.tag_id => Tag.id', // many-to-many
+        },
+      },
+    },
+  },
+};
+</pre>
+</div>
+
+<br />
+
+<p>
+  Then, use the <code>generate</code> function to dynamically build and register your models:
+</p>
+
+<div class="code-block">
+<pre>
+import modelConfig from './model-config';
+
+joint.generate({ modelConfig }); // generate the models
+
+// Access all models using the syntax joint.model.&lt;modelName&gt;:
+if (joint.model.Profile) console.log('The Profile model exists !!!');
+</pre>
+</div>
+
+<h3>Create a Method Library</h3>
+
+<p>
+  From the provided set of abstract data actions ([Joint Actions][section-joint-actions]), you can quickly implement a customized method library.
+</p>
+
+<p>
+  You can hand-roll the methods yourself:
+</p>
+
+<details>
+<summary>Hand-rolling a CRUD set of methods</summary>
+
+<div class="code-filename">
+  <span>/methods/profile.js</span>
+</div>
+
+<div class="code-block">
+<pre>
+export function createProfile(input) {
+  const spec = {
+    modelName: 'Profile',
+    fields: [
+      { name: 'user_id', type: 'Number', required: true },
+      { name: 'title', type: 'String', required: true },
+      { name: 'slug', type: 'String', defaultValue: '% kebabCase(title) %' },
+      { name: 'tagline', type: 'String' },
+      { name: 'is_live', type: 'Boolean', defaultValue: false },
+    ],
+  };
+
+  return joint.createItem(spec, input);
+}
+
+export function updateProfile(input) {
+  const spec = {
+    modelName: 'Profile',
+    fields: [
+      { name: 'id', type: 'Number', required: true, lookup: true },
+      { name: 'title', type: 'String' },
+      { name: 'slug', type: 'String' },
+      { name: 'tagline', type: 'String' },
+      { name: 'is_live', type: 'Boolean' },
+    ],
+  };
+
+  return joint.updateItem(spec, input);
+}
+
+export function getProfile(input) {
+  const spec = {
+    modelName: 'Profile',
+    fields: [
+      { name: 'id', type: 'Number', requiredOr: true },
+      { name: 'slug', type: 'String', requiredOr: true },
+    ],
+  };
+
+  return joint.getItem(spec, input);
+}
+
+export function getProfiles(input) {
+  const spec = {
+    modelName: 'Profile',
+    fields: [
+      { name: 'user_id', type: 'Number' },
+      { name: 'is_live', type: 'Boolean' },
+    ],
+    defaultOrderBy: '-created_at,title',
+  };
+
+  return joint.getItems(spec, input);
+}
+
+export function deleteProfile(input) {
+  const spec = {
+    modelName: 'Profile',
+    fields: [
+      { name: 'id', type: 'Number', requiredOr: true },
+      { name: 'slug', type: 'String', requiredOr: true },
+    ],
+  };
+
+  return joint.deleteItem(spec, input);
+}
+</pre>
+</div>
+</details>
+
+<br />
+<span>-OR-</span>
+<br />
+
+<p>
+  You can dynamically generate them from a JSON descriptor:
+</p>
+
+<div class="code-filename">
+  <span>/method-config.js</span>
+</div>
+
+<div class="code-block">
+<pre>
+export default {
+  resources: [
+    {
+      modelName: 'Profile',
+      methods: [
+        {
+          name: 'createProfile',
+          action: 'createItem',
+          spec: {
+            fields: [
+              { name: 'user_id', type: 'Number', required: true },
+              { name: 'title', type: 'String', required: true },
+              { name: 'slug', type: 'String', defaultValue: '% kebabCase(title) %' },
+              { name: 'tagline', type: 'String' },
+              { name: 'is_live', type: 'Boolean', defaultValue: false },
+            ],
+          },
+        },
+        {
+          name: 'updateProfile',
+          action: 'updateItem',
+          spec: {
+            fields: [
+              { name: 'id', type: 'Number', required: true, lookup: true },
+              { name: 'title', type: 'String' },
+        	    { name: 'slug', type: 'String' },
+              { name: 'tagline', type: 'String' },
+              { name: 'is_live', type: 'Boolean' },
+            ],
+          },
+        },
+        {
+          name: 'getProfile',
+          action: 'getItem',
+          spec: {
+            fields: [
+              { name: 'id', type: 'Number', requiredOr: true },
+      		    { name: 'slug', type: 'String', requiredOr: true },
+            ],
+          },
+        },
+        {
+          name: 'getProfiles',
+          action: 'getItems',
+          spec: {
+            fields: [
+              { name: 'user_id', type: 'Number' },
+              { name: 'is_live', type: 'Boolean' },
+            ],
+            defaultOrderBy: '-created_at,title',
+          },
+        },
+        {
+          name: 'deleteProfile',
+          action: 'deleteItem',
+          spec: {
+            fields: [
+              { name: 'id', type: 'Number', requiredOr: true },
+      		    { name: 'slug', type: 'String', requiredOr: true },
+            ],
+          },
+        },
+      ],
+    },
+  ],
+};
+</pre>
+</div>
+
+<br />
+
+<p>
+  Then, use the <code>generate</code> function to dynamically generate your methods:
+</p>
+
+<div class="code-block">
+<pre>
+import methodConfig from './method-config';
+
+joint.generate({ methodConfig }); // generate the methods
+
+const input = {
+  fields: { is_live: true }, // retrieve all "live" profiles
+};
+
+joint.method.Profile.getProfiles(input)
+  .then((result) => { ... })
+  .catch((error) => { ... });
+</pre>
+</div>
+
+<h3>Create RESTful Endpoints</h3>
+
+<p>
+  On top of your Joint methods, you can quickly expose a RESTful API layer.
+</p>
+
+<p>
+  You can hand-roll the router logic yourself:
+</p>
+
+<span>-OR-</span>
+
+<p>
+  You can dynamically generate a router from a JSON descriptor:
+</p>
+
+<div class="code-filename">
+  <span>/route-config.js</span>
+</div>
+
+<div class="code-block">
+<pre>
+export default {
+  routes: [
+    {
+      uri: '/profile',
+      post: { method: 'Profile.createProfile', successStatus: 201, body: true },
+    },
+    {
+      uri: '/profile/:id',
+      get: { method: 'Profile.getProfile' },
+      post: { method: 'Profile.updateProfile', body: true },
+      delete: { method: 'Profile.deleteProfile', successStatus: 204 },
+    },
+    {
+      uri: '/profiles',
+      get: { method: 'Profile.getProfiles' },
+    },
+  ],
+};
+</pre>
+</div>
+
+<br />
+
+<p>
+  Then, use the <code>generate</code> function to dynamically generate your router logic:
+</p>
+
+<div class="code-block">
+<pre>
+import express from 'express';
+import routeConfig from './route-config';
+
+joint.setServer(express);
+joint.generate({ routeConfig }); // generate the router
+
+const app = express();
+app.use('/api', joint.router); // provide the router to your server
+
+// Now serving: GET /api/profile/333
+</pre>
+</div>
+
+{% endblock %}

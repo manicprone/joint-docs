@@ -1,7 +1,7 @@
 {
   "name": "joint-docs",
   "version": "0.0.0",
-  "description": "Joint Kit Guide & API Reference",
+  "description": "Joint JS | Guide & API Reference",
   "author": "|M| <manicprone@gmail.com>",
   "license": "MIT",
   "main": "src/server.js",

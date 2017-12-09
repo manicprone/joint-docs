@@ -1,0 +1,58 @@
+{% extends "main.njk" %}
+
+{% block content %}
+
+<h2>Prerequisites</h2>
+
+<p>
+  To use the Joint Kit, you need:
+</p>
+<ul>
+  <li>a supported persistence solution <is>(e.g. Postgres)</is></li>
+  <li>a configured data schema <is>(e.g. database & tables)</is></li>
+  <li> a supported service interface / ORM</li>
+</ul>
+
+<p>
+  The Joint Kit currently supports:
+</p>
+<table>
+  <tr>
+    <th>Service</th>
+    <th>Required Plugins</th>
+    <th>Persistence Options</th>
+  </tr>
+  <tr>
+    <td><a href="http://bookshelfjs.org">Bookshelf</a></td>
+    <td>
+      <a href="https://github.com/bookshelf/bookshelf/wiki/Plugin:-Model-Registry">registry</a>,
+      <a href="https://github.com/bookshelf/bookshelf/wiki/Plugin:-Pagination">pagination</a>
+    </td>
+    <td>Postgres, MySQL, SQLite3</td>
+  </tr>
+</table>
+
+<br />
+
+<p>
+If you wish to generate RESTful API endpoints, you need:
+</p>
+<ul>
+  <li>a supported server framework</li>
+</ul>
+
+<p>
+  The Joint Kit currently supports:
+</p>
+<table>
+  <tr>
+    <th>Server</th>
+    <th>Required Middleware</th>
+  </tr>
+  <tr>
+    <td><a href="http://expressjs.com">Express</a></td>
+    <td>body-parser, cookie-parser</td>
+  </tr>
+</table>
+
+{% endblock %}
