@@ -45,12 +45,12 @@ code {
 }
 
 details {
-  margin-top: 10px;
+  margin-top: 12px;
 }
 details summary {
   cursor: pointer;
   border-left: 5px solid #7799dd;
-  margin-bottom: 10px;
+  margin: 0 0 10px 4px;
   padding: 10px;
 }
 
@@ -91,8 +91,41 @@ td.code {
 }
 
 /* -----------------------------------------------------------------------------
- * API Reference Elements
+ * Custom Doc Elements
  * -------------------------------------------------------------------------- */
+
+dangle {
+  display: block;
+  color: #9c9c9c;
+  margin: 22px 0 22px 15px;
+}
+dangle span {
+  color: #121212;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+hilite {
+  color: #0b5693;
+  font-weight: 900;
+}
+
+comment {
+  font-size: 90%;
+  color: #9c9c9c;
+}
+
+callout {
+  display: block;
+  font-size: 15px;
+  color: #727272;
+  border-left: 4px solid #e5e5e5;
+  padding: 4px 0 4px 15px;
+  margin: 16px 0 12px 10px;
+}
+callout code {
+  font-size: 13px;
+}
 
 spec {
   font-size: 17px;
@@ -107,6 +140,18 @@ tip, tip code, tip div {
 tip span {
   font-size: 12px;
   color: #AAAAAA;
+}
+
+func {
+  font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+  font-size: 14px;
+  font-weight: 400;
+  border-radius: 4px;
+  margin-left: 2px;
+  margin-right: 1px;
+  padding: 2px 8px 3px 8px;
+  color: #ffffff;
+  background-color: #0b5693;
 }
 
 owner {
@@ -156,7 +201,6 @@ validation {
 /* -----------------------------------------------------------------------------
  * Page Components
  * -------------------------------------------------------------------------- */
-
 
 /* --------------------------------------------------------------  App Header */
 .app-header {
@@ -285,19 +329,31 @@ validation {
 .page-content li {
   margin-bottom: 6px;
 }
+.page-content ul.definition {
+  margin-left: -16px;
+}
+.page-content ul.definition li div {
+  display: inline-block;
+}
 .page-content table {
   margin-top: 10px;
+  max-width: 780px;
 }
 .page-content th, td {
   font-size: 14px;
 }
+.page-content table.definition {
+  max-width: 450px !important;
+}
 
-/* ----------------------------------------------------  Page Content Formats */
+/* ----------------------------------------------------  Code-related Formats */
 .code-filename {
   font-family: monospace;
-  font-size: 90%;
+  color: #8C8C8C;
+  font-size: 80%;
   padding: 3px 4px;
-  margin: 12px 0 5px 0;
+  margin: 12px 7px 3px 0;
+  text-align: right;
 }
 .code-ref {
   color: #525252;
