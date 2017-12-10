@@ -206,34 +206,34 @@ joint.&lt;action&gt;(spec, input, output)
     <td>The root property for defining accepted fields.</td>
     <td style="text-align:center;"><i>Array</i></td>
     <td><i>all</i></td>
-    <td style="text-align:center;">Yes <is>(*except <code>getItems</code>)</is></td>
+    <td style="text-align:center;">Yes (except getItems)</td>
   </tr>
   <tr>
     <td><a href="#spec-opt-fieldsToReturn"><code>fieldsToReturn</code></a></td>
     <td>The fields to return with the payload. Returns all fields when not provided.</td>
     <td style="text-align:center;"><i>Array</i><br />-or-<br /><i>Object</i></td>
-    <td><code>getItem, getItems</code></td>
+    <td>getItem, getItems</td>
     <td style="text-align:center;">No</td>
   </tr>
   <tr>
     <td><a href="#spec-opt-defaultOrderBy"><code>defaultOrderBy</code></a></td>
     <td>The default sort order for a collection payload.</td>
     <td style="text-align:center;"><i>String</i></td>
-    <td><code>getItems</code></td>
+    <td>getItems</td>
     <td style="text-align:center;">No</td>
   </tr>
   <tr>
     <td><a href="#spec-opt-forceAssociations"><code>forceAssociations</code></a></td>
     <td>Binds the <code class="code-ref">associations</code> to return, for all action requests.</td>
     <td style="text-align:center;"><i>Array</i></td>
-    <td><code>getItem, getItems</code></td>
+    <td>getItem, getItems</td>
     <td style="text-align:center;">No</td>
   </tr>
   <tr>
     <td><a href="#spec-opt-forceLoadDirect"><code>forceLoadDirect</code></a></td>
     <td>Binds the <code class="code-ref">loadDirect</code> associations to return, for all action requests.</td>
     <td style="text-align:center;"><i>Array</i></td>
-    <td><code>getItem, getItems</code></td>
+    <td>getItem, getItems</td>
     <td style="text-align:center;">No</td>
   </tr>
   <tr>
@@ -261,22 +261,9 @@ joint.&lt;action&gt;(spec, input, output)
 
 <h4 id="spec-opt-modelName">spec.modelName</h4>
 
-<apisig>
-  <div class="header">
-    <div class="type">type</div>
-    <div class="desc">actions supported</div>
-    <div class="bool">required?</div>
-  </div>
-  <div class="values">
-    <div class="type">String</div>
-    <div class="desc">all</div>
-    <div class="bool">Yes</div>
-  </div>
-</apisig>
+{{ html.apisig('String', 'all', 'Yes') }}
 
-<apidesc>
-  The model name of the resource upon which to act.
-</apidesc>
+{{ html.apidesc('The model name of the resource upon which to act.') }}
 
 <div class="code-block-heading">
   <span>Example (getItems):</span>
@@ -296,22 +283,9 @@ const spec = {
 
 <h4 id="spec-opt-fields">spec.fields</h4>
 
-<apisig>
-  <div class="header">
-    <div class="type">type</div>
-    <div class="desc">actions supported</div>
-    <div class="bool">required?</div>
-  </div>
-  <div class="values">
-    <div class="type">Array</div>
-    <div class="desc">all</div>
-    <div class="bool">Yes <comment>(*except <code>getItems</code>)</comment></div>
-  </div>
-</apisig>
+{{ html.apisig('Array', 'all', 'Yes (except getItems)') }}
 
-<apidesc>
-  Declares all fields that are accessible to the method, and defines how they can be used.
-</apidesc>
+{{ html.apidesc('Declares all fields that are accessible to the method, and defines how they can be used.') }}
 
 <div class="code-block-heading">
   <span>Example (updateItem):</span>
@@ -446,7 +420,7 @@ const spec = {
       Instead, the value is populated via the <b><code>defaultValue</code></b> property.
       <p>
         Either generate the <b><code>defaultValue</code></b> when hand-rolling the method logic yourself,
-        or you can utilize the <b><i>Dynamic Values</i></b> feature.
+        or you can utilize the <b>Dynamic Values</b> feature.
       </p>
       <p>
         If the user input provides a value, it will be ignored.
@@ -461,7 +435,7 @@ const spec = {
     <td>
       The default value to persist, when a value is not provided by the input.
       <p>
-        Supports <b><i>Dynamic Values</i></b>:
+        Supports <b>Dynamic Values</b>:
       </p>
       <ul>
         <li><b><code>now</code></b></li>
@@ -500,9 +474,9 @@ const spec = {
 
 <h4 id="spec-opt-fieldsToReturn">spec.fieldsToReturn</h4>
 
-<p>
-  [TBC]
-</p>
+{{ html.apisig('Array or Object', 'getItem, getItem', 'No') }}
+
+{{ html.apidesc('The fields to return with the payload. Returns all fields when not provided.') }}
 
 <h4 id="spec-opt-defaultOrderBy">spec.defaultOrderBy</h4>
 

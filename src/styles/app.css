@@ -407,7 +407,7 @@ apisig .values .bool {
 apisig .type {
   display: inline-block;
   border-right: 1px solid #0b5693;
-  width: 120px;
+  width: 130px;
 }
 apisig .values .type {
   font-style: italic;
