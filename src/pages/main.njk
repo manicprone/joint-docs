@@ -16,7 +16,7 @@
     {% include "navs/page-nav_" + section + ".njk" %}
   </aside>
 
-  <div class="page-content">
+  <div class="page-content {{ section }}">
     {% block content %}
       Page Content
     {% endblock %}

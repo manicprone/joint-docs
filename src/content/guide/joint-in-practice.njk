@@ -14,12 +14,12 @@
 
 <ul class="definition">
   <li>
-    <div style="width:180px">your persistence service</div>
+    <div style="width:180px"><i>your persistence service</i></div>
     <div style="width:27px">&#10132;</div>
     <div>to implement a data method layer</div>
   </li>
   <li>
-    <div style="width:180px">your server framework</div>
+    <div style="width:180px"><i>your server framework</i></div>
     <div style="width:27px">&#10132;</div>
     <div>to implement an HTTP API layer</div>
   </li>
@@ -117,9 +117,19 @@ const joint = new Joint({
 
 <hilite>joint.generate({ modelConfig });</hilite> <comment>// generate the models</comment>
 
-if (joint.model.Profile) console.log('The Profile model exists !!!');
-
 export default joint;
+</pre>
+</div>
+
+<div class="code-filename">
+  <span>example usage</span>
+</div>
+
+<div class="code-block">
+<pre>
+import joint from '../joint';
+
+if (joint.model.Profile) console.log('The Profile model exists !!!');
 </pre>
 </div>
 
@@ -322,6 +332,18 @@ const joint = new Joint({
 
 <hilite>joint.generate</hilite>({ modelConfig, <hilite>methodConfig</hilite> });</hilite> <comment>// generate the methods</comment>
 
+export default joint;
+</pre>
+</div>
+
+<div class="code-filename">
+  <span>example usage</span>
+</div>
+
+<div class="code-block">
+<pre>
+import joint from '../joint';
+
 const input = {
   fields: { is_live: true }, <comment>// retrieve all "live" profiles</comment>
 };
@@ -329,8 +351,6 @@ const input = {
 joint.method.Profile.getProfiles(input)
   .then((result) => { ... })
   .catch((error) => { ... });
-
-export default joint;
 </pre>
 </div>
 
@@ -422,12 +442,28 @@ const joint = new Joint({
 
 <hilite>joint.generate</hilite>({ modelConfig, methodConfig, <hilite>routeConfig</hilite> });</hilite> <comment>// generate the router</comment>
 
+export default joint;
+</pre>
+</div>
+
+<div class="code-filename">
+  <span>server.js</span>
+</div>
+
+<div class="code-block">
+<pre>
+import express from 'express';
+import joint from '../joint';
+
 const app = express();
+
+...
+
 app.use('/api', joint.router); <comment>// provide the router to your server</comment>
 
-<comment>// Now serving: GET /api/profile/333</comment>
+...
 
-export default joint;
+<comment>// Now serving: GET /api/profile/333</comment>
 </pre>
 </div>
 

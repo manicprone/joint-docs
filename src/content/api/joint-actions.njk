@@ -24,7 +24,7 @@
 
 <div class="code-block">
 <pre>
-joint.<action>(spec, input, output)
+joint.&lt;action&gt;(spec, input, output)
   .then((payload) => { ... })
   .catch((error) => { ... });
 </pre>
@@ -89,6 +89,35 @@ joint.<action>(spec, input, output)
   </tr>
 </table>
 
+<h3>Association Actions (Relational)</h3>
+
+<table>
+  <tr>
+    <th>Action</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><a href="#joint-action-addAssociatedItems"><code>addAssociatedItems</code></a></td>
+    <td>Operation for associating one to many items of a type to a main resource.</td>
+  </tr>
+  <tr>
+    <td><a href="#joint-action-hasAssociatedItem"><code>hasAssociatedItem</code></a></td>
+    <td>Operation for checking the existence of an association on a main resource.</td>
+  </tr>
+  <tr>
+    <td><a href="#joint-action-getAllAssociatedItems"><code>getAllAssociatedItems</code></a></td>
+    <td>Operation for retrieving all associations of a type from a main resource.</td>
+  </tr>
+  <tr>
+    <td><a href="#joint-action-removeAssociatedItems"><code>removeAssociatedItems</code></a></td>
+    <td>Operation for disassociating one to many items of a type from a main resource.</td>
+  </tr>
+  <tr>
+    <td><a href="#joint-action-removeAllAssociatedItems"><code>removeAllAssociatedItems</code></a></td>
+    <td>Operation for removing all associations of a type from a main resource.</td>
+  </tr>
+</table>
+
 <h4 id="joint-action-createItem">createItem</h4>
 
 <p>
@@ -124,35 +153,6 @@ joint.<action>(spec, input, output)
 <p>
   [TBC]
 </p>
-
-<h3>Association Actions (Relational)</h3>
-
-<table>
-  <tr>
-    <th>Action</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td><a href="#joint-action-addAssociatedItems"><code>addAssociatedItems</code></a></td>
-    <td>Operation for associating one to many items of a type to a main resource.</td>
-  </tr>
-  <tr>
-    <td><a href="#joint-action-hasAssociatedItem"><code>hasAssociatedItem</code></a></td>
-    <td>Operation for checking the existence of an association on a main resource.</td>
-  </tr>
-  <tr>
-    <td><a href="#joint-action-getAllAssociatedItems"><code>getAllAssociatedItems</code></a></td>
-    <td>Operation for retrieving all associations of a type from a main resource.</td>
-  </tr>
-  <tr>
-    <td><a href="#joint-action-removeAssociatedItems"><code>removeAssociatedItems</code></a></td>
-    <td>Operation for disassociating one to many items of a type from a main resource.</td>
-  </tr>
-  <tr>
-    <td><a href="#joint-action-removeAllAssociatedItems"><code>removeAllAssociatedItems</code></a></td>
-    <td>Operation for removing all associations of a type from a main resource.</td>
-  </tr>
-</table>
 
 <h4 id="joint-action-addAssociatedItems">addAssociatedItems</h4>
 
@@ -196,7 +196,7 @@ joint.<action>(spec, input, output)
   </tr>
   <tr>
     <td><a href="#spec-opt-modelName"><code>modelName</code></a></td>
-    <td>The model name of the resource for the action.</td>
+    <td>The model name of the resource upon which to act.</td>
     <td style="text-align:center;"><i>String</i></td>
     <td><i>all</i></td>
     <td style="text-align:center;">Yes</td>
@@ -224,14 +224,14 @@ joint.<action>(spec, input, output)
   </tr>
   <tr>
     <td><a href="#spec-opt-forceAssociations"><code>forceAssociations</code></a></td>
-    <td>Binds the <code class="code-ref">associations</code> to return for all action requests.</td>
+    <td>Binds the <code class="code-ref">associations</code> to return, for all action requests.</td>
     <td style="text-align:center;"><i>Array</i></td>
     <td><code>getItem, getItems</code></td>
     <td style="text-align:center;">No</td>
   </tr>
   <tr>
     <td><a href="#spec-opt-forceLoadDirect"><code>forceLoadDirect</code></a></td>
-    <td>Binds the <code class="code-ref">loadDirect</code> associations to return for all action requests.</td>
+    <td>Binds the <code class="code-ref">loadDirect</code> associations to return, for all action requests.</td>
     <td style="text-align:center;"><i>Array</i></td>
     <td><code>getItem, getItems</code></td>
     <td style="text-align:center;">No</td>
@@ -259,66 +259,306 @@ joint.<action>(spec, input, output)
   </tr>
 </table>
 
-<h4 id="spec-opt-modelName">modelName</h4>
+<h4 id="spec-opt-modelName">spec.modelName</h4>
+
+<apisig>
+  <div class="header">
+    <div class="type">type</div>
+    <div class="desc">actions supported</div>
+    <div class="bool">required?</div>
+  </div>
+  <div class="values">
+    <div class="type">String</div>
+    <div class="desc">all</div>
+    <div class="bool">Yes</div>
+  </div>
+</apisig>
+
+<apidesc>
+  The model name of the resource upon which to act.
+</apidesc>
+
+<div class="code-block-heading">
+  <span>Example (getItems):</span>
+</div>
+
+<div class="code-block">
+<pre>
+const spec = {
+  <hilite>modelName:</hilite> 'User',
+  fields: [
+    { name: 'country_of_origin', type: 'String' },
+  ],
+  defaultOrderBy: '-created_at,username',
+};
+</pre>
+</div>
+
+<h4 id="spec-opt-fields">spec.fields</h4>
+
+<apisig>
+  <div class="header">
+    <div class="type">type</div>
+    <div class="desc">actions supported</div>
+    <div class="bool">required?</div>
+  </div>
+  <div class="values">
+    <div class="type">Array</div>
+    <div class="desc">all</div>
+    <div class="bool">Yes <comment>(*except <code>getItems</code>)</comment></div>
+  </div>
+</apisig>
+
+<apidesc>
+  Declares all fields that are accessible to the method, and defines how they can be used.
+</apidesc>
+
+<div class="code-block-heading">
+  <span>Example (updateItem):</span>
+</div>
+
+<div class="code-block">
+<pre>
+const spec = {
+  modelName: 'User',
+  <hilite>fields:</hilite> [
+    { name: 'id', type: 'Number', required: true, lookup: true },
+    { name: 'last_login_at', type: 'String', locked: true, defaultValue: '% now %' },
+  ],
+};
+</pre>
+</div>
+
+<div class="code-block-heading">
+  <span>Example (getItem):</span>
+</div>
+
+<div class="code-block">
+<pre>
+const spec = {
+  modelName: 'User',
+  <hilite>fields:</hilite> [
+    { name: 'id', type: 'Number', requiredOr: true },
+    { name: 'username', type: 'String', requiredOr: true },
+    { name: 'external_id', type: 'String', requiredOr: true },
+  ],
+};
+</pre>
+</div>
+
+<br />
+<p>
+  <b>Available properties:</b>
+</p>
+
+<table>
+  <tr>
+    <th>Property</th>
+    <th>Description</th>
+    <th style="text-align:center;">Type</th>
+    <th>Actions Supported</th>
+    <th style="text-align:center;">Required?</th>
+  </tr>
+  <tr>
+    <td><code>fields.name</code></td>
+    <td>
+      The field name.
+      <p>
+        This value must match the underlying field name in the
+        persistence layer (e.g. the column name of the database table).
+      </p>
+    </td>
+    <td style="text-align:center;"><i>String</i></td>
+    <td><i>all</i></td>
+    <td style="text-align:center;">Yes</td>
+  </tr>
+  <tr>
+    <td><code>fields.type</code></td>
+    <td>
+      The field data type.
+      <p>
+        Can be: <code class="code-ref">'String'</code>, <code class="code-ref">'Number'</code>,
+        <code class="code-ref">'Boolean'</code>, <code class="code-ref">'JSON'</code>.
+      </p>
+      <p>
+        When an input value is provided for the field, it is explicitly cast to the defined type, to
+        ensure the proper value is persisted.
+      </p>
+    </td>
+    <td style="text-align:center;"><i>String</i></td>
+    <td><i>all</i></td>
+    <td style="text-align:center;">Yes</td>
+  </tr>
+  <tr>
+    <td><code>fields.required</code></td>
+    <td>
+      If the field is required for the action.
+      By default, a field is considered <i>not required</i>.
+      <p>
+        If a required field is not provided by the input, the Promise is rejected and an error is returned.
+      </p>
+    </td>
+    <td style="text-align:center;"><i>Boolean</i></td>
+    <td><i>all</i></td>
+    <td style="text-align:center;">No</td>
+  </tr>
+  <tr>
+    <td><code>fields.requiredOr</code></td>
+    <td>
+      If the field is required for the action (within an OR set).
+      By default, a field is considered <i>not required</i>.
+      <p>
+        If a required field is not provided by the input, the Promise is rejected and an error is returned.
+      </p>
+    </td>
+    <td style="text-align:center;"><i>Boolean</i></td>
+    <td><i>all</i></td>
+    <td style="text-align:center;">No</td>
+  </tr>
+  <tr>
+    <td><code>fields.lookup</code></td>
+    <td>
+      Denotes the field is required to pre-fetch the resource before a mutation can occur.
+      <p>
+        If a lookup field is not provided by the input, the Promise is rejected and an error is returned.
+      </p>
+    </td>
+    <td style="text-align:center;"><i>Boolean</i></td>
+    <td>upsertItem, updateItem, deleteItem</td>
+    <td style="text-align:center;">Yes for upsertItem, updateItem</td>
+  </tr>
+  <tr>
+    <td><code>fields.lookupOr</code></td>
+    <td>
+      Denotes the field is required (within an OR set) to pre-fetch the resource before a mutation can occur.
+      <p>
+        If a lookup field is not provided by the input, the Promise is rejected and an error is returned.
+      </p>
+    </td>
+    <td style="text-align:center;"><i>Boolean</i></td>
+    <td>upsertItem, updateItem, deleteItem</td>
+    <td style="text-align:center;">Yes for upsertItem, updateItem</td>
+  </tr>
+  <tr>
+    <td><code>fields.locked</code></td>
+    <td>
+      Denotes the field cannot be updated by user input.
+      Instead, the value is populated via the <b><code>defaultValue</code></b> property.
+      <p>
+        Either generate the <b><code>defaultValue</code></b> when hand-rolling the method logic yourself,
+        or you can utilize the <b><i>Dynamic Values</i></b> feature.
+      </p>
+      <p>
+        If the user input provides a value, it will be ignored.
+      </p>
+    </td>
+    <td style="text-align:center;"><i>Boolean</i></td>
+    <td>createItem, upsertItem, updateItem, getItem, getItems</td>
+    <td style="text-align:center;">No</td>
+  </tr>
+  <tr>
+    <td><code>fields.defaultValue</code></td>
+    <td>
+      The default value to persist, when a value is not provided by the input.
+      <p>
+        Supports <b><i>Dynamic Values</i></b>:
+      </p>
+      <ul>
+        <li><b><code>now</code></b></li>
+        <li><b><code>kebabCase(&lt;<i>fieldName</i>&gt;)</code></b></li>
+        <li><b><code>snakeCase(&lt;<i>fieldName</i>&gt;)</code></b></li>
+        <li><b><code>camelCase(&lt;<i>fieldName</i>&gt;)</code></b></li>
+        <li><b><code>pascalCase(&lt;<i>fieldName</i>&gt;)</code></b></li>
+      </ul>
+      <p>
+        See the <a href="#spec-concept-dynamicValues">Dynamic Values</a> section, for information on
+        how to use this feature.
+      </p>
+    </td>
+    <td style="text-align:center;"><i>Mixed</i></td>
+    <td>createItem, upsertItem, updateItem, getItem, getItems</td>
+    <td style="text-align:center;">No</td>
+  </tr>
+</table>
+
+<br />
+<p id="spec-concept-dynamicValues">
+  <b>Dynamic Values</b>
+</p>
+
+{#
+  now => Generates a timestamp reflecting the date/time the action request is executed.
+
+  kebabCase(<fieldName>)   => Transforms the specified field value to kebab case.
+
+  snakeCase(<fieldName>)  => Transforms the specified field value to snake case.
+
+  camelCase(<fieldName>)  => Transforms the specified field value to camel case.
+
+  pascalCase(<fieldName>) => Transforms the specified field value to pascal case.
+#}
+
+<h4 id="spec-opt-fieldsToReturn">spec.fieldsToReturn</h4>
 
 <p>
   [TBC]
 </p>
 
-<h4 id="spec-opt-fields">fields</h4>
+<h4 id="spec-opt-defaultOrderBy">spec.defaultOrderBy</h4>
 
 <p>
   [TBC]
 </p>
 
-{# fields.name | The field name. | _String_ | (_all_) | Yes #}
-{# fields.type | The field data type. | _String_ | (_all_) | Yes |
-{# fields.required | If the field is required for the action. | _Boolean_ | (_all_) | No #}
-{# fields.requiredOr | If the field is required for the action (within an OR set). | _Boolean_ | (_all_) | No #}
-{# fields.lookup | Denotes the field is required to pre-fetch the resource before an update can occur. | _Boolean_ | upsertItem, updateItem, deleteItem | Yes for upsertItem, updateItem #}
-{# fields.lookupOr | Denotes the field is required (within an OR set) to pre-fetch the resource before an update can occur. | _Boolean_ | upsertItem, updateItem, deleteItem | Yes for upsertItem, updateItem #}
-{# fields.locked | Denotes the field cannot be updated by user input. Instead, the `defaultValue` option is set by hand-rolling method logic or by use of dynamic values. | _Boolean_ | createItem, upsertItem, updateItem, getItem, getItems | No #}
-{# fields.defaultValue | The default value to persist, if the field is not provided in the input. Supports dynamic values. | _Mixed_ | createItem, upsertItem, updateItem, getItem, getItems | No #}
-
-<h4 id="spec-opt-fieldsToReturn">fieldsToReturn</h4>
+<h4 id="spec-opt-forceAssociations">spec.forceAssociations</h4>
 
 <p>
   [TBC]
 </p>
 
-<h4 id="spec-opt-defaultOrderBy">defaultOrderBy</h4>
+<h4 id="spec-opt-forceLoadDirect">spec.forceLoadDirect</h4>
 
 <p>
   [TBC]
 </p>
 
-<h4 id="spec-opt-forceAssociations">forceAssociations</h4>
+<h4 id="spec-opt-auth">spec.auth</h4>
+
+<br />
+<p>
+  <b>Available properties:</b>
+</p>
+
+<table>
+  <tr>
+    <th>Property</th>
+    <th>Description</th>
+    <th style="text-align:center;">Type</th>
+    <th>Actions Supported</th>
+    <th style="text-align:center;">Required?</th>
+  </tr>
+  <tr>
+    <td><code>auth.ownerCreds</code></td>
+    <td>
+      Specifies the fields that can verify resource ownership (for owner auth rules).
+    </td>
+    <td style="text-align:center;"><i>Array</i></td>
+    <td><i>all</i></td>
+    <td style="text-align:center;">No</td>
+  </tr>
+</table>
 
 <p>
   [TBC]
 </p>
 
-<h4 id="spec-opt-forceLoadDirect">forceLoadDirect</h4>
+<h4 id="spec-opt-main">spec.main</h4>
 
 <p>
   [TBC]
 </p>
 
-<h4 id="spec-opt-auth">auth</h4>
-
-<p>
-  [TBC]
-</p>
-
-{# auth.ownerCreds | Specifies the fields that can verify resource ownership (for owner auth rules). | _Array_ | (_all_) | No #}
-
-<h4 id="spec-opt-main">main</h4>
-
-<p>
-  [TBC]
-</p>
-
-<h4 id="spec-opt-association">association</h4>
+<h4 id="spec-opt-association">spec.association</h4>
 
 <p>
   [TBC]
