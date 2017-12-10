@@ -247,7 +247,7 @@ validation {
   overflow-y: auto;
   background-color: #f5f5f5;
   margin: 0;
-  width: 300px;
+  width: 265px;
 }
 .page-nav {
   padding: 20px;
@@ -272,9 +272,10 @@ validation {
   color: #727272;
   font-size: 12px;
   font-style: italic;
+  font-weight: 200;
   text-align: right;
   border-bottom: 1px solid #7799dd;
-  margin: 0 60px 8px 0;
+  margin: 0 15px 8px 0;
   padding-right: 4px;
 }
 .page-nav .nav-item {
@@ -307,7 +308,7 @@ validation {
   top: 45px;
   z-index: 10;
   background-color: #ffffff;
-  margin: 0 0 0 300px;
+  margin: 0 0 0 265px;
   padding: 30px 40px 40px 40px;
   max-width: 780px;
 }
