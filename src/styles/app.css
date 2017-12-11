@@ -36,6 +36,7 @@ a.disabled {
   cursor: not-allowed;
 }
 
+/* -------------------------------------  Code */
 pre {
   margin: 10px;
 }
@@ -44,6 +45,7 @@ code {
   font-size: 14px;
 }
 
+/* -------------------------------------  Collapsible Details */
 details {
   margin-top: 12px;
 }
@@ -54,10 +56,7 @@ details summary {
   padding: 10px;
 }
 
-/* -----------------------------------------------------------------------------
- * Tables
- * -------------------------------------------------------------------------- */
-
+/* -------------------------------------  Tables */
 table {
   border-collapse: collapse;
   width: 100%;
@@ -256,11 +255,11 @@ validation {
   margin-bottom: 20px;
 }
 .page-nav .nav-sub-group {
-  margin: 0 0 15px 4px;
+  margin: 0 0 20px 0;
 }
 .page-nav .nav-header {
   font-size: 17px;
-  margin-bottom: 8px;
+  margin-bottom: 18px;
 }
 .page-nav .nav-header a {
   color: #252525;
@@ -270,12 +269,10 @@ validation {
 }
 .page-nav .nav-sub-header {
   color: #727272;
-  font-size: 12px;
+  font-size: 14px;
   font-style: italic;
   font-weight: 200;
-  text-align: right;
-  border-bottom: 1px solid #7799dd;
-  margin: 0 15px 8px 0;
+  margin-bottom: 15px;
   padding-right: 4px;
 }
 .page-nav .nav-item {
@@ -290,13 +287,22 @@ validation {
 }
 .page-nav .nav-sub-item {
   font-size: 14px;
-  margin: 0 0 7px 4px;
+  margin: 0 0 10px 12px;
 }
 .page-nav .nav-sub-item a {
   color: #252525;
 }
 .page-nav .nav-sub-item a:hover {
   color: #525252;
+}
+.page-nav details {
+  margin-top: 0;
+  margin-left: 2px;
+}
+.page-nav details summary {
+  border: none;
+  margin: 0;
+  padding: 0;
 }
 
 /* -----------------------------------------------------------------------------
