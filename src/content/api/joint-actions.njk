@@ -22,13 +22,11 @@
   All Joint Actions return Promises, and have the signature:
 </p>
 
-<div class="code-block">
-<pre>
+{% call code.block() -%}
 joint.&lt;action&gt;(spec, input, output)
   .then((payload) => { ... })
   .catch((error) => { ... });
-</pre>
-</div>
+{%- endcall %}
 
 <p>
   Action Parameters:
@@ -261,16 +259,11 @@ joint.&lt;action&gt;(spec, input, output)
 
 <h4 id="spec-opt-modelName">spec.modelName</h4>
 
-{{ html.apisig('String', 'all', 'Yes') }}
+{{ api.optsig(['String'], 'all', 'Yes') }}
 
-{{ html.apidesc('The model name of the resource upon which to act.') }}
+{{ api.apidesc('The model name of the resource upon which to act.') }}
 
-<div class="code-block-heading">
-  <span>Example (getItems):</span>
-</div>
-
-<div class="code-block">
-<pre>
+{% call code.block('Example (getItems):') -%}
 const spec = {
   <hilite>modelName:</hilite> 'User',
   fields: [
@@ -278,21 +271,15 @@ const spec = {
   ],
   defaultOrderBy: '-created_at,username',
 };
-</pre>
-</div>
+{%- endcall %}
 
 <h4 id="spec-opt-fields">spec.fields</h4>
 
-{{ html.apisig('Array', 'all', 'Yes (except getItems)') }}
+{{ api.optsig(['Array'], 'all', 'Yes (except getItems)') }}
 
-{{ html.apidesc('Declares all fields that are accessible to the method, and defines how they can be used.') }}
+{{ api.apidesc('Declares all fields that are accessible to the method, and defines how they can be used.') }}
 
-<div class="code-block-heading">
-  <span>Example (updateItem):</span>
-</div>
-
-<div class="code-block">
-<pre>
+{% call code.block('Example (updateItem):') -%}
 const spec = {
   modelName: 'User',
   <hilite>fields:</hilite> [
@@ -300,15 +287,9 @@ const spec = {
     { name: 'last_login_at', type: 'String', locked: true, defaultValue: '% now %' },
   ],
 };
-</pre>
-</div>
+{%- endcall %}
 
-<div class="code-block-heading">
-  <span>Example (getItem):</span>
-</div>
-
-<div class="code-block">
-<pre>
+{% call code.block('Example (getItem):') -%}
 const spec = {
   modelName: 'User',
   <hilite>fields:</hilite> [
@@ -317,8 +298,7 @@ const spec = {
     { name: 'external_id', type: 'String', requiredOr: true },
   ],
 };
-</pre>
-</div>
+{%- endcall %}
 
 <br />
 <p>
@@ -474,9 +454,9 @@ const spec = {
 
 <h4 id="spec-opt-fieldsToReturn">spec.fieldsToReturn</h4>
 
-{{ html.apisig('Array or Object', 'getItem, getItem', 'No') }}
+{{ api.optsig(['Array', 'Object'], 'getItem, getItem', 'No') }}
 
-{{ html.apidesc('The fields to return with the payload. Returns all fields when not provided.') }}
+{{ api.apidesc('The fields to return with the payload. Returns all fields when not provided.') }}
 
 <h4 id="spec-opt-defaultOrderBy">spec.defaultOrderBy</h4>
 

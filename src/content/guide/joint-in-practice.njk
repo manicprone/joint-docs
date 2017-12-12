@@ -36,12 +36,7 @@
 
 <h3>Create a Joint</h3>
 
-<div class="code-filename">
-  <span>/joint/index.js</span>
-</div>
-
-<div class="code-block">
-<pre>
+{% call code.block(filename='/joint/index.js') -%}
 import Joint from 'joint-kit';
 import bookshelf from '../services/bookshelf'; <comment>// your configured bookshelf instance</comment>
 
@@ -50,8 +45,7 @@ const joint = new Joint({
 });
 
 export default joint;
-</pre>
-</div>
+{%- endcall %}
 
 <h3>Define Data Models</h3>
 

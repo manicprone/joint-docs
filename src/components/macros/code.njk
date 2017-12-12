@@ -1,0 +1,22 @@
+{# -----------------------------------------------------------------------------
+ Inline Code Macros
+----------------------------------------------------------------------------- #}
+
+{# ------------------------- #}
+{# block - Inline Code Block #}
+{# ------------------------- #}
+{% macro block(heading, filename) %}
+  {% if heading %}
+  <div class="code-block-heading">
+    <span>{{ heading }}</span>
+  </div>
+  {% endif %}
+  {% if filename %}
+  <div class="code-filename">
+    <span>{{ filename }}</span>
+  </div>
+  {% endif %}
+  <div class="code-block">
+    <pre>{{ caller() }}</pre>
+  </div>
+{% endmacro %}

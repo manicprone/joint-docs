@@ -1,0 +1,48 @@
+{# -----------------------------------------------------------------------------
+ API Macros
+----------------------------------------------------------------------------- #}
+
+{# ------------------------- #}
+{# optsig - Option Signature #}
+{# ------------------------- #}
+{% macro optsig(dataTypes=[], supportedActionsText='', requiredText='') %}
+  <optsig>
+    <div class="param">
+      <label>type</label>
+      <span>
+      {% set textOr = joiner('-or-') %}
+      {% for dataType in dataTypes %}
+        {{ textOr() }} <span class="type-value">{{ dataType }}</span>
+      {% endfor %}
+      </span>
+    </div>
+    <div class="param">
+      <label>for actions</label>
+      <span class="type-value">{{ supportedActionsText }}</span>
+    </div>
+    <div class="param">
+      <label>required?</label>
+      <span>{{ requiredText }}</span>
+    </div>
+  </optsig>
+{% endmacro %}
+
+{# ------------------------- #}
+{# apidesc - API Description #}
+{# ------------------------- #}
+{% macro apidesc(text='') %}
+  <apidesc>
+    {{ text }}
+  </apidesc>
+{% endmacro %}
+
+
+{#
+{% macro add(x, y) %}
+{{ caller() }}: {{ x + y }}
+{% endmacro%}
+
+{% call add(1, 2) -%}
+The result is
+{%- endcall %}
+#}

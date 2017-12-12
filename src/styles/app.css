@@ -4,7 +4,7 @@
 
 
 /* -----------------------------------------------------------------------------
- * General
+ * General HTML
  * -------------------------------------------------------------------------- */
 
 body {
@@ -90,7 +90,7 @@ td.code {
 }
 
 /* -----------------------------------------------------------------------------
- * Custom Doc Elements (General Text)
+ * Custom Doc Elements
  * -------------------------------------------------------------------------- */
 
 dangle {
@@ -116,6 +116,41 @@ callout {
   border-left: 4px solid #e5e5e5;
   padding: 4px 0 4px 15px;
   margin: 16px 0 12px 10px;
+}
+
+comment {
+  font-size: 90%;
+  color: #9c9c9c;
+}
+callout code {
+  font-size: 13px;
+}
+
+/* -------------------------------------  API-related */
+apidesc {
+  display: block;
+  border-left: 4px solid #8cb0cc;
+  margin: 0 30px 30px 8px;
+  padding: 7px 0 7px 15px;
+}
+
+optsig {
+  display: block;
+  font-size: 95%;
+  margin: 0 8px 35px 8px;
+}
+optsig .param {
+  margin-bottom: 10px;
+}
+optsig .param label {
+  display: inline-block;
+  color: #7e7e7e;
+  font-weight: 200;
+  margin-right: 20px;
+  width: 80px;
+}
+optsig .param .type-value {
+  font-style: italic;
 }
 
 spec {
@@ -380,63 +415,6 @@ validation {
 }
 
 /* -------------------------------------  Code-related */
-comment {
-  font-size: 90%;
-  color: #9c9c9c;
-}
-callout code {
-  font-size: 13px;
-}
-
-apisig {
-  display: block;
-  font-size: 95%;
-  margin: 0 8px 35px 8px;
-}
-apisig .header {
-}
-apisig .values {
-}
-apisig .header .type,
-apisig .header .desc,
-apisig .header .bool {
-  color: #7e7e7e;
-  text-align: left;
-  font-weight: 200;
-}
-apisig .values .type,
-apisig .values .desc,
-apisig .values .bool {
-  text-align: left;
-  padding-top: 6px;
-}
-apisig .type {
-  display: inline-block;
-  border-right: 1px solid #0b5693;
-  width: 130px;
-}
-apisig .values .type {
-  font-style: italic;
-}
-apisig .desc {
-  display: inline-block;
-  border-right: 1px solid #0b5693;
-  margin-left: 12px;
-  width: 270px;
-}
-apisig .bool {
-  display: inline-block;
-  margin-left: 12px;
-  width: 200px;
-}
-
-apidesc {
-  display: block;
-  border-left: 4px solid #8cb0cc;
-  margin: 0 30px 30px 8px;
-  padding: 7px 0 7px 15px;
-}
-
 .code-filename {
   font-family: monospace;
   color: #8C8C8C;
