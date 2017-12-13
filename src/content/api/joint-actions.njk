@@ -25,8 +25,8 @@
 {# ========================== BEGIN | Code Block  "Joint Action syntax" ===== #}
 {% call code.block() -%}
 joint.&lt;<i>action</i>&gt;(spec, input, output)
-  .then((payload) => { ... })
-  .catch((error) => { ... });
+  .then((payload) => { <comment>...</comment> })
+  .catch((error) => { <comment>...</comment> });
 {%- endcall %}
 {# =========================== END  | Code Block  "Joint Action syntax" ===== #}
 
@@ -650,6 +650,165 @@ function getUsers(input) {
 </p>
 
 <h4 id="spec-opt-association">spec.association</h4>
+
+<p>
+  [TBC]
+</p>
+
+<h3 id="joint-action-input">Input Options</h3>
+
+<table>
+  <tr>
+    <th>Option</th>
+    <th>Description</th>
+    <th style="text-align:center;">Type</th>
+    <th>Actions Supported</th>
+    <th style="text-align:center;">Required?</th>
+  </tr>
+  <tr>
+    <td><a href="#input-opt-fields"><code>fields</code></a></td>
+    <td>The root property for providing field data.</td>
+    <td style="text-align:center;"><i>Object</i></td>
+    <td><i>all</i></td>
+    <td style="text-align:center;">Yes (except getItems)</td>
+  </tr>
+  <tr>
+    <td><a href="#input-opt-fieldSet"><code>fieldSet</code></a></td>
+    <td>
+      The <b>Field Set</b> to return.
+      <p>
+        See the <a href="#input-concept-fieldSets">Field Sets</a> section, for information on
+        how to use this feature.
+      </p>
+    </td>
+    <td style="text-align:center;"><i>String</i></td>
+    <td>getItem, getItems</td>
+    <td style="text-align:center;">No</td>
+  </tr>
+  <tr>
+    <td><a href="#input-opt-orderBy"><code>orderBy</code></a></td>
+    <td>The sort order to apply to the returned collection payload.</td>
+    <td style="text-align:center;"><i>String</i></td>
+    <td>getItems</td>
+    <td style="text-align:center;">No</td>
+  </tr>
+  <tr>
+    <td><a href="#input-opt-associations"><code>associations</code></a></td>
+    <td>The association data to return with the payload. Returns full, detached payloads for the underlying resources.</td>
+    <td style="text-align:center;"><i>Array</i></td>
+    <td>getItem, getItems</td>
+    <td style="text-align:center;">No</td>
+  </tr>
+  <tr>
+    <td><a href="#input-opt-loadDirect"><code>loadDirect</code></a></td>
+    <td>Loads association data directly to the to main resource payload, as if it were native field data.</td>
+    <td style="text-align:center;"><i>Array</i></td>
+    <td>getItem, getItems</td>
+    <td style="text-align:center;">No</td>
+  </tr>
+  <tr>
+    <td><a href="#input-opt-paginate"><code>paginate</code></a></td>
+    <td></td>
+    <td style="text-align:center;"><i>Object</i></td>
+    <td>getItems</td>
+    <td style="text-align:center;">No</td>
+  </tr>
+  <tr>
+    <td><a href="#input-opt-trx"><code>trx</code></a></td>
+    <td></td>
+    <td style="text-align:center;"><i>Object</i></td>
+    <td><i>all</i></td>
+    <td style="text-align:center;">No</td>
+  </tr>
+  <tr>
+    <td><a href="#input-opt-authBundle"><code>authBundle</code></a></td>
+    <td></td>
+    <td style="text-align:center;"><i>Object</i></td>
+    <td><i>all</i></td>
+    <td style="text-align:center;">No</td>
+  </tr>
+</table>
+
+<h4 id="input-opt-fields">input.fields</h4>
+
+{{ api.optsig(['Object'], 'all', 'Yes (except getItems)') }}
+
+{{ api.apidesc('Provides the field data for an action request.') }}
+
+{# ========================== BEGIN | Code Block  "/methods/profile.js" ===== #}
+{% call code.block(filename='/methods/profile.js') -%}
+export function createProfile(input) {
+  const spec = {
+    modelName: 'Profile',
+    fields: [
+      { name: 'user_id', type: 'Number', required: true },
+      { name: 'title', type: 'String', required: true },
+      { name: 'tagline', type: 'String' },
+      { name: 'is_live', type: 'Boolean', defaultValue: false },
+    ],
+  };
+
+  return joint.createItem(spec, input);
+}
+{%- endcall %}
+{# =========================== END  | Code Block  "/methods/profile.js" ===== #}
+
+{# ================================ BEGIN | Code Block  "Example usage" ===== #}
+{% call code.block('Example usage:') -%}
+import * as profileMethods from '../methods/profile';
+
+const input = {
+  <hilite>fields: {
+    user_id: 333,
+    title: 'Functional Fanatic',
+    tagline: 'I don\'t have habits, I have algorithms.',
+    is_live: true,
+  },</hilite>
+};
+
+profileMethods.createProfile(input)
+  .then((payload) => { <comment>...</comment> }) <comment>// returns the created Profile resource</comment>
+  .catch((error) => { <comment>...</comment> }); <comment>// or returns an error</comment>
+{%- endcall %}
+{# ================================= END  | Code Block  "Example usage" ===== #}
+
+<h4 id="input-opt-fieldSet">input.fieldSet</h4>
+
+<p>
+  [TBC]
+</p>
+
+<h4 id="input-opt-orderBy">input.orderBy</h4>
+
+<p>
+  [TBC]
+</p>
+
+<h4 id="input-opt-associations">input.associations</h4>
+
+<p>
+  [TBC]
+</p>
+
+<h4 id="input-opt-loadDirect">input.loadDirect</h4>
+
+<p>
+  [TBC]
+</p>
+
+<h4 id="input-opt-paginate">input.paginate</h4>
+
+<p>
+  [TBC]
+</p>
+
+<h4 id="input-opt-trx">input.trx</h4>
+
+<p>
+  [TBC]
+</p>
+
+<h4 id="input-opt-authBundle">input.authBundle</h4>
 
 <p>
   [TBC]
