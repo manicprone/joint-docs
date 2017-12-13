@@ -22,14 +22,17 @@
   All Joint Actions return Promises, and have the signature:
 </p>
 
+{# ========================== BEGIN | Code Block  "Joint Action syntax" ===== #}
 {% call code.block() -%}
-joint.&lt;action&gt;(spec, input, output)
+joint.&lt;<i>action</i>&gt;(spec, input, output)
   .then((payload) => { ... })
   .catch((error) => { ... });
 {%- endcall %}
+{# =========================== END  | Code Block  "Joint Action syntax" ===== #}
 
+<br />
 <p>
-  Action Parameters:
+  <b>Action parameters:</b>
 </p>
 <table>
   <tr>
@@ -263,6 +266,7 @@ joint.&lt;action&gt;(spec, input, output)
 
 {{ api.apidesc('The model name of the resource upon which to act.') }}
 
+{# =========================== BEGIN | Code Block  "Example (getItems)" ===== #}
 {% call code.block('Example (getItems):') -%}
 const spec = {
   <hilite>modelName:</hilite> 'User',
@@ -272,6 +276,7 @@ const spec = {
   defaultOrderBy: '-created_at,username',
 };
 {%- endcall %}
+{# ============================ END  | Code Block  "Example (getItems)" ===== #}
 
 <h4 id="spec-opt-fields">spec.fields</h4>
 
@@ -279,6 +284,7 @@ const spec = {
 
 {{ api.apidesc('Declares all fields that are accessible to the method, and defines how they can be used.') }}
 
+{# ========================= BEGIN | Code Block  "Example (updateItem)" ===== #}
 {% call code.block('Example (updateItem):') -%}
 const spec = {
   modelName: 'User',
@@ -288,7 +294,9 @@ const spec = {
   ],
 };
 {%- endcall %}
+{# ========================== END  | Code Block  "Example (updateItem)" ===== #}
 
+{# ============================ BEGIN | Code Block  "Example (getItem)" ===== #}
 {% call code.block('Example (getItem):') -%}
 const spec = {
   modelName: 'User',
@@ -299,6 +307,7 @@ const spec = {
   ],
 };
 {%- endcall %}
+{# ============================= END  | Code Block  "Example (getItem)" ===== #}
 
 <br />
 <p>
