@@ -211,7 +211,13 @@ joint.&lt;<i>action</i>&gt;(spec, input, output)
   </tr>
   <tr>
     <td><a href="#spec-opt-fieldsToReturn"><code>fieldsToReturn</code></a></td>
-    <td>The fields to return with the payload. Returns all fields when not provided.</td>
+    <td>
+      Restricts the fields to return with the payload. Supports <b>Field Sets</b>.
+      <p>
+        See the <a href="#spec-concept-fieldSets">Field Sets</a> section, for information on
+        how to use this feature.
+      </p>
+    </td>
     <td style="text-align:center;"><i>Array</i><br />-or-<br /><i>Object</i></td>
     <td>getItem, getItems</td>
     <td style="text-align:center;">No</td>
@@ -266,17 +272,18 @@ joint.&lt;<i>action</i>&gt;(spec, input, output)
 
 {{ api.apidesc('The model name of the resource upon which to act.') }}
 
-{# =========================== BEGIN | Code Block  "Example (getItems)" ===== #}
-{% call code.block('Example (getItems):') -%}
-const spec = {
-  <hilite>modelName:</hilite> 'User',
-  fields: [
-    { name: 'country_of_origin', type: 'String' },
-  ],
-  defaultOrderBy: '-created_at,username',
-};
+{# ======================= BEGIN | Code Block  "Example getItems usage" ===== #}
+{% call code.block('Example getItems usage:') -%}
+function getUsers(input) {
+  const spec = {
+    <hilite>modelName: 'User'</hilite>,
+    defaultOrderBy: '-created_at,username',
+  };
+
+  return joint.getItems(spec, input);
+}
 {%- endcall %}
-{# ============================ END  | Code Block  "Example (getItems)" ===== #}
+{# ======================== END  | Code Block  "Example getItems usage" ===== #}
 
 <h4 id="spec-opt-fields">spec.fields</h4>
 
@@ -284,30 +291,38 @@ const spec = {
 
 {{ api.apidesc('Declares all fields that are accessible to the method, and defines how they can be used.') }}
 
-{# ========================= BEGIN | Code Block  "Example (updateItem)" ===== #}
-{% call code.block('Example (updateItem):') -%}
-const spec = {
-  modelName: 'User',
-  <hilite>fields:</hilite> [
-    { name: 'id', type: 'Number', required: true, lookup: true },
-    { name: 'last_login_at', type: 'String', locked: true, defaultValue: '% now %' },
-  ],
-};
-{%- endcall %}
-{# ========================== END  | Code Block  "Example (updateItem)" ===== #}
+{# ===================== BEGIN | Code Block  "Example updateItem usage" ===== #}
+{% call code.block('Example updateItem usage:') -%}
+function markLogin(input) {
+  const spec = {
+    modelName: 'User',
+    <hilite>fields: [
+      { name: 'id', type: 'Number', required: true, lookup: true },
+      { name: 'last_login_at', type: 'String', locked: true, defaultValue: '% now %' },
+    ],</hilite>
+  };
 
-{# ============================ BEGIN | Code Block  "Example (getItem)" ===== #}
-{% call code.block('Example (getItem):') -%}
-const spec = {
-  modelName: 'User',
-  <hilite>fields:</hilite> [
-    { name: 'id', type: 'Number', requiredOr: true },
-    { name: 'username', type: 'String', requiredOr: true },
-    { name: 'external_id', type: 'String', requiredOr: true },
-  ],
-};
+  return joint.updateItem(spec, input);
+}
 {%- endcall %}
-{# ============================= END  | Code Block  "Example (getItem)" ===== #}
+{# ====================== END  | Code Block  "Example updateItem usage" ===== #}
+
+{# ======================== BEGIN | Code Block  "Example getItem usage" ===== #}
+{% call code.block('Example getItem usage:') -%}
+function getUser(input) {
+  const spec = {
+    modelName: 'User',
+    <hilite>fields: [
+      { name: 'id', type: 'Number', requiredOr: true },
+      { name: 'username', type: 'String', requiredOr: true },
+      { name: 'external_id', type: 'String', requiredOr: true },
+    ],</hilite>
+  };
+
+  return joint.getItem(spec, input);
+}
+{%- endcall %}
+{# ========================= END  | Code Block  "Example getItem usage" ===== #}
 
 <br />
 <p>
@@ -428,10 +443,10 @@ const spec = {
       </p>
       <ul>
         <li><b><code>now</code></b></li>
-        <li><b><code>kebabCase(&lt;<i>fieldName</i>&gt;)</code></b></li>
-        <li><b><code>snakeCase(&lt;<i>fieldName</i>&gt;)</code></b></li>
-        <li><b><code>camelCase(&lt;<i>fieldName</i>&gt;)</code></b></li>
-        <li><b><code>pascalCase(&lt;<i>fieldName</i>&gt;)</code></b></li>
+        <li><code><b>kebabCase(</b>&lt;<i>fieldName</i>&gt;<b>)</b></code></li>
+        <li><code><b>snakeCase(</b>&lt;<i>fieldName</i>&gt;<b>)</b></code></li>
+        <li><code><b>camelCase(</b>&lt;<i>fieldName</i>&gt;<b>)</b></code></li>
+        <li><code><b>pascalCase(</b>&lt;<i>fieldName</i>&gt;<b>)</b></code></li>
       </ul>
       <p>
         See the <a href="#spec-concept-dynamicValues">Dynamic Values</a> section, for information on
@@ -449,6 +464,26 @@ const spec = {
   <b>Dynamic Values</b>
 </p>
 
+<p>
+  [TBC]
+</p>
+
+{# ================== BEGIN | Code Block  "Example with dynamic values" ===== #}
+{% call code.block('Example usage with dynamic values:') -%}
+function createTag(input) {
+  const spec = {
+    modelName: 'Tag',
+    fields: {
+      { name: 'label', type: 'String', required: true },
+      { name: 'key', type: 'String', <hilite>defaultValue: '% kebabCase(label) %'</hilite> },
+    },
+  };
+
+  return joint.createItem(spec, input);
+}
+{%- endcall %}
+{# =================== END  | Code Block  "Example with dynamic values" ===== #}
+
 {#
   now => Generates a timestamp reflecting the date/time the action request is executed.
 
@@ -463,27 +498,120 @@ const spec = {
 
 <h4 id="spec-opt-fieldsToReturn">spec.fieldsToReturn</h4>
 
-{{ api.optsig(['Array', 'Object'], 'getItem, getItem', 'No') }}
+{{ api.optsig(['Array', 'Object'], 'getItem, getItems', 'No') }}
 
-{{ api.apidesc('The fields to return with the payload. Returns all fields when not provided.') }}
+{{ api.apidesc('Restricts the fields to return with the payload. When not provided, all fields are returned.') }}
+
+{# ================================ BEGIN | Code Block  "Example usage" ===== #}
+{% call code.block('Example usage:') -%}
+function getUsers(input) {
+  const spec = {
+    modelName: 'User',
+    <hilite>fieldsToReturn: ['id', 'username', 'display_name', 'avatar_url'],</hilite> <comment>// return public fields only</comment>
+    defaultOrderBy: '-created_at,username',
+  };
+
+  return joint.getItems(spec, input);
+}
+{%- endcall %}
+{# ================================= END  | Code Block  "Example usage" ===== #}
+
+<br />
+<p id="spec-concept-fieldSets">
+  <b>Field Sets</b>
+</p>
+
+<p>
+  [TBC]
+</p>
+
+{# ================ BEGIN | Code Block  "Example usage with field sets" ===== #}
+{% call code.block('Example usage with field sets:') -%}
+function getUsers(input) {
+  const spec = {
+    modelName: 'User',
+    <hilite>fieldsToReturn: {
+      default: ['id', 'username', 'display_name', 'avatar_url'],
+      contact: ['id', 'email', 'display_name'],
+      full: ['id', 'external_id', 'username', 'email', 'display_name', 'avatar_url', 'preferred_locale', 'created_at', 'updated_at', 'last_login_at'],
+    },</hilite>
+    defaultOrderBy: '-created_at,username',
+  };
+
+  return joint.getItems(spec, input);
+}
+{%- endcall %}
+{# ================= END  | Code Block  "Example usage with field sets" ===== #}
 
 <h4 id="spec-opt-defaultOrderBy">spec.defaultOrderBy</h4>
 
-<p>
-  [TBC]
-</p>
+{{ api.optsig(['String'], 'getItems', 'No') }}
+
+{% call api.apidesc() -%}
+The default sort for a collection payload.
+Provide a comma-delimited string for specifying multiple field precedence.
+{%- endcall %}
+
+{# ================================ BEGIN | Code Block  "Example usage" ===== #}
+{% call code.block('Example usage:') -%}
+function getUsers(input) {
+  const spec = {
+    modelName: 'User',
+    <hilite>defaultOrderBy: '-created_at,username',</hilite> <comment>// created_at DESC, username ASC</comment>
+  };
+
+  return joint.getItems(spec, input);
+}
+{%- endcall %}
+{# ================================= END  | Code Block  "Example usage" ===== #}
 
 <h4 id="spec-opt-forceAssociations">spec.forceAssociations</h4>
 
-<p>
-  [TBC]
-</p>
+{{ api.optsig(['Array'], 'getItem, getItems', 'No') }}
+
+{% call api.apidesc() -%}
+Binds the <code>associations</code> to return, for all action requests.
+<br /><br />
+See <a href="#input-opt-associations"><prop>input.associations</prop></a> for more details.
+{%- endcall %}
+
+{# ================================ BEGIN | Code Block  "Example usage" ===== #}
+{% call code.block('Example usage:') -%}
+function getProfiles(input) {
+  const spec = {
+    modelName: 'Profile',
+    defaultOrderBy: '-created_at,title',
+    <hilite>forceAssociations: ['user', 'posts', 'tags'],</hilite>
+  };
+
+  return joint.getItems(spec, input);
+}
+{%- endcall %}
+{# ================================= END  | Code Block  "Example usage" ===== #}
 
 <h4 id="spec-opt-forceLoadDirect">spec.forceLoadDirect</h4>
 
-<p>
-  [TBC]
-</p>
+{{ api.optsig(['Array'], 'getItem, getItems', 'No') }}
+
+{% call api.apidesc() -%}
+Binds the <code>loadDirect</code> associations to return, for all action requests.
+<br /><br />
+See <a href="#input-opt-loadDirect"><prop>input.loadDirect</prop></a> for more details.
+{%- endcall %}
+
+{# ================================ BEGIN | Code Block  "Example usage" ===== #}
+{% call code.block('Example usage:') -%}
+function getUsers(input) {
+  const spec = {
+    modelName: 'User',
+    defaultOrderBy: '-created_at,username',
+    <hilite>forceLoadDirect: ['roles:name'],</hilite>
+  };
+
+  return joint.getItems(spec, input);
+}
+{%- endcall %}
+{# ================================= END  | Code Block  "Example usage" ===== #}
 
 <h4 id="spec-opt-auth">spec.auth</h4>
 

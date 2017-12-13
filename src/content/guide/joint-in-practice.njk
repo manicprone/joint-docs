@@ -25,21 +25,6 @@
   </li>
 </ul>
 
-<p style="margin-top:30px">
-  The Joint Kit provides a set of data actions that are abstracted to handle common data operations for your resources.
-  Actions are implemented using a config-like JSON syntax, making development simple and quick.
-</p>
-
-<p>
-  Leverage the built-in features of the Joint Kit to satisfy 100% of your required data layer
-</p>
-
-{{ text.dangle('or') }}
-
-<p>
-  use the Kit as a base... so you can focus on the nuances of your app, with custom logic.
-</p>
-
 <h3>Create a Joint</h3>
 
 {# ============================== BEGIN | Code Block  "/joint/index.js" ===== #}
@@ -294,7 +279,7 @@ export default {
 </p>
 
 <callout>
-  Methods are registered as: &nbsp; <code>joint.model.&lt;modelName&gt;.&lt;methodName&gt;</code>
+  Methods are registered as: &nbsp; <code>joint.method.&lt;modelName&gt;.&lt;methodName&gt;</code>
 </callout>
 
 {# ============================== BEGIN | Code Block  "/joint/index.js" ===== #}
@@ -320,6 +305,7 @@ import joint from '../joint';
 
 const input = {
   fields: { is_live: true }, <comment>// retrieve all "live" profiles</comment>
+  orderBy: 'title', <comment>// order by the "title" field, ascending</comment>
 };
 
 joint.method.Profile.getProfiles(input)
@@ -343,10 +329,68 @@ joint.method.Profile.getProfiles(input)
 
 {# =========================== BEGIN | Code Block  "/router/profile.js" ===== #}
 {% call code.block(filename='/router/profile.js') -%}
+import express from 'express';
 import joint from '../joint';
 
-[TBC]
+const router = express.Router();
 
+router.route('/profile')
+  .post((req, res) => {
+    const input = {};
+    input.fields = Object.assign({}, req.body, req.query);
+
+    return joint.method.Profile.createProfile(input)
+      .then(payload => handleDataResponse(payload, res, 201))
+      .catch(error => handleErrorResponse(error, res));
+  });
+
+router.route('/profile/:id')
+  .get((req, res) => {
+    const input = {};
+    input.fields = Object.assign({}, req.query, { id: req.params.id });
+
+    return joint.method.Profile.getProfile(input)
+      .then(payload => handleDataResponse(payload, res, 200))
+      .catch(error => handleErrorResponse(error, res));
+  })
+  .post((req, res) => {
+    const input = {};
+    input.fields = Object.assign({}, req.body, req.query, { id: req.params.id });
+
+    return joint.method.Profile.updateProfile(input)
+      .then(payload => handleDataResponse(payload, res, 200))
+      .catch(error => handleErrorResponse(error, res));
+  })
+  .delete((req, res) => {
+    const input = {};
+    input.fields = Object.assign({}, { id: req.params.id });
+
+    return joint.method.Profile.deleteProfile(input)
+      .then(payload => handleDataResponse(payload, res, 204))
+      .catch(error => handleErrorResponse(error, res));
+  });
+
+router.route('/profiles')
+  .get((req, res) => {
+    const input = {};
+    input.fields = Object.assign({}, req.query);
+
+    return joint.method.Profile.getProfiles(input)
+      .then(payload => handleDataResponse(payload, res, 200))
+      .catch(error => handleErrorResponse(error, res));
+  });
+
+<comment>// Abstractly handle the responses:</comment>
+function handleDataResponse(data, res, status = 200) {
+  res.status(status).json(data);
+}
+
+function handleErrorResponse(error, res) {
+  const status = error.status || 500;
+  res.status(status).json(error);
+}
+
+module.exports = router;
 {%- endcall %}
 {# ============================ END  | Code Block  "/router/profile.js" ===== #}
 </details>
@@ -422,7 +466,6 @@ const app = express();
 <hilite>app.use('/api', joint.router);</hilite> <comment>// provide the router to your running server</comment>
 
 <comment>...</comment>
-
 <comment>
 // Now serving:
 // POST   /api/profile

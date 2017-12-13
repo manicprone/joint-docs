@@ -30,8 +30,10 @@
 {# ------------------------- #}
 {# apidesc - API Description #}
 {# ------------------------- #}
-{% macro apidesc(text='') %}
-  <apidesc>
-    {{ text }}
-  </apidesc>
+{% macro apidesc(text) %}
+  {% if text %}
+  <apidesc>{{ text }}</apidesc>
+  {% else %}
+  <apidesc>{{ caller() }}</apidesc>
+  {% endif %}
 {% endmacro %}

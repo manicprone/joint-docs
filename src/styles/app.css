@@ -107,7 +107,7 @@ dangle span {
 
 hilite {
   color: #0b5693;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 callout {
@@ -120,6 +120,7 @@ callout {
 }
 
 comment {
+  font-weight: normal;
   font-size: 90%;
   color: #9c9c9c;
 }
@@ -171,26 +172,30 @@ tip span {
 
 func {
   font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+  color: #ffffff;
   font-size: 14px;
   font-weight: 400;
+  background-color: #0b5693;
   border-radius: 4px;
   margin-left: 2px;
   margin-right: 1px;
   padding: 2px 8px 3px 8px;
-  color: #ffffff;
-  background-color: #0b5693;
 }
 
 prop {
   font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+  color: #ffffff;
   font-size: 14px;
   font-weight: 400;
+  background-color: #5d819b;
   border-radius: 4px;
   margin-left: 2px;
   margin-right: 1px;
   padding: 2px 8px 3px 8px;
+}
+a:hover prop {
   color: #ffffff;
-  background-color: #8cb0cc;
+  background-color: #7594aa;
 }
 
 owner {
