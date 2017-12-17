@@ -1,0 +1,26 @@
+{# -----------------------------------------------------------------------------
+ Nav Macros
+----------------------------------------------------------------------------- #}
+
+{# ---------------------------- #}
+{# linkheader - Nav Link Header #}
+{# ---------------------------- #}
+{% macro linkheader(headerText='', uri='') %}
+  <div class="nav-header"><a href="{{ uri }}">{{ headerText }}</a></div>
+{% endmacro %}
+
+{# ------------------------------ #}
+{# subnav - Sub Nav (Collapsible) #}
+{# ------------------------------ #}
+{% macro subnav(headerText='', items=[], uri='') %}
+  <details>
+    <summary class="nav-sub-header">{{ headerText }}</summary>
+    <div class="nav-sub-group">
+    {% for item in items %}
+      <div class="nav-sub-item">
+        <a href={{ uri }}/#{{ item.refID }}>{{ item.label }}</a>
+      </div>
+    {% endfor %}
+    </div>
+  </details>
+{% endmacro %}

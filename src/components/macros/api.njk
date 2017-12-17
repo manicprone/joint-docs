@@ -2,6 +2,27 @@
  API Macros
 ----------------------------------------------------------------------------- #}
 
+{# ---------------------------- #}
+{# funcheader - Function Header #}
+{# ---------------------------- #}
+{% macro funcheader(headingText='', refID='') %}
+  <h4 id={{ refID }}>{{ headingText }}</h3>
+{% endmacro %}
+
+{# ------------------------- #}
+{# optheader - Option Header #}
+{# ------------------------- #}
+{% macro optheader(headingText='', refID='') %}
+  <h4 id={{ refID }}>{{ headingText }}</h3>
+{% endmacro %}
+
+{# ------------------------ #}
+{# valheader - Value Header #}
+{# ------------------------ #}
+{% macro valheader(headingText='', refID='') %}
+  <h4 id={{ refID }}>{{ headingText }}</h3>
+{% endmacro %}
+
 {# ------------------------- #}
 {# optsig - Option Signature #}
 {# ------------------------- #}

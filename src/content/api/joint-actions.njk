@@ -266,7 +266,7 @@ joint.&lt;<i>action</i>&gt;(spec, input, output)
   </tr>
 </table>
 
-<h4 id="spec-opt-modelName">spec.modelName</h4>
+{{ api.optheader('spec.modelName', 'spec-opt-modelName') }}
 
 {{ api.optsig(['String'], 'all', 'Yes') }}
 
@@ -285,7 +285,7 @@ function getUsers(input) {
 {%- endcall %}
 {# ======================== END  | Code Block  "Example getItems usage" ===== #}
 
-<h4 id="spec-opt-fields">spec.fields</h4>
+{{ api.optheader('spec.fields', 'spec-opt-fields') }}
 
 {{ api.optsig(['Array'], 'all', 'Yes (except getItems)') }}
 
@@ -496,7 +496,7 @@ function createTag(input) {
   pascalCase(<fieldName>) => Transforms the specified field value to pascal case.
 #}
 
-<h4 id="spec-opt-fieldsToReturn">spec.fieldsToReturn</h4>
+{{ api.optheader('spec.fieldsToReturn', 'spec-opt-fieldsToReturn') }}
 
 {{ api.optsig(['Array', 'Object'], 'getItem, getItems', 'No') }}
 
@@ -543,7 +543,7 @@ function getUsers(input) {
 {%- endcall %}
 {# ================= END  | Code Block  "Example usage with field sets" ===== #}
 
-<h4 id="spec-opt-defaultOrderBy">spec.defaultOrderBy</h4>
+{{ api.optheader('spec.defaultOrderBy', 'spec-opt-defaultOrderBy') }}
 
 {{ api.optsig(['String'], 'getItems', 'No') }}
 
@@ -565,7 +565,7 @@ function getUsers(input) {
 {%- endcall %}
 {# ================================= END  | Code Block  "Example usage" ===== #}
 
-<h4 id="spec-opt-forceAssociations">spec.forceAssociations</h4>
+{{ api.optheader('spec.forceAssociations', 'spec-opt-forceAssociations') }}
 
 {{ api.optsig(['Array'], 'getItem, getItems', 'No') }}
 
@@ -589,7 +589,7 @@ function getProfiles(input) {
 {%- endcall %}
 {# ================================= END  | Code Block  "Example usage" ===== #}
 
-<h4 id="spec-opt-forceLoadDirect">spec.forceLoadDirect</h4>
+{{ api.optheader('spec.forceLoadDirect', 'spec-opt-forceLoadDirect') }}
 
 {{ api.optsig(['Array'], 'getItem, getItems', 'No') }}
 
@@ -613,7 +613,7 @@ function getUsers(input) {
 {%- endcall %}
 {# ================================= END  | Code Block  "Example usage" ===== #}
 
-<h4 id="spec-opt-auth">spec.auth</h4>
+{{ api.optheader('spec.auth', 'spec-opt-auth') }}
 
 <br />
 <p>
@@ -643,13 +643,13 @@ function getUsers(input) {
   [TBC]
 </p>
 
-<h4 id="spec-opt-main">spec.main</h4>
+{{ api.optheader('spec.main', 'spec-opt-main') }}
 
 <p>
   [TBC]
 </p>
 
-<h4 id="spec-opt-association">spec.association</h4>
+{{ api.optheader('spec.association', 'spec-opt-association') }}
 
 <p>
   [TBC]
@@ -729,7 +729,7 @@ function getUsers(input) {
   </tr>
 </table>
 
-<h4 id="input-opt-fields">input.fields</h4>
+{{ api.optheader('input.fields', 'input-opt-fields') }}
 
 {{ api.optsig(['Object'], 'all', 'Yes (except getItems)') }}
 
@@ -772,46 +772,84 @@ profileMethods.createProfile(input)
 {%- endcall %}
 {# ================================= END  | Code Block  "Example usage" ===== #}
 
-<h4 id="input-opt-fieldSet">input.fieldSet</h4>
+{{ api.optheader('input.fieldSet', 'input-opt-fieldSet') }}
 
 <p>
   [TBC]
 </p>
 
-<h4 id="input-opt-orderBy">input.orderBy</h4>
+{{ api.optheader('input.orderBy', 'input-opt-orderBy') }}
 
 <p>
   [TBC]
 </p>
 
-<h4 id="input-opt-associations">input.associations</h4>
+{{ api.optheader('input.associations', 'input-opt-associations') }}
 
 <p>
   [TBC]
 </p>
 
-<h4 id="input-opt-loadDirect">input.loadDirect</h4>
+{{ api.optheader('input.loadDirect', 'input-opt-loadDirect') }}
 
 <p>
   [TBC]
 </p>
 
-<h4 id="input-opt-paginate">input.paginate</h4>
+{{ api.optheader('input.paginate', 'input-opt-paginate') }}
 
 <p>
   [TBC]
 </p>
 
-<h4 id="input-opt-trx">input.trx</h4>
+{{ api.optheader('input.trx', 'input-opt-trx') }}
 
 <p>
   [TBC]
 </p>
 
-<h4 id="input-opt-authBundle">input.authBundle</h4>
+{{ api.optheader('input.authBundle', 'input-opt-authBundle') }}
 
 <p>
   [TBC]
 </p>
+
+<h3 id="joint-action-output">Output Values</h3>
+
+<p>
+  The <code>output</code> value configures the format of the returned payload.
+</p>
+
+<callout>
+  This setting can be configured globally on the Joint instance itself.
+  (See the <a href="{{ rootURI }}/api/joint-instance">Joint Instance API</a>)
+</callout>
+
+<br />
+<table>
+  <tr>
+    <th>Value</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><a href="#output-value-native"><code>'native'</code></a></td>
+    <td>Returns the queried data in the format generated natively by the service. This is the default setting.</td>
+  </tr>
+  <tr>
+    <td><a href="#output-value-native"><code>'json-api'</code></a></td>
+    <td>Transforms the data into a <a href="http://jsonapi.org">JSON API Spec</a>-like format, making the data suitable for HTTP transport.</td>
+  </tr>
+</table>
+
+{{ api.valheader('output = \'native\'', 'output-value-native') }}
+
+{{ api.apidesc('Returns the payload in the format generated natively by the service. This is the default setting.') }}
+
+{{ api.valheader('output = \'json-api\'', 'output-value-json-api') }}
+
+{% call api.apidesc() -%}
+Transforms the data into a <a href="http://jsonapi.org">JSON API Spec</a>-like format, making the data suitable for HTTP transport.
+{%- endcall %}
+
 
 {% endblock %}

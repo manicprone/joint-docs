@@ -2,7 +2,19 @@
 
 {% block content %}
 
-<h2>Prerequisites</h2>
+<h2>Getting Started</h2>
+
+<p>
+  The foundation of all Joint solutions is the Joint Kit.
+</p>
+
+<h3>Install</h3>
+
+{% call code.block() -%}
+$ npm install joint-kit --save
+{%- endcall %}
+
+<h3>Prerequisites</h3>
 
 <p>
   To use the Joint Kit, you need:
@@ -33,9 +45,8 @@
 </table>
 
 <br />
-
 <p>
-If you wish to generate RESTful API endpoints, you need:
+  If you wish to generate RESTful API endpoints, you need:
 </p>
 <ul>
   <li>a supported server framework</li>
