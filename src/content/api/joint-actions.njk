@@ -22,13 +22,11 @@
   All Joint Actions return Promises, and have the signature:
 </p>
 
-{# ========================== BEGIN | Code Block  "Joint Action syntax" ===== #}
 {% call code.block() -%}
 joint.&lt;<i>action</i>&gt;(spec, input, output)
   .then((payload) => { <comment>...</comment> })
   .catch((error) => { <comment>...</comment> });
 {%- endcall %}
-{# =========================== END  | Code Block  "Joint Action syntax" ===== #}
 
 <br />
 <p>
@@ -119,67 +117,111 @@ joint.&lt;<i>action</i>&gt;(spec, input, output)
   </tr>
 </table>
 
-<h4 id="joint-action-createItem">createItem</h4>
+{{ api.funcheader('createItem', 'joint-action-createItem') }}
+
+{{ api.actionsig('The newly created item.') }}
+
+{{ api.apidesc('Create operation for a single item.') }}
 
 <p>
   [TBC]
 </p>
 
-<h4 id="joint-action-upsertItem">upsertItem</h4>
+{{ api.funcheader('upsertItem', 'joint-action-upsertItem') }}
+
+{{ api.actionsig('The upserted item.') }}
+
+{{ api.apidesc('Upsert operation for a single item.') }}
 
 <p>
   [TBC]
 </p>
 
-<h4 id="joint-action-updateItem">updateItem</h4>
+{{ api.funcheader('updateItem', 'joint-action-updateItem') }}
+
+{{ api.actionsig('The updated item.') }}
+
+{{ api.apidesc('Update operation for a single item.') }}
 
 <p>
   [TBC]
 </p>
 
-<h4 id="joint-action-getItem">getItem</h4>
+{{ api.funcheader('getItem', 'joint-action-getItem') }}
+
+{{ api.actionsig('The requested item.') }}
+
+{{ api.apidesc('Read operation for retrieving a single item.') }}
 
 <p>
   [TBC]
 </p>
 
-<h4 id="joint-action-getItems">getItems</h4>
+{{ api.funcheader('getItems', 'joint-action-getItems') }}
+
+{{ api.actionsig('The requested collection of items.') }}
+
+{{ api.apidesc('Read operation for retrieving a collection of items.') }}
 
 <p>
   [TBC]
 </p>
 
-<h4 id="joint-action-deleteItem">deleteItem</h4>
+{{ api.funcheader('deleteItem', 'joint-action-deleteItem') }}
+
+{{ api.actionsig('An empty object.') }}
+
+{{ api.apidesc('Delete operation for single item.') }}
 
 <p>
   [TBC]
 </p>
 
-<h4 id="joint-action-addAssociatedItems">addAssociatedItems</h4>
+{{ api.funcheader('addAssociatedItems', 'joint-action-addAssociatedItems') }}
+
+{{ api.actionsig('') }}
+
+{{ api.apidesc('Operation for associating one to many items of a type to a main resource.') }}
 
 <p>
   [TBC]
 </p>
 
-<h4 id="joint-action-hasAssociatedItem">hasAssociatedItem</h4>
+{{ api.funcheader('hasAssociatedItem', 'joint-action-hasAssociatedItem') }}
+
+{{ api.actionsig('true -or- false') }}
+
+{{ api.apidesc('Operation for checking the existence of an association on a main resource..') }}
 
 <p>
   [TBC]
 </p>
 
-<h4 id="joint-action-getAllAssociatedItems">getAllAssociatedItems</h4>
+{{ api.funcheader('getAllAssociatedItems', 'joint-action-getAllAssociatedItems') }}
+
+{{ api.actionsig('') }}
+
+{{ api.apidesc('Operation for retrieving all associations of a type from a main resource.') }}
 
 <p>
   [TBC]
 </p>
 
-<h4 id="joint-action-removeAssociatedItems">removeAssociatedItems</h4>
+{{ api.funcheader('removeAssociatedItems', 'joint-action-removeAssociatedItems') }}
+
+{{ api.actionsig('') }}
+
+{{ api.apidesc('Update operation for a single item.') }}
 
 <p>
   [TBC]
 </p>
 
-<h4 id="joint-action-removeAllAssociatedItems">removeAllAssociatedItems</h4>
+{{ api.funcheader('removeAllAssociatedItems', 'joint-action-removeAllAssociatedItems') }}
+
+{{ api.actionsig('') }}
+
+{{ api.apidesc('Operation for removing all associations of a type from a main resource.') }}
 
 <p>
   [TBC]
@@ -272,7 +314,6 @@ joint.&lt;<i>action</i>&gt;(spec, input, output)
 
 {{ api.apidesc('The model name of the resource upon which to act.') }}
 
-{# ======================= BEGIN | Code Block  "Example getItems usage" ===== #}
 {% call code.block('Example getItems usage:') -%}
 function getUsers(input) {
   const spec = {
@@ -283,7 +324,6 @@ function getUsers(input) {
   return joint.getItems(spec, input);
 }
 {%- endcall %}
-{# ======================== END  | Code Block  "Example getItems usage" ===== #}
 
 {{ api.optheader('spec.fields', 'spec-opt-fields') }}
 
@@ -291,7 +331,6 @@ function getUsers(input) {
 
 {{ api.apidesc('Declares all fields that are accessible to the method, and defines how they can be used.') }}
 
-{# ===================== BEGIN | Code Block  "Example updateItem usage" ===== #}
 {% call code.block('Example updateItem usage:') -%}
 function markLogin(input) {
   const spec = {
@@ -305,9 +344,7 @@ function markLogin(input) {
   return joint.updateItem(spec, input);
 }
 {%- endcall %}
-{# ====================== END  | Code Block  "Example updateItem usage" ===== #}
 
-{# ======================== BEGIN | Code Block  "Example getItem usage" ===== #}
 {% call code.block('Example getItem usage:') -%}
 function getUser(input) {
   const spec = {
@@ -322,7 +359,6 @@ function getUser(input) {
   return joint.getItem(spec, input);
 }
 {%- endcall %}
-{# ========================= END  | Code Block  "Example getItem usage" ===== #}
 
 <br />
 <p>
@@ -465,11 +501,78 @@ function getUser(input) {
 </p>
 
 <p>
-  [TBC]
+  The <prop>defaultValue</prop> property supports a set of convenience operations that
+  generate dynamic values.
 </p>
 
-{# ================== BEGIN | Code Block  "Example with dynamic values" ===== #}
-{% call code.block('Example usage with dynamic values:') -%}
+<br />
+<table>
+  <tr>
+    <th>Operation</th>
+    <th style="text-align:center;">Generated Type</th>
+    <th>Description</th>
+    <th>Example</th>
+  </tr>
+  <tr>
+    <td><b><code>now</code></b></td>
+    <td style="text-align:center;"><i>String</i></td>
+    <td>Generates a UTC timestamp for the current date/time.</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><code><b>kebabCase(</b>&lt;<i>fieldName</i>&gt;<b>)</b></code></td>
+    <td style="text-align:center;"><i>String</i></td>
+    <td>Generates the Kebab case of the value provided by the <i>fieldName</i> input.</td>
+    <td>
+{% call code.block() -%}
+<comment>// title: 'The Very First'</comment>
+kebabCase(title) => 'the-very-first';
+{%- endcall %}
+    </td>
+  </tr>
+  <tr>
+    <td><code><b>snakeCase(</b>&lt;<i>fieldName</i>&gt;<b>)</b></code></td>
+    <td style="text-align:center;"><i>String</i></td>
+    <td>Generates the Snake case of the value provided by the <i>fieldName</i> input.</td>
+    <td>
+{% call code.block() -%}
+<comment>// title: 'The Very First'</comment>
+snakeCase(title) => 'the_very_first';
+{%- endcall %}
+    </td>
+  </tr>
+  <tr>
+    <td><code><b>camelCase(</b>&lt;<i>fieldName</i>&gt;<b>)</b></code></td>
+    <td style="text-align:center;"><i>String</i></td>
+    <td>Generates the Camel case of the value provided by the <i>fieldName</i> input.</td>
+    <td>
+{% call code.block() -%}
+<comment>// title: 'The Very First'</comment>
+camelCase(title) => 'theVeryFirst';
+{%- endcall %}
+    </td>
+  </tr>
+  <tr>
+    <td><code><b>pascalCase(</b>&lt;<i>fieldName</i>&gt;<b>)</b></code></td>
+    <td style="text-align:center;"><i>String</i></td>
+    <td>Generates the Pascal case of the value provided by the <i>fieldName</i> input.</td>
+    <td>
+{% call code.block() -%}
+<comment>// title: 'The Very First'</comment>
+pascalCase(title) => 'TheVeryFirst';
+{%- endcall %}
+    </td>
+  </tr>
+</table>
+
+<br />
+
+{% call api.apidesc() -%}
+  To call an operation, use a <i>String</i> that starts and ends with the
+  <code style="font-size:105%;">%</code> character.
+{%- endcall %}
+
+{% call code.block('For example:') -%}
 function createTag(input) {
   const spec = {
     modelName: 'Tag',
@@ -482,19 +585,31 @@ function createTag(input) {
   return joint.createItem(spec, input);
 }
 {%- endcall %}
-{# =================== END  | Code Block  "Example with dynamic values" ===== #}
 
-{#
-  now => Generates a timestamp reflecting the date/time the action request is executed.
+<br /><br />
 
-  kebabCase(<fieldName>)   => Transforms the specified field value to kebab case.
+{% call api.apidesc() -%}
+  If the specified <code>fieldName</code> does not provide a value when the action request
+  is executed, or the operation is not recognized, a <code>null</code> value will be generated.
+{%- endcall %}
 
-  snakeCase(<fieldName>)  => Transforms the specified field value to snake case.
+{% call api.apidesc() -%}
+  To force the execution of the <code>defaultValue</code> option, you can use the <prop>locked</prop> property.
+  The <code>locked</code> property prevents the field from being updated by user input. Using the
+  <code>defaultValue</code> property in conjunction with <code>locked</code> ensures it will always be executed.
+{%- endcall %}
 
-  camelCase(<fieldName>)  => Transforms the specified field value to camel case.
+{% call code.block('For example:') -%}
+function markLogin(input) {
+  const spec = {
+    modelName: 'User',
+    { name: 'id', type: 'Number', required: true, lookup: true },
+    { name: 'last_login_at', type: 'String', <hilite>locked: true, defaultValue: '% now %'</hilite> },
+  };
 
-  pascalCase(<fieldName>) => Transforms the specified field value to pascal case.
-#}
+  return joint.updateItem(spec, input);
+}
+{%- endcall %}
 
 {{ api.optheader('spec.fieldsToReturn', 'spec-opt-fieldsToReturn') }}
 
@@ -502,7 +617,6 @@ function createTag(input) {
 
 {{ api.apidesc('Restricts the fields to return with the payload. When not provided, all fields are returned.') }}
 
-{# ================================ BEGIN | Code Block  "Example usage" ===== #}
 {% call code.block('Example usage:') -%}
 function getUsers(input) {
   const spec = {
@@ -514,7 +628,6 @@ function getUsers(input) {
   return joint.getItems(spec, input);
 }
 {%- endcall %}
-{# ================================= END  | Code Block  "Example usage" ===== #}
 
 <br />
 <p id="spec-concept-fieldSets">
@@ -525,7 +638,6 @@ function getUsers(input) {
   [TBC]
 </p>
 
-{# ================ BEGIN | Code Block  "Example usage with field sets" ===== #}
 {% call code.block('Example usage with field sets:') -%}
 function getUsers(input) {
   const spec = {
@@ -541,18 +653,16 @@ function getUsers(input) {
   return joint.getItems(spec, input);
 }
 {%- endcall %}
-{# ================= END  | Code Block  "Example usage with field sets" ===== #}
 
 {{ api.optheader('spec.defaultOrderBy', 'spec-opt-defaultOrderBy') }}
 
 {{ api.optsig(['String'], 'getItems', 'No') }}
 
 {% call api.apidesc() -%}
-The default sort for a collection payload.
-Provide a comma-delimited string for specifying multiple field precedence.
+  The default sort for a collection payload.
+  Provide a comma-delimited string for specifying multiple field precedence.
 {%- endcall %}
 
-{# ================================ BEGIN | Code Block  "Example usage" ===== #}
 {% call code.block('Example usage:') -%}
 function getUsers(input) {
   const spec = {
@@ -563,19 +673,17 @@ function getUsers(input) {
   return joint.getItems(spec, input);
 }
 {%- endcall %}
-{# ================================= END  | Code Block  "Example usage" ===== #}
 
 {{ api.optheader('spec.forceAssociations', 'spec-opt-forceAssociations') }}
 
 {{ api.optsig(['Array'], 'getItem, getItems', 'No') }}
 
 {% call api.apidesc() -%}
-Binds the <code>associations</code> to return, for all action requests.
-<br /><br />
-See <a href="#input-opt-associations"><prop>input.associations</prop></a> for more details.
+  Binds the <code>associations</code> to return, for all action requests.
+  <br /><br />
+  See <a href="#input-opt-associations"><prop>input.associations</prop></a> for more details.
 {%- endcall %}
 
-{# ================================ BEGIN | Code Block  "Example usage" ===== #}
 {% call code.block('Example usage:') -%}
 function getProfiles(input) {
   const spec = {
@@ -587,19 +695,17 @@ function getProfiles(input) {
   return joint.getItems(spec, input);
 }
 {%- endcall %}
-{# ================================= END  | Code Block  "Example usage" ===== #}
 
 {{ api.optheader('spec.forceLoadDirect', 'spec-opt-forceLoadDirect') }}
 
 {{ api.optsig(['Array'], 'getItem, getItems', 'No') }}
 
 {% call api.apidesc() -%}
-Binds the <code>loadDirect</code> associations to return, for all action requests.
-<br /><br />
-See <a href="#input-opt-loadDirect"><prop>input.loadDirect</prop></a> for more details.
+  Binds the <code>loadDirect</code> associations to return, for all action requests.
+  <br /><br />
+  See <a href="#input-opt-loadDirect"><prop>input.loadDirect</prop></a> for more details.
 {%- endcall %}
 
-{# ================================ BEGIN | Code Block  "Example usage" ===== #}
 {% call code.block('Example usage:') -%}
 function getUsers(input) {
   const spec = {
@@ -611,7 +717,6 @@ function getUsers(input) {
   return joint.getItems(spec, input);
 }
 {%- endcall %}
-{# ================================= END  | Code Block  "Example usage" ===== #}
 
 {{ api.optheader('spec.auth', 'spec-opt-auth') }}
 
@@ -735,7 +840,6 @@ function getUsers(input) {
 
 {{ api.apidesc('Provides the field data for an action request.') }}
 
-{# ========================== BEGIN | Code Block  "/methods/profile.js" ===== #}
 {% call code.block(filename='/methods/profile.js') -%}
 export function createProfile(input) {
   const spec = {
@@ -751,9 +855,7 @@ export function createProfile(input) {
   return joint.createItem(spec, input);
 }
 {%- endcall %}
-{# =========================== END  | Code Block  "/methods/profile.js" ===== #}
 
-{# ================================ BEGIN | Code Block  "Example usage" ===== #}
 {% call code.block('Example usage:') -%}
 import * as profileMethods from '../methods/profile';
 
@@ -770,7 +872,6 @@ profileMethods.createProfile(input)
   .then((payload) => { <comment>...</comment> }) <comment>// returns the created Profile resource</comment>
   .catch((error) => { <comment>...</comment> }); <comment>// or returns an error</comment>
 {%- endcall %}
-{# ================================= END  | Code Block  "Example usage" ===== #}
 
 {{ api.optheader('input.fieldSet', 'input-opt-fieldSet') }}
 
@@ -848,7 +949,7 @@ profileMethods.createProfile(input)
 {{ api.valheader('output = \'json-api\'', 'output-value-json-api') }}
 
 {% call api.apidesc() -%}
-Transforms the data into a <a href="http://jsonapi.org">JSON API Spec</a>-like format, making the data suitable for HTTP transport.
+  Transforms the data into a <a href="http://jsonapi.org">JSON API Spec</a>-like format, making the data suitable for HTTP transport.
 {%- endcall %}
 
 

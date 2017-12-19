@@ -23,6 +23,18 @@
   <h4 id={{ refID }}>{{ headingText }}</h3>
 {% endmacro %}
 
+{# ---------------------------- #}
+{# actionsig - Action Signature #}
+{# ---------------------------- #}
+{% macro actionsig(returnsText='') %}
+  <optsig>
+    <div class="param">
+      <label>returns</label>
+      <span>{{ returnsText }}</span>
+    </div>
+  </optsig>
+{% endmacro %}
+
 {# ------------------------- #}
 {# optsig - Option Signature #}
 {# ------------------------- #}
