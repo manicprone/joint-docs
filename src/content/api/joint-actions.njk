@@ -1,4 +1,4 @@
-{% extends "main.njk" %}
+{% extends "main-with-nav.njk" %}
 
 {% block content %}
 
@@ -22,16 +22,15 @@
   All Joint Actions return Promises, and have the signature:
 </p>
 
-<div class="code-block">
-<pre>
-joint.<action>(spec, input, output)
-  .then((payload) => { ... })
-  .catch((error) => { ... });
-</pre>
-</div>
+{% call code.block() -%}
+joint.&lt;<i>action</i>&gt;(spec, input, output)
+  .then((payload) => { <comment>...</comment> })
+  .catch((error) => { <comment>...</comment> });
+{%- endcall %}
 
+<br />
 <p>
-  Action Parameters:
+  <b>Action parameters:</b>
 </p>
 <table>
   <tr>
@@ -89,42 +88,6 @@ joint.<action>(spec, input, output)
   </tr>
 </table>
 
-<h4 id="joint-action-createItem">createItem</h4>
-
-<p>
-  [TBC]
-</p>
-
-<h4 id="joint-action-upsertItem">upsertItem</h4>
-
-<p>
-  [TBC]
-</p>
-
-<h4 id="joint-action-updateItem">updateItem</h4>
-
-<p>
-  [TBC]
-</p>
-
-<h4 id="joint-action-getItem">getItem</h4>
-
-<p>
-  [TBC]
-</p>
-
-<h4 id="joint-action-getItems">getItems</h4>
-
-<p>
-  [TBC]
-</p>
-
-<h4 id="joint-action-deleteItem">deleteItem</h4>
-
-<p>
-  [TBC]
-</p>
-
 <h3>Association Actions (Relational)</h3>
 
 <table>
@@ -154,31 +117,111 @@ joint.<action>(spec, input, output)
   </tr>
 </table>
 
-<h4 id="joint-action-addAssociatedItems">addAssociatedItems</h4>
+{{ api.funcheader('createItem', 'joint-action-createItem') }}
+
+{{ api.actionsig('The newly created item.') }}
+
+{{ api.apidesc('Create operation for a single item.') }}
 
 <p>
   [TBC]
 </p>
 
-<h4 id="joint-action-hasAssociatedItem">hasAssociatedItem</h4>
+{{ api.funcheader('upsertItem', 'joint-action-upsertItem') }}
+
+{{ api.actionsig('The upserted item.') }}
+
+{{ api.apidesc('Upsert operation for a single item.') }}
 
 <p>
   [TBC]
 </p>
 
-<h4 id="joint-action-getAllAssociatedItems">getAllAssociatedItems</h4>
+{{ api.funcheader('updateItem', 'joint-action-updateItem') }}
+
+{{ api.actionsig('The updated item.') }}
+
+{{ api.apidesc('Update operation for a single item.') }}
 
 <p>
   [TBC]
 </p>
 
-<h4 id="joint-action-removeAssociatedItems">removeAssociatedItems</h4>
+{{ api.funcheader('getItem', 'joint-action-getItem') }}
+
+{{ api.actionsig('The requested item.') }}
+
+{{ api.apidesc('Read operation for retrieving a single item.') }}
 
 <p>
   [TBC]
 </p>
 
-<h4 id="joint-action-removeAllAssociatedItems">removeAllAssociatedItems</h4>
+{{ api.funcheader('getItems', 'joint-action-getItems') }}
+
+{{ api.actionsig('The requested collection of items.') }}
+
+{{ api.apidesc('Read operation for retrieving a collection of items.') }}
+
+<p>
+  [TBC]
+</p>
+
+{{ api.funcheader('deleteItem', 'joint-action-deleteItem') }}
+
+{{ api.actionsig('An empty object.') }}
+
+{{ api.apidesc('Delete operation for single item.') }}
+
+<p>
+  [TBC]
+</p>
+
+{{ api.funcheader('addAssociatedItems', 'joint-action-addAssociatedItems') }}
+
+{{ api.actionsig('') }}
+
+{{ api.apidesc('Operation for associating one to many items of a type to a main resource.') }}
+
+<p>
+  [TBC]
+</p>
+
+{{ api.funcheader('hasAssociatedItem', 'joint-action-hasAssociatedItem') }}
+
+{{ api.actionsig('true -or- false') }}
+
+{{ api.apidesc('Operation for checking the existence of an association on a main resource..') }}
+
+<p>
+  [TBC]
+</p>
+
+{{ api.funcheader('getAllAssociatedItems', 'joint-action-getAllAssociatedItems') }}
+
+{{ api.actionsig('') }}
+
+{{ api.apidesc('Operation for retrieving all associations of a type from a main resource.') }}
+
+<p>
+  [TBC]
+</p>
+
+{{ api.funcheader('removeAssociatedItems', 'joint-action-removeAssociatedItems') }}
+
+{{ api.actionsig('') }}
+
+{{ api.apidesc('Update operation for a single item.') }}
+
+<p>
+  [TBC]
+</p>
+
+{{ api.funcheader('removeAllAssociatedItems', 'joint-action-removeAllAssociatedItems') }}
+
+{{ api.actionsig('') }}
+
+{{ api.apidesc('Operation for removing all associations of a type from a main resource.') }}
 
 <p>
   [TBC]
@@ -196,7 +239,7 @@ joint.<action>(spec, input, output)
   </tr>
   <tr>
     <td><a href="#spec-opt-modelName"><code>modelName</code></a></td>
-    <td>The model name of the resource for the action.</td>
+    <td>The model name of the resource upon which to act.</td>
     <td style="text-align:center;"><i>String</i></td>
     <td><i>all</i></td>
     <td style="text-align:center;">Yes</td>
@@ -206,34 +249,40 @@ joint.<action>(spec, input, output)
     <td>The root property for defining accepted fields.</td>
     <td style="text-align:center;"><i>Array</i></td>
     <td><i>all</i></td>
-    <td style="text-align:center;">Yes <is>(*except <code>getItems</code>)</is></td>
+    <td style="text-align:center;">Yes (except getItems)</td>
   </tr>
   <tr>
     <td><a href="#spec-opt-fieldsToReturn"><code>fieldsToReturn</code></a></td>
-    <td>The fields to return with the payload. Returns all fields when not provided.</td>
+    <td>
+      Restricts the fields to return with the payload. Supports <b>Field Sets</b>.
+      <p>
+        See the <a href="#spec-concept-fieldSets">Field Sets</a> section, for information on
+        how to use this feature.
+      </p>
+    </td>
     <td style="text-align:center;"><i>Array</i><br />-or-<br /><i>Object</i></td>
-    <td><code>getItem, getItems</code></td>
+    <td>getItem, getItems</td>
     <td style="text-align:center;">No</td>
   </tr>
   <tr>
     <td><a href="#spec-opt-defaultOrderBy"><code>defaultOrderBy</code></a></td>
     <td>The default sort order for a collection payload.</td>
     <td style="text-align:center;"><i>String</i></td>
-    <td><code>getItems</code></td>
+    <td>getItems</td>
     <td style="text-align:center;">No</td>
   </tr>
   <tr>
     <td><a href="#spec-opt-forceAssociations"><code>forceAssociations</code></a></td>
-    <td>Binds the <code class="code-ref">associations</code> to return for all action requests.</td>
+    <td>Binds the <code class="code-ref">associations</code> to return, for all action requests.</td>
     <td style="text-align:center;"><i>Array</i></td>
-    <td><code>getItem, getItems</code></td>
+    <td>getItem, getItems</td>
     <td style="text-align:center;">No</td>
   </tr>
   <tr>
     <td><a href="#spec-opt-forceLoadDirect"><code>forceLoadDirect</code></a></td>
-    <td>Binds the <code class="code-ref">loadDirect</code> associations to return for all action requests.</td>
+    <td>Binds the <code class="code-ref">loadDirect</code> associations to return, for all action requests.</td>
     <td style="text-align:center;"><i>Array</i></td>
-    <td><code>getItem, getItems</code></td>
+    <td>getItem, getItems</td>
     <td style="text-align:center;">No</td>
   </tr>
   <tr>
@@ -259,69 +308,672 @@ joint.<action>(spec, input, output)
   </tr>
 </table>
 
-<h4 id="spec-opt-modelName">modelName</h4>
+{{ api.optheader('spec.modelName', 'spec-opt-modelName') }}
+
+{{ api.optsig(['String'], 'all', 'Yes') }}
+
+{{ api.apidesc('The model name of the resource upon which to act.') }}
+
+{% call code.block('Example getItems usage:') -%}
+function getUsers(input) {
+  const spec = {
+    <hilite>modelName: 'User'</hilite>,
+    defaultOrderBy: '-created_at,username',
+  };
+
+  return joint.getItems(spec, input);
+}
+{%- endcall %}
+
+{{ api.optheader('spec.fields', 'spec-opt-fields') }}
+
+{{ api.optsig(['Array'], 'all', 'Yes (except getItems)') }}
+
+{{ api.apidesc('Declares all fields that are accessible to the method, and defines how they can be used.') }}
+
+{% call code.block('Example updateItem usage:') -%}
+function markLogin(input) {
+  const spec = {
+    modelName: 'User',
+    <hilite>fields: [
+      { name: 'id', type: 'Number', required: true, lookup: true },
+      { name: 'last_login_at', type: 'String', locked: true, defaultValue: '% now %' },
+    ],</hilite>
+  };
+
+  return joint.updateItem(spec, input);
+}
+{%- endcall %}
+
+{% call code.block('Example getItem usage:') -%}
+function getUser(input) {
+  const spec = {
+    modelName: 'User',
+    <hilite>fields: [
+      { name: 'id', type: 'Number', requiredOr: true },
+      { name: 'username', type: 'String', requiredOr: true },
+      { name: 'external_id', type: 'String', requiredOr: true },
+    ],</hilite>
+  };
+
+  return joint.getItem(spec, input);
+}
+{%- endcall %}
+
+<br />
+<p>
+  <b>Available properties:</b>
+</p>
+
+<table>
+  <tr>
+    <th>Property</th>
+    <th>Description</th>
+    <th style="text-align:center;">Type</th>
+    <th>Actions Supported</th>
+    <th style="text-align:center;">Required?</th>
+  </tr>
+  <tr>
+    <td><code>fields.name</code></td>
+    <td>
+      The field name.
+      <p>
+        This value must match the underlying field name in the
+        persistence layer (e.g. the column name of the database table).
+      </p>
+    </td>
+    <td style="text-align:center;"><i>String</i></td>
+    <td><i>all</i></td>
+    <td style="text-align:center;">Yes</td>
+  </tr>
+  <tr>
+    <td><code>fields.type</code></td>
+    <td>
+      The field data type.
+      <p>
+        Can be: <code class="code-ref">'String'</code>, <code class="code-ref">'Number'</code>,
+        <code class="code-ref">'Boolean'</code>, <code class="code-ref">'JSON'</code>.
+      </p>
+      <p>
+        When an input value is provided for the field, it is explicitly cast to the defined type, to
+        ensure the proper value is persisted.
+      </p>
+    </td>
+    <td style="text-align:center;"><i>String</i></td>
+    <td><i>all</i></td>
+    <td style="text-align:center;">Yes</td>
+  </tr>
+  <tr>
+    <td><code>fields.required</code></td>
+    <td>
+      If the field is required for the action.
+      By default, a field is considered <i>not required</i>.
+      <p>
+        If a required field is not provided by the input, the Promise is rejected and an error is returned.
+      </p>
+    </td>
+    <td style="text-align:center;"><i>Boolean</i></td>
+    <td><i>all</i></td>
+    <td style="text-align:center;">No</td>
+  </tr>
+  <tr>
+    <td><code>fields.requiredOr</code></td>
+    <td>
+      If the field is required for the action (within an OR set).
+      By default, a field is considered <i>not required</i>.
+      <p>
+        If a required field is not provided by the input, the Promise is rejected and an error is returned.
+      </p>
+    </td>
+    <td style="text-align:center;"><i>Boolean</i></td>
+    <td><i>all</i></td>
+    <td style="text-align:center;">No</td>
+  </tr>
+  <tr>
+    <td><code>fields.lookup</code></td>
+    <td>
+      Denotes the field is required to pre-fetch the resource before a mutation can occur.
+      <p>
+        If a lookup field is not provided by the input, the Promise is rejected and an error is returned.
+      </p>
+    </td>
+    <td style="text-align:center;"><i>Boolean</i></td>
+    <td>upsertItem, updateItem, deleteItem</td>
+    <td style="text-align:center;">Yes for upsertItem, updateItem</td>
+  </tr>
+  <tr>
+    <td><code>fields.lookupOr</code></td>
+    <td>
+      Denotes the field is required (within an OR set) to pre-fetch the resource before a mutation can occur.
+      <p>
+        If a lookup field is not provided by the input, the Promise is rejected and an error is returned.
+      </p>
+    </td>
+    <td style="text-align:center;"><i>Boolean</i></td>
+    <td>upsertItem, updateItem, deleteItem</td>
+    <td style="text-align:center;">Yes for upsertItem, updateItem</td>
+  </tr>
+  <tr>
+    <td><code>fields.locked</code></td>
+    <td>
+      Denotes the field cannot be updated by user input.
+      Instead, the value is populated via the <b><code>defaultValue</code></b> property.
+      <p>
+        Either generate the <b><code>defaultValue</code></b> when hand-rolling the method logic yourself,
+        or you can utilize the <b>Dynamic Values</b> feature.
+      </p>
+      <p>
+        If the user input provides a value, it will be ignored.
+      </p>
+    </td>
+    <td style="text-align:center;"><i>Boolean</i></td>
+    <td>createItem, upsertItem, updateItem, getItem, getItems</td>
+    <td style="text-align:center;">No</td>
+  </tr>
+  <tr>
+    <td><code>fields.defaultValue</code></td>
+    <td>
+      The default value to persist, when a value is not provided by the input.
+      <p>
+        Supports <b>Dynamic Values</b>:
+      </p>
+      <ul>
+        <li><b><code>now</code></b></li>
+        <li><code><b>kebabCase(</b>&lt;<i>fieldName</i>&gt;<b>)</b></code></li>
+        <li><code><b>snakeCase(</b>&lt;<i>fieldName</i>&gt;<b>)</b></code></li>
+        <li><code><b>camelCase(</b>&lt;<i>fieldName</i>&gt;<b>)</b></code></li>
+        <li><code><b>pascalCase(</b>&lt;<i>fieldName</i>&gt;<b>)</b></code></li>
+      </ul>
+      <p>
+        See the <a href="#spec-concept-dynamicValues">Dynamic Values</a> section, for information on
+        how to use this feature.
+      </p>
+    </td>
+    <td style="text-align:center;"><i>Mixed</i></td>
+    <td>createItem, upsertItem, updateItem, getItem, getItems</td>
+    <td style="text-align:center;">No</td>
+  </tr>
+</table>
+
+<br />
+<p id="spec-concept-dynamicValues">
+  <b>Dynamic Values</b>
+</p>
+
+<p>
+  The <code class="code-ref">defaultValue</code> property supports a set of convenience operations that
+  generate dynamic values.
+</p>
+
+<br />
+<table>
+  <tr>
+    <th>Operation</th>
+    <th style="text-align:center;">Generated Type</th>
+    <th>Description</th>
+    <th>Example</th>
+  </tr>
+  <tr>
+    <td><b><code>now</code></b></td>
+    <td style="text-align:center;"><i>String</i></td>
+    <td>Generates a UTC timestamp for the current date/time.</td>
+    <td>
+{% call code.block() -%}
+now => '2017-11-23T03:47:19Z';
+{%- endcall %}
+    </td>
+  </tr>
+  <tr>
+    <td><code><b>kebabCase(</b>&lt;<i>fieldName</i>&gt;<b>)</b></code></td>
+    <td style="text-align:center;"><i>String</i></td>
+    <td>Generates the Kebab case of the value provided by the <i>fieldName</i> input.</td>
+    <td>
+{% call code.block() -%}
+<comment>// title: 'The Very First'</comment>
+kebabCase(title) => 'the-very-first';
+{%- endcall %}
+    </td>
+  </tr>
+  <tr>
+    <td><code><b>snakeCase(</b>&lt;<i>fieldName</i>&gt;<b>)</b></code></td>
+    <td style="text-align:center;"><i>String</i></td>
+    <td>Generates the Snake case of the value provided by the <i>fieldName</i> input.</td>
+    <td>
+{% call code.block() -%}
+<comment>// title: 'The Very First'</comment>
+snakeCase(title) => 'the_very_first';
+{%- endcall %}
+    </td>
+  </tr>
+  <tr>
+    <td><code><b>camelCase(</b>&lt;<i>fieldName</i>&gt;<b>)</b></code></td>
+    <td style="text-align:center;"><i>String</i></td>
+    <td>Generates the Camel case of the value provided by the <i>fieldName</i> input.</td>
+    <td>
+{% call code.block() -%}
+<comment>// title: 'The Very First'</comment>
+camelCase(title) => 'theVeryFirst';
+{%- endcall %}
+    </td>
+  </tr>
+  <tr>
+    <td><code><b>pascalCase(</b>&lt;<i>fieldName</i>&gt;<b>)</b></code></td>
+    <td style="text-align:center;"><i>String</i></td>
+    <td>Generates the Pascal case of the value provided by the <i>fieldName</i> input.</td>
+    <td>
+{% call code.block() -%}
+<comment>// title: 'The Very First'</comment>
+pascalCase(title) => 'TheVeryFirst';
+{%- endcall %}
+    </td>
+  </tr>
+</table>
+
+<br />
+
+{% call api.apidesc() -%}
+  To call an operation, use a <i>String</i> that starts and ends with the
+  <code class="code-ref" style="font-size:105%;">%</code> character.
+{%- endcall %}
+
+{% call code.block('For example:') -%}
+function createTag(input) {
+  const spec = {
+    modelName: 'Tag',
+    fields: {
+      { name: 'label', type: 'String', required: true },
+      { name: 'key', type: 'String', <hilite>defaultValue: '% kebabCase(label) %'</hilite> },
+    },
+  };
+
+  return joint.createItem(spec, input);
+}
+{%- endcall %}
+
+<br /><br />
+
+{% call api.apidesc() -%}
+  If the specified <code>fieldName</code> does not provide a value when the action request
+  is executed, or the operation is not recognized, a <code>null</code> value will be generated.
+{%- endcall %}
+
+{% call api.apidesc() -%}
+  To force the execution of the <code class="code-ref">defaultValue</code> option,
+  you can use the <prop>locked</prop> property. The <code>locked</code> property prevents the
+  field from being updated by user input. Using the <code>defaultValue</code> property in
+  conjunction with <code>locked</code> ensures it will always be executed.
+{%- endcall %}
+
+{% call code.block('For example:') -%}
+function markLogin(input) {
+  const spec = {
+    modelName: 'User',
+    { name: 'id', type: 'Number', required: true, lookup: true },
+    { name: 'last_login_at', type: 'String', <hilite>locked: true, defaultValue: '% now %'</hilite> },
+  };
+
+  return joint.updateItem(spec, input);
+}
+{%- endcall %}
+
+{{ api.optheader('spec.fieldsToReturn', 'spec-opt-fieldsToReturn') }}
+
+{{ api.optsig(['Array', 'Object'], 'getItem, getItems', 'No') }}
+
+{{ api.apidesc('Restricts the fields to return with the payload. When not provided, all fields are returned.') }}
+
+{% call code.block('Example usage:') -%}
+function getUsers(input) {
+  const spec = {
+    modelName: 'User',
+    <hilite>fieldsToReturn: ['id', 'username', 'display_name', 'avatar_url'],</hilite> <comment>// return public fields only</comment>
+    defaultOrderBy: '-created_at,username',
+  };
+
+  return joint.getItems(spec, input);
+}
+{%- endcall %}
+
+<br />
+<p id="spec-concept-fieldSets">
+  <b>Field Sets</b>
+</p>
+
+<p>
+  The <code class="code-ref">fieldsToReturn</code> property also supports the ability
+  to define multiple return field combinations.
+</p>
+
+{% call code.block('Example usage with field sets:') -%}
+function getUsers(input) {
+  const spec = {
+    modelName: 'User',
+    <hilite>fieldsToReturn: {
+      default: ['id', 'username', 'display_name', 'avatar_url'],
+      contact: ['id', 'email', 'display_name'],
+      full: ['id', 'external_id', 'username', 'email', 'display_name', 'avatar_url', 'preferred_locale', 'created_at', 'updated_at', 'last_login_at'],
+    },</hilite>
+    defaultOrderBy: '-created_at,username',
+  };
+
+  return joint.getItems(spec, input);
+}
+{%- endcall %}
+
+<br /><br />
+
+{% call api.apidesc() -%}
+  By using an <i>Object</i> value instead of an <i>Array</i>, multiple Field Sets are defined by
+  providing property names (as the aliases), and specifying the <i>Array</i> of fields to return
+  as the values. The input request can then specify which fields to return,
+  using the <a href="#input-opt-fieldSet"><prop>input.fieldSet</prop></a> property.
+{%- endcall %}
+
+{% call api.apidesc() -%}
+  There is one special Field Set alias: <code class="code-ref">default</code>.
+  <br /><br />
+  If the default Field Set is defined, this field combination will be returned whenever the input
+  does not use the <a href="#input-opt-fieldSet"><prop>input.fieldSet</prop></a> property
+  or if an undefined set is requested.
+{%- endcall %}
+
+{{ api.optheader('spec.defaultOrderBy', 'spec-opt-defaultOrderBy') }}
+
+{{ api.optsig(['String'], 'getItems', 'No') }}
+
+{% call api.apidesc() -%}
+  The default sort for a collection payload.
+  Provide a comma-delimited string for specifying multiple field precedence.
+{%- endcall %}
+
+{% call code.block('Example usage:') -%}
+function getUsers(input) {
+  const spec = {
+    modelName: 'User',
+    <hilite>defaultOrderBy: '-created_at,username',</hilite> <comment>// created_at DESC, username ASC</comment>
+  };
+
+  return joint.getItems(spec, input);
+}
+{%- endcall %}
+
+{{ api.optheader('spec.forceAssociations', 'spec-opt-forceAssociations') }}
+
+{{ api.optsig(['Array'], 'getItem, getItems', 'No') }}
+
+{% call api.apidesc() -%}
+  Binds the <code>associations</code> to return, for all action requests.
+  <br /><br />
+  See <a href="#input-opt-associations"><prop>input.associations</prop></a> for more details.
+{%- endcall %}
+
+{% call code.block('Example usage:') -%}
+function getProfiles(input) {
+  const spec = {
+    modelName: 'Profile',
+    defaultOrderBy: '-created_at,title',
+    <hilite>forceAssociations: ['user', 'posts', 'tags'],</hilite>
+  };
+
+  return joint.getItems(spec, input);
+}
+{%- endcall %}
+
+{{ api.optheader('spec.forceLoadDirect', 'spec-opt-forceLoadDirect') }}
+
+{{ api.optsig(['Array'], 'getItem, getItems', 'No') }}
+
+{% call api.apidesc() -%}
+  Binds the <code>loadDirect</code> associations to return, for all action requests.
+  <br /><br />
+  See <a href="#input-opt-loadDirect"><prop>input.loadDirect</prop></a> for more details.
+{%- endcall %}
+
+{% call code.block('Example usage:') -%}
+function getUsers(input) {
+  const spec = {
+    modelName: 'User',
+    defaultOrderBy: '-created_at,username',
+    <hilite>forceLoadDirect: ['roles:name'],</hilite>
+  };
+
+  return joint.getItems(spec, input);
+}
+{%- endcall %}
+
+{{ api.optheader('spec.auth', 'spec-opt-auth') }}
+
+<br />
+<p>
+  <b>Available properties:</b>
+</p>
+
+<table>
+  <tr>
+    <th>Property</th>
+    <th>Description</th>
+    <th style="text-align:center;">Type</th>
+    <th>Actions Supported</th>
+    <th style="text-align:center;">Required?</th>
+  </tr>
+  <tr>
+    <td><code>auth.ownerCreds</code></td>
+    <td>
+      Specifies the fields that can verify resource ownership (for owner auth rules).
+    </td>
+    <td style="text-align:center;"><i>Array</i></td>
+    <td><i>all</i></td>
+    <td style="text-align:center;">No</td>
+  </tr>
+</table>
 
 <p>
   [TBC]
 </p>
 
-<h4 id="spec-opt-fields">fields</h4>
+{{ api.optheader('spec.main', 'spec-opt-main') }}
 
 <p>
   [TBC]
 </p>
 
-{# fields.name | The field name. | _String_ | (_all_) | Yes #}
-{# fields.type | The field data type. | _String_ | (_all_) | Yes |
-{# fields.required | If the field is required for the action. | _Boolean_ | (_all_) | No #}
-{# fields.requiredOr | If the field is required for the action (within an OR set). | _Boolean_ | (_all_) | No #}
-{# fields.lookup | Denotes the field is required to pre-fetch the resource before an update can occur. | _Boolean_ | upsertItem, updateItem, deleteItem | Yes for upsertItem, updateItem #}
-{# fields.lookupOr | Denotes the field is required (within an OR set) to pre-fetch the resource before an update can occur. | _Boolean_ | upsertItem, updateItem, deleteItem | Yes for upsertItem, updateItem #}
-{# fields.locked | Denotes the field cannot be updated by user input. Instead, the `defaultValue` option is set by hand-rolling method logic or by use of dynamic values. | _Boolean_ | createItem, upsertItem, updateItem, getItem, getItems | No #}
-{# fields.defaultValue | The default value to persist, if the field is not provided in the input. Supports dynamic values. | _Mixed_ | createItem, upsertItem, updateItem, getItem, getItems | No #}
-
-<h4 id="spec-opt-fieldsToReturn">fieldsToReturn</h4>
+{{ api.optheader('spec.association', 'spec-opt-association') }}
 
 <p>
   [TBC]
 </p>
 
-<h4 id="spec-opt-defaultOrderBy">defaultOrderBy</h4>
+<h3 id="joint-action-input">Input Options</h3>
+
+<table>
+  <tr>
+    <th>Option</th>
+    <th>Description</th>
+    <th style="text-align:center;">Type</th>
+    <th>Actions Supported</th>
+    <th style="text-align:center;">Required?</th>
+  </tr>
+  <tr>
+    <td><a href="#input-opt-fields"><code>fields</code></a></td>
+    <td>The root property for providing field data.</td>
+    <td style="text-align:center;"><i>Object</i></td>
+    <td><i>all</i></td>
+    <td style="text-align:center;">Yes (except getItems)</td>
+  </tr>
+  <tr>
+    <td><a href="#input-opt-fieldSet"><code>fieldSet</code></a></td>
+    <td>
+      The <b>Field Set</b> to return.
+      <p>
+        See the <a href="#input-concept-fieldSets">Field Sets</a> section, for information on
+        how to use this feature.
+      </p>
+    </td>
+    <td style="text-align:center;"><i>String</i></td>
+    <td>getItem, getItems</td>
+    <td style="text-align:center;">No</td>
+  </tr>
+  <tr>
+    <td><a href="#input-opt-orderBy"><code>orderBy</code></a></td>
+    <td>The sort order to apply to the returned collection payload.</td>
+    <td style="text-align:center;"><i>String</i></td>
+    <td>getItems</td>
+    <td style="text-align:center;">No</td>
+  </tr>
+  <tr>
+    <td><a href="#input-opt-associations"><code>associations</code></a></td>
+    <td>The association data to return with the payload. Returns full, detached payloads for the underlying resources.</td>
+    <td style="text-align:center;"><i>Array</i></td>
+    <td>getItem, getItems</td>
+    <td style="text-align:center;">No</td>
+  </tr>
+  <tr>
+    <td><a href="#input-opt-loadDirect"><code>loadDirect</code></a></td>
+    <td>Loads association data directly to the to main resource payload, as if it were native field data.</td>
+    <td style="text-align:center;"><i>Array</i></td>
+    <td>getItem, getItems</td>
+    <td style="text-align:center;">No</td>
+  </tr>
+  <tr>
+    <td><a href="#input-opt-paginate"><code>paginate</code></a></td>
+    <td></td>
+    <td style="text-align:center;"><i>Object</i></td>
+    <td>getItems</td>
+    <td style="text-align:center;">No</td>
+  </tr>
+  <tr>
+    <td><a href="#input-opt-trx"><code>trx</code></a></td>
+    <td></td>
+    <td style="text-align:center;"><i>Object</i></td>
+    <td><i>all</i></td>
+    <td style="text-align:center;">No</td>
+  </tr>
+  <tr>
+    <td><a href="#input-opt-authBundle"><code>authBundle</code></a></td>
+    <td></td>
+    <td style="text-align:center;"><i>Object</i></td>
+    <td><i>all</i></td>
+    <td style="text-align:center;">No</td>
+  </tr>
+</table>
+
+{{ api.optheader('input.fields', 'input-opt-fields') }}
+
+{{ api.optsig(['Object'], 'all', 'Yes (except getItems)') }}
+
+{{ api.apidesc('Provides the field data for an action request.') }}
+
+{% call code.block(filename='/methods/profile.js') -%}
+export function createProfile(input) {
+  const spec = {
+    modelName: 'Profile',
+    fields: [
+      { name: 'user_id', type: 'Number', required: true },
+      { name: 'title', type: 'String', required: true },
+      { name: 'tagline', type: 'String' },
+      { name: 'is_live', type: 'Boolean', defaultValue: false },
+    ],
+  };
+
+  return joint.createItem(spec, input);
+}
+{%- endcall %}
+
+{% call code.block('Example usage:') -%}
+import * as profileMethods from '../methods/profile';
+
+const input = {
+  <hilite>fields: {
+    user_id: 333,
+    title: 'Functional Fanatic',
+    tagline: 'I don\'t have habits, I have algorithms.',
+    is_live: true,
+  },</hilite>
+};
+
+profileMethods.createProfile(input)
+  .then((payload) => { <comment>...</comment> }) <comment>// returns the created Profile resource</comment>
+  .catch((error) => { <comment>...</comment> }); <comment>// or returns an error</comment>
+{%- endcall %}
+
+{{ api.optheader('input.fieldSet', 'input-opt-fieldSet') }}
 
 <p>
   [TBC]
 </p>
 
-<h4 id="spec-opt-forceAssociations">forceAssociations</h4>
+{{ api.optheader('input.orderBy', 'input-opt-orderBy') }}
 
 <p>
   [TBC]
 </p>
 
-<h4 id="spec-opt-forceLoadDirect">forceLoadDirect</h4>
+{{ api.optheader('input.associations', 'input-opt-associations') }}
 
 <p>
   [TBC]
 </p>
 
-<h4 id="spec-opt-auth">auth</h4>
+{{ api.optheader('input.loadDirect', 'input-opt-loadDirect') }}
 
 <p>
   [TBC]
 </p>
 
-{# auth.ownerCreds | Specifies the fields that can verify resource ownership (for owner auth rules). | _Array_ | (_all_) | No #}
-
-<h4 id="spec-opt-main">main</h4>
+{{ api.optheader('input.paginate', 'input-opt-paginate') }}
 
 <p>
   [TBC]
 </p>
 
-<h4 id="spec-opt-association">association</h4>
+{{ api.optheader('input.trx', 'input-opt-trx') }}
 
 <p>
   [TBC]
 </p>
+
+{{ api.optheader('input.authBundle', 'input-opt-authBundle') }}
+
+<p>
+  [TBC]
+</p>
+
+<h3 id="joint-action-output">Output Values</h3>
+
+<p>
+  The <code>output</code> value configures the format of the returned payload.
+</p>
+
+<callout>
+  This setting can be configured globally on the Joint instance itself.
+  (See the <a href="{{ rootURI }}/api/joint-instance">Joint Instance API</a>)
+</callout>
+
+<br />
+<table>
+  <tr>
+    <th>Value</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><a href="#output-value-native"><code>'native'</code></a></td>
+    <td>Returns the queried data in the format generated natively by the service. This is the default setting.</td>
+  </tr>
+  <tr>
+    <td><a href="#output-value-native"><code>'json-api'</code></a></td>
+    <td>Transforms the data into a <a href="http://jsonapi.org">JSON API Spec</a>-like format, making the data suitable for HTTP transport.</td>
+  </tr>
+</table>
+
+{{ api.valheader('output = \'native\'', 'output-value-native') }}
+
+{{ api.apidesc('Returns the payload in the format generated natively by the service. This is the default setting.') }}
+
+{{ api.valheader('output = \'json-api\'', 'output-value-json-api') }}
+
+{% call api.apidesc() -%}
+  Transforms the data into a <a href="http://jsonapi.org">JSON API Spec</a>-like format, making the data suitable for HTTP transport.
+{%- endcall %}
+
 
 {% endblock %}

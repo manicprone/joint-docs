@@ -6,15 +6,20 @@ const basePaths = appConfig.basePaths;
 // -----------------------------------------------------------------------------
 // Main Nav:
 //
-// /          => Splash Page
+// /          => splash page (source | overview)
 //
-// /about     => Overview / License
+// /overview  => brief intro & features + diagrams
 //
-// /guide     => Getting Started / The Joint Concept / Joint in Practice
+// /guide     => Getting Started / The Joint Concept / Joint in Practice + Dev Guides
 //
-// /api       => Constructor / Instance / Actions
+// /api       => Constructor / Instance / Actions, et al
 //
 // /examples  => inline examples, list of links to running apps, etc
+// -----------------------------------------------------------------------------
+// Notes:
+//
+// + Remove "The Joint Concept" guide, instead just describe the concept
+//   in the  Overview section.
 // -----------------------------------------------------------------------------
 
 const router = express.Router();
@@ -24,9 +29,9 @@ router.route('/')
     res.render('splash');
   });
 
-router.route(`${basePaths.docs}/:section/:content?`)
+router.route(`${basePaths.docs}/:section?/:content?`)
   .get((req, res) => {
-    const section = req.params.section || 'guide';
+    const section = req.params.section || 'overview';
     const content = req.params.content || 'start';
     const contentURI = `${section}/${content}`;
     const leadingURI = `${basePaths.docs}/${section}`;

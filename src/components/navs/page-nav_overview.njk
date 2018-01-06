@@ -1,0 +1,24 @@
+<div class="page-nav">
+
+  {#
+  ------------------------------------------------------------------------------
+  Introduction
+  ------------------------------------------------------------------------------
+  #}
+  {%
+    set header = 'Introduction'
+  %}
+
+  <div class="nav-group">
+    {{ nav.header(header) }}
+    {%
+      set items = [
+        { label: 'Getting Started', uri:leadingURI + '/getting-started' },
+        { label: 'The Joint Concept', uri:leadingURI + '/the-joint-concept' },
+        { label: 'Joint in Practice', uri:leadingURI + '/joint-in-practice' }
+      ]
+    %}
+    {{ nav.items(items) }}
+  </div>
+
+</div>

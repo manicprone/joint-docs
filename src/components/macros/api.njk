@@ -1,0 +1,72 @@
+{# -----------------------------------------------------------------------------
+ API Macros
+----------------------------------------------------------------------------- #}
+
+{# ---------------------------- #}
+{# funcheader - Function Header #}
+{# ---------------------------- #}
+{% macro funcheader(headingText='', refID='') %}
+  <h4 id={{ refID }}>{{ headingText }}</h3>
+{% endmacro %}
+
+{# ------------------------- #}
+{# optheader - Option Header #}
+{# ------------------------- #}
+{% macro optheader(headingText='', refID='') %}
+  <h4 id={{ refID }}>{{ headingText }}</h3>
+{% endmacro %}
+
+{# ------------------------ #}
+{# valheader - Value Header #}
+{# ------------------------ #}
+{% macro valheader(headingText='', refID='') %}
+  <h4 id={{ refID }}>{{ headingText }}</h3>
+{% endmacro %}
+
+{# ---------------------------- #}
+{# actionsig - Action Signature #}
+{# ---------------------------- #}
+{% macro actionsig(returnsText='') %}
+  <optsig>
+    <div class="param">
+      <label>returns</label>
+      <span>{{ returnsText }}</span>
+    </div>
+  </optsig>
+{% endmacro %}
+
+{# ------------------------- #}
+{# optsig - Option Signature #}
+{# ------------------------- #}
+{% macro optsig(dataTypes=[], supportedActionsText='', requiredText='') %}
+  <optsig>
+    <div class="param">
+      <label>type</label>
+      <span>
+      {% set textOr = joiner('-or-') %}
+      {% for dataType in dataTypes %}
+        {{ textOr() }} <span class="type-value">{{ dataType }}</span>
+      {% endfor %}
+      </span>
+    </div>
+    <div class="param">
+      <label>for actions</label>
+      <span class="type-value">{{ supportedActionsText }}</span>
+    </div>
+    <div class="param">
+      <label>required?</label>
+      <span>{{ requiredText }}</span>
+    </div>
+  </optsig>
+{% endmacro %}
+
+{# ------------------------- #}
+{# apidesc - API Description #}
+{# ------------------------- #}
+{% macro apidesc(text) %}
+  {% if text %}
+  <apidesc>{{ text }}</apidesc>
+  {% else %}
+  <apidesc>{{ caller() }}</apidesc>
+  {% endif %}
+{% endmacro %}

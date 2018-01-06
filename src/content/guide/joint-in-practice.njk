@@ -1,4 +1,4 @@
-{% extends "main.njk" %}
+{% extends "main-with-nav.njk" %}
 
 {% block content %}
 
@@ -11,92 +11,107 @@
 <p>
   A Joint connects to:
 </p>
-<ul>
-  <li>your persistence service &nbsp;&nbsp;-&nbsp;&nbsp; to implement a data method layer</li>
-  <li>your server framework &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp; to implement an HTTP API layer</li>
+
+<ul class="definition">
+  <li>
+    <div style="width:180px"><i>your persistence service</i></div>
+    <div style="width:27px">&#10132;</div>
+    <div>to implement a data method layer</div>
+  </li>
+  <li>
+    <div style="width:180px"><i>your server framework</i></div>
+    <div style="width:27px">&#10132;</div>
+    <div>to implement an HTTP API layer</div>
+  </li>
 </ul>
-
-<p>
-  The Joint Kit provides a set of data actions that are abstracted to handle common data operations for your resources.
-  Actions are implemented using a config-like JSON syntax, making development simple and quick.
-</p>
-
-<p>
-  Leverage the built-in features to satisfy 100% of your required functionality, or use them as a base to augment with your own specialized logic.
-</p>
 
 <h3>Create a Joint</h3>
 
-<div class="code-block">
-<pre>
+{# ============================== BEGIN | Code Block  "/joint/index.js" ===== #}
+{% call code.block(filename='/joint/index.js') -%}
 import Joint from 'joint-kit';
-import bookshelf from './services/bookshelf'; // your configured bookshelf service
+import bookshelf from '../services/bookshelf'; <comment>// your configured bookshelf instance</comment>
 
 const joint = new Joint({
   service: bookshelf,
 });
-</pre>
-</div>
+
+export default joint;
+{%- endcall %}
+{# =============================== END  | Code Block  "/joint/index.js" ===== #}
 
 <h3>Define Data Models</h3>
 
 <p>
-  You can continue configuring data models with your service natively, or you can dynamically generate them with Joint using a JSON descriptor:
+  Define your data models using a JSON descriptor:
 </p>
 
-<div class="code-filename">
-  <span>/model-config.js</span>
-</div>
-
-<div class="code-block">
-<pre>
+{# ======================= BEGIN | Code Block  "/joint/model-config.js" ===== #}
+{% call code.block(filename='/joint/model-config.js') -%}
 export default {
   models: {
-    // Define a model named: "Profile"
+    <comment>// Define a model named: "Profile"</comment>
     Profile: {
       tableName: 'blog_profiles',
       timestamps: { created: 'created_at', updated: 'updated_at' },
       associations: {
         user: {
           type: 'toOne',
-          path: 'user_id => User.id', // one-to-one
+          path: 'user_id => User.id', <comment>// one-to-one</comment>
         },
         posts: {
           type: 'toMany',
-          path: 'id => BlogPost.profile_id', // one-to-many
+          path: 'id => BlogPost.profile_id', <comment>// one-to-many</comment>
         },
         tags: {
           type: 'toMany',
-          path: 'id => ProfileTag.profile_id => ProfileTag.tag_id => Tag.id', // many-to-many
+          path: 'id => ProfileTag.profile_id => ProfileTag.tag_id => Tag.id', <comment>// many-to-many</comment>
         },
       },
     },
   },
 };
-</pre>
-</div>
+{%- endcall %}
+{# ======================== END  | Code Block  "/joint/model-config.js" ===== #}
 
 <br />
 
 <p>
-  Then, use the <code>generate</code> function to dynamically build and register your models:
+  Then, use the <func>generate</func> <span>func</span>tion to dynamically build and register your models:
 </p>
 
-<div class="code-block">
-<pre>
-import modelConfig from './model-config';
+<callout>
+  Models are registered as: &nbsp; <code>joint.model.&lt;modelName&gt;</code>
+</callout>
 
-joint.generate({ modelConfig }); // generate the models
+{# ============================== BEGIN | Code Block  "/joint/index.js" ===== #}
+{% call code.block(filename='/joint/index.js') -%}
+import Joint from 'joint-kit';
+import bookshelf from '../services/bookshelf';
+<hilite>import modelConfig from './model-config';</hilite>
 
-// Access all models using the syntax joint.model.&lt;modelName&gt;:
+const joint = new Joint({
+  service: bookshelf,
+});
+
+<hilite>joint.generate({ modelConfig });</hilite> <comment>// generate the models</comment>
+
+export default joint;
+{%- endcall %}
+{# =============================== END  | Code Block  "/joint/index.js" ===== #}
+
+{# ============================= BEGIN | Code Block  "example-usage.js" ===== #}
+{% call code.block(filename='example-usage.js') -%}
+import joint from '../joint';
+
 if (joint.model.Profile) console.log('The Profile model exists !!!');
-</pre>
-</div>
+{%- endcall %}
+{# ============================== END  | Code Block  "example-usage.js" ===== #}
 
 <h3>Create a Method Library</h3>
 
 <p>
-  From the provided set of abstract data actions ([Joint Actions][section-joint-actions]), you can quickly implement a customized method library.
+  From the provided set of abstract data actions (<a href="{{ rootURI }}/api/joint-actions">Joint Actions</a>), you can quickly implement a customized method library.
 </p>
 
 <p>
@@ -106,12 +121,10 @@ if (joint.model.Profile) console.log('The Profile model exists !!!');
 <details>
 <summary>Hand-rolling a CRUD set of methods</summary>
 
-<div class="code-filename">
-  <span>/methods/profile.js</span>
-</div>
+{# ========================== BEGIN | Code Block  "/methods/profile.js" ===== #}
+{% call code.block(filename='/methods/profile.js') -%}
+import joint from '../joint';
 
-<div class="code-block">
-<pre>
 export function createProfile(input) {
   const spec = {
     modelName: 'Profile',
@@ -178,24 +191,18 @@ export function deleteProfile(input) {
 
   return joint.deleteItem(spec, input);
 }
-</pre>
-</div>
+{%- endcall %}
+{# =========================== END  | Code Block  "/methods/profile.js" ===== #}
 </details>
 
-<br />
-<span>-OR-</span>
-<br />
+{{ text.dangle('or') }}
 
 <p>
-  You can dynamically generate them from a JSON descriptor:
+  You can define the methods using a JSON descriptor:
 </p>
 
-<div class="code-filename">
-  <span>/method-config.js</span>
-</div>
-
-<div class="code-block">
-<pre>
+{# ====================== BEGIN | Code Block  "/joint/method-config.js" ===== #}
+{% call code.block(filename='/joint/method-config.js') -%}
 export default {
   resources: [
     {
@@ -221,7 +228,7 @@ export default {
             fields: [
               { name: 'id', type: 'Number', required: true, lookup: true },
               { name: 'title', type: 'String' },
-        	    { name: 'slug', type: 'String' },
+              { name: 'slug', type: 'String' },
               { name: 'tagline', type: 'String' },
               { name: 'is_live', type: 'Boolean' },
             ],
@@ -233,7 +240,7 @@ export default {
           spec: {
             fields: [
               { name: 'id', type: 'Number', requiredOr: true },
-      		    { name: 'slug', type: 'String', requiredOr: true },
+              { name: 'slug', type: 'String', requiredOr: true },
             ],
           },
         },
@@ -254,7 +261,7 @@ export default {
           spec: {
             fields: [
               { name: 'id', type: 'Number', requiredOr: true },
-      		    { name: 'slug', type: 'String', requiredOr: true },
+              { name: 'slug', type: 'String', requiredOr: true },
             ],
           },
         },
@@ -262,30 +269,50 @@ export default {
     },
   ],
 };
-</pre>
-</div>
+{%- endcall %}
+{# ======================= END  | Code Block  "/joint/method-config.js" ===== #}
 
 <br />
 
 <p>
-  Then, use the <code>generate</code> function to dynamically generate your methods:
+  Then, use the <func>generate</func> <span>func</span>tion to dynamically generate your methods:
 </p>
 
-<div class="code-block">
-<pre>
-import methodConfig from './method-config';
+<callout>
+  Methods are registered as: &nbsp; <code>joint.method.&lt;modelName&gt;.&lt;methodName&gt;</code>
+</callout>
 
-joint.generate({ methodConfig }); // generate the methods
+{# ============================== BEGIN | Code Block  "/joint/index.js" ===== #}
+{% call code.block(filename='/joint/index.js') -%}
+import Joint from 'joint-kit';
+import bookshelf from '../services/bookshelf';
+import modelConfig from './model-config';
+<hilite>import methodConfig from './method-config';</hilite>
+
+const joint = new Joint({
+  service: bookshelf,
+});
+
+<hilite>joint.generate</hilite>({ modelConfig, <hilite>methodConfig</hilite> });</hilite> <comment>// generate the methods</comment>
+
+export default joint;
+{%- endcall %}
+{# =============================== END  | Code Block  "/joint/index.js" ===== #}
+
+{# ============================== BEGIN | Code Block  "example-usage.js" ===== #}
+{% call code.block(filename='example-usage.js') -%}
+import joint from '../joint';
 
 const input = {
-  fields: { is_live: true }, // retrieve all "live" profiles
+  fields: { is_live: true }, <comment>// retrieve all "live" profiles</comment>
+  orderBy: 'title', <comment>// order by the "title" field, ascending</comment>
 };
 
 joint.method.Profile.getProfiles(input)
   .then((result) => { ... })
   .catch((error) => { ... });
-</pre>
-</div>
+{%- endcall %}
+{# =============================== END  | Code Block  "example-usage.js" ===== #}
 
 <h3>Create RESTful Endpoints</h3>
 
@@ -294,21 +321,88 @@ joint.method.Profile.getProfiles(input)
 </p>
 
 <p>
-  You can hand-roll the router logic yourself:
+  You can hand-roll the router yourself:
 </p>
 
-<span>-OR-</span>
+<details>
+<summary>Hand-rolling a router</summary>
+
+{# =========================== BEGIN | Code Block  "/router/profile.js" ===== #}
+{% call code.block(filename='/router/profile.js') -%}
+import express from 'express';
+import joint from '../joint';
+
+const router = express.Router();
+
+router.route('/profile')
+  .post((req, res) => {
+    const input = {};
+    input.fields = Object.assign({}, req.body, req.query);
+
+    return joint.method.Profile.createProfile(input)
+      .then(payload => handleDataResponse(payload, res, 201))
+      .catch(error => handleErrorResponse(error, res));
+  });
+
+router.route('/profile/:id')
+  .get((req, res) => {
+    const input = {};
+    input.fields = Object.assign({}, req.query, { id: req.params.id });
+
+    return joint.method.Profile.getProfile(input)
+      .then(payload => handleDataResponse(payload, res, 200))
+      .catch(error => handleErrorResponse(error, res));
+  })
+  .post((req, res) => {
+    const input = {};
+    input.fields = Object.assign({}, req.body, req.query, { id: req.params.id });
+
+    return joint.method.Profile.updateProfile(input)
+      .then(payload => handleDataResponse(payload, res, 200))
+      .catch(error => handleErrorResponse(error, res));
+  })
+  .delete((req, res) => {
+    const input = {};
+    input.fields = Object.assign({}, { id: req.params.id });
+
+    return joint.method.Profile.deleteProfile(input)
+      .then(payload => handleDataResponse(payload, res, 204))
+      .catch(error => handleErrorResponse(error, res));
+  });
+
+router.route('/profiles')
+  .get((req, res) => {
+    const input = {};
+    input.fields = Object.assign({}, req.query);
+
+    return joint.method.Profile.getProfiles(input)
+      .then(payload => handleDataResponse(payload, res, 200))
+      .catch(error => handleErrorResponse(error, res));
+  });
+
+<comment>// Abstractly handle the responses:</comment>
+function handleDataResponse(data, res, status = 200) {
+  res.status(status).json(data);
+}
+
+function handleErrorResponse(error, res) {
+  const status = error.status || 500;
+  res.status(status).json(error);
+}
+
+module.exports = router;
+{%- endcall %}
+{# ============================ END  | Code Block  "/router/profile.js" ===== #}
+</details>
+
+{{ text.dangle('or') }}
 
 <p>
-  You can dynamically generate a router from a JSON descriptor:
+  You can define the router using a JSON descriptor:
 </p>
 
-<div class="code-filename">
-  <span>/route-config.js</span>
-</div>
-
-<div class="code-block">
-<pre>
+{# ======================= BEGIN | Code Block  "/joint/route-config.js" ===== #}
+{% call code.block(filename='/joint/route-config.js') -%}
 export default {
   routes: [
     {
@@ -327,28 +421,61 @@ export default {
     },
   ],
 };
-</pre>
-</div>
+{%- endcall %}
+{# ======================== END  | Code Block  "/joint/route-config.js" ===== #}
 
 <br />
 
 <p>
-  Then, use the <code>generate</code> function to dynamically generate your router logic:
+  Then, use the <func>generate</func> <span>func</span>tion to dynamically generate your router:
 </p>
 
-<div class="code-block">
-<pre>
-import express from 'express';
-import routeConfig from './route-config';
+<callout>
+  The router is registered as: &nbsp; <code>joint.router</code>
+</callout>
 
-joint.setServer(express);
-joint.generate({ routeConfig }); // generate the router
+{# ============================== BEGIN | Code Block  "/joint/index.js" ===== #}
+{% call code.block(filename='/joint/index.js') -%}
+import Joint from 'joint-kit';
+<hilite>import express from 'express';</hilite>
+import bookshelf from '../services/bookshelf';
+import modelConfig from './model-config';
+import methodConfig from './method-config';
+<hilite>import routeConfig from './route-config';</hilite>
+
+const joint = new Joint({
+  service: bookshelf,
+  <hilite>server: express,</hilite> <comment>// provide express, so it can generate the router middleware</comment>
+});
+
+<hilite>joint.generate</hilite>({ modelConfig, methodConfig, <hilite>routeConfig</hilite> });</hilite> <comment>// generate the router</comment>
+
+export default joint;
+{%- endcall %}
+{# =============================== END  | Code Block  "/joint/index.js" ===== #}
+
+{# ==================================== BEGIN | Code Block  "server.js" ===== #}
+{% call code.block(filename='server.js') -%}
+import express from 'express';
+<hilite>import joint from '../joint';</hilite>
 
 const app = express();
-app.use('/api', joint.router); // provide the router to your server
 
-// Now serving: GET /api/profile/333
-</pre>
-</div>
+<comment>...</comment>
+
+<hilite>app.use('/api', joint.router);</hilite> <comment>// provide the router to your running server</comment>
+
+<comment>...</comment>
+<comment>
+// Now serving:
+// POST   /api/profile
+// GET    /api/profile/333
+// POST   /api/profile/333
+// DELETE /api/profile/333
+// GET    /api/profiles
+</comment>
+{%- endcall %}
+{# ===================================== END  | Code Block  "server.js" ===== #}
+
 
 {% endblock %}

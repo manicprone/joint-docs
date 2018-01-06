@@ -1,0 +1,12 @@
+{# -----------------------------------------------------------------------------
+ General Text Macros
+----------------------------------------------------------------------------- #}
+
+{# ------------------------------------------------ #}
+{# dangle - Indented Dangle Clause (Text Separator) #}
+{# ------------------------------------------------ #}
+{% macro dangle(text, withWings=true) %}
+  <dangle>
+    {% if withWings %}-{% endif %}<span>{{ text }}</span>{% if withWings %}-{% endif %}
+  </dangle>
+{% endmacro %}

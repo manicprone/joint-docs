@@ -1,275 +1,295 @@
 <div class="page-nav">
 
-  {# --------------------- #}
-  {# Joint Constructor API #}
-  {# --------------------- #}
+  {#
+  ------------------------------------------------------------------------------
+  Joint Constructor API
+  ------------------------------------------------------------------------------
+  #}
+  {%
+    set header = 'Joint Constructor'
+  %}
+  {%
+    set uri = leadingURI + '/joint-constructor'
+  %}
 
   <div class="nav-group">
-    <div class="nav-header"><a href="{{ leadingURI }}/joint-constructor">Joint Constructor</a></div>
+    {{ nav.linkheader(header, uri) }}
 
-    <div class="nav-sub-group">
-      <div class="nav-sub-header">params</div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-constructor/#constructor-param-service">service</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-constructor/#constructor-param-server">server</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-constructor/#constructor-param-output">output</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-constructor/#constructor-param-settings">settings</a>
-      </div>
-    </div>
+    {# ------------------------------------------- Joint Constructor - params #}
+    {%
+      set subHeader = 'params'
+    %}
+    {%
+      set items = [
+        { label: 'service', refID:'constructor-param-service' },
+        { label: 'server', refID:'constructor-param-server' },
+        { label: 'output', refID:'constructor-param-output' },
+        { label: 'settings', refID:'constructor-param-settings' }
+      ]
+    %}
+    {{ nav.subnav(subHeader, items, uri) }}
   </div>
 
-  {# ------------------ #}
-  {# Joint Instance API #}
-  {# ------------------ #}
+  {#
+  ------------------------------------------------------------------------------
+  Joint Instance API
+  ------------------------------------------------------------------------------
+  #}
+  {%
+    set header = 'Joint Instance'
+  %}
+  {%
+    set uri = leadingURI + '/joint-instance'
+  %}
 
   <div class="nav-group">
-    <div class="nav-header"><a href="{{ leadingURI }}/joint-instance">Joint Instance</a></div>
+    {{ nav.linkheader(header, uri) }}
 
-    {# Joint Instance - properties #}
-    <div class="nav-sub-group">
-      <div class="nav-sub-header">properties</div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-instance/#instance-prop-service">service</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-instance/#instance-prop-serviceKey">serviceKey</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-instance/#instance-prop-server">server</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-instance/#instance-prop-serverKey">serverKey</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-instance/#instance-prop-output">output</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-instance/#instance-prop-settings">settings</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-instance/#instance-prop-modelConfig">modelConfig</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-instance/#instance-prop-methodConfig">methodConfig</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-instance/#instance-prop-routeConfig">routeConfig</a>
-      </div>
-    </div>
-    {# END | Joint Instance - properties #}
+    {# ------------------------------------------ Joint Instance - properties #}
+    {%
+      set subHeader = 'properties'
+    %}
+    {%
+      set items = [
+        { label: 'service', refID:'instance-prop-service' },
+        { label: 'serviceKey', refID:'instance-prop-serviceKey' },
+        { label: 'server', refID:'instance-prop-server' },
+        { label: 'serverKey', refID:'instance-prop-serverKey' },
+        { label: 'output', refID:'instance-prop-output' },
+        { label: 'settings', refID:'instance-prop-settings' },
+        { label: 'modelConfig', refID:'instance-prop-modelConfig' },
+        { label: 'methodConfig', refID:'instance-prop-methodConfig' },
+        { label: 'routeConfig', refID:'instance-prop-routeConfig' }
+      ]
+    %}
+    {{ nav.subnav(subHeader, items, uri) }}
 
-    {# Joint Instance - functions #}
-    <div class="nav-sub-group">
-      <div class="nav-sub-header">functions</div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-instance/#instance-func-generate">generate</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-instance/#instance-func-setServer">setServer</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-instance/#instance-func-setOutput">setOutput</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-instance/#instance-func-updateSettings">updateSettings</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-instance/#instance-func-buildAuthBundle">buildAuthBundle</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-instance/#instance-func-info">info</a>
-      </div>
-    </div>
-    {# END | Joint Instance - functions #}
+    {# ------------------------------------------ Joint Instance - functions  #}
+    {%
+      set subHeader = 'functions'
+    %}
+    {%
+      set items = [
+        { label: 'generate', refID:'instance-func-generate' },
+        { label: 'setServer', refID:'instance-func-setServer' },
+        { label: 'setOutput', refID:'instance-func-setOutput' },
+        { label: 'updateSettings', refID:'instance-func-updateSettings' },
+        { label: 'buildAuthBundle', refID:'instance-func-buildAuthBundle' },
+        { label: 'info', refID:'instance-func-info' }
+      ]
+    %}
+    {{ nav.subnav(subHeader, items, uri) }}
 
-    {# Joint Instance - models #}
-    <div class="nav-sub-group">
-      <div class="nav-sub-header">models</div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-instance/#instance-obj-model">model</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-instance/#instance-obj-modelByTable">modelByTable</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-instance/#instance-obj-modelNameByTable">modelNameByTable</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-instance/#instance-obj-specByMethod">specByMethod</a>
-      </div>
-    </div>
-    {# END | Joint Instance - models #}
+    {# ---------------------------------------------- Joint Instance - models #}
+    {%
+      set subHeader = 'models'
+    %}
+    {%
+      set items = [
+        { label: 'model', refID:'instance-obj-model' },
+        { label: 'modelByTable', refID:'instance-obj-modelByTable' },
+        { label: 'modelNameByTable', refID:'instance-obj-modelNameByTable' }
+      ]
+    %}
+    {{ nav.subnav(subHeader, items, uri) }}
 
-    {# Joint Instance - methods #}
-    <div class="nav-sub-group">
-      <div class="nav-sub-header">methods</div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-instance/#instance-func-method">method</a>
-      </div>
-    </div>
-    {# END | Joint Instance - methods #}
+    {# --------------------------------------------- Joint Instance - methods #}
+    {%
+      set subHeader = 'methods'
+    %}
+    {%
+      set items = [
+        { label: 'method', refID:'instance-func-method' },
+        { label: 'specByMethod', refID:'instance-obj-specByMethod' }
+      ]
+    %}
+    {{ nav.subnav(subHeader, items, uri) }}
 
-    {# Joint Instance - router #}
-    <div class="nav-sub-group">
-      <div class="nav-sub-header">router</div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-instance/#instance-func-router">router</a>
-      </div>
-    </div>
-    {# END | Joint Instance - router #}
+    {# ---------------------------------------------- Joint Instance - router #}
+    {%
+      set subHeader = 'router'
+    %}
+    {%
+      set items = [
+        { label: 'router', refID:'instance-func-router' }
+      ]
+    %}
+    {{ nav.subnav(subHeader, items, uri) }}
   </div>
 
-  {# ----------------- #}
-  {# Joint Actions API #}
-  {# ----------------- #}
+  {#
+  ------------------------------------------------------------------------------
+  Joint Actions API
+  ------------------------------------------------------------------------------
+  #}
+  {%
+    set header = 'Joint Actions'
+  %}
+  {%
+    set uri = leadingURI + '/joint-actions'
+  %}
 
   <div class="nav-group">
-    <div class="nav-header"><a href="{{ leadingURI }}/joint-actions">Joint Actions</a></div>
+    {{ nav.linkheader(header, uri) }}
 
-    {# Joint Actions - CRUD #}
-    <div class="nav-sub-group">
-      <div class="nav-sub-header">CRUD</div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-actions/#action-createItem">createItem</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-actions/#action-upsertItem">upsertItem</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-actions/#action-updateItem">updateItem</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-actions/#action-getItem">getItem</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-actions/#action-getItems">getItems</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-actions/#action-deleteItem">deleteItem</a>
-      </div>
-    </div>
-    {# END | Joint Actions - CRUD #}
+    {# ------------------------------------------------- Joint Actions - CRUD #}
+    {%
+      set subHeader = 'CRUD'
+    %}
+    {%
+      set items = [
+        { label: 'createItem', refID:'action-createItem' },
+        { label: 'upsertItem', refID: 'action-upsertItem' },
+        { label: 'updateItem', refID: 'action-updateItem' },
+        { label: 'getItem', refID: 'action-getItem' },
+        { label: 'getItems', refID: 'action-getItems' },
+        { label: 'deleteItem', refID: 'action-deleteItem' }
+      ]
+    %}
+    {{ nav.subnav(subHeader, items, uri) }}
 
-    {# Joint Actions - relational #}
-    <div class="nav-sub-group">
-      <div class="nav-sub-header">relational</div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-actions/#action-addAssociatedItems">addAssociatedItems</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-actions/#action-hasAssociatedItem">hasAssociatedItem</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-actions/#action-getAllAssociatedItems">getAllAssociatedItems</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-actions/#action-removeAssociatedItems">removeAssociatedItems</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-actions/#action-removeAllAssociatedItems">removeAllAssociatedItems</a>
-      </div>
-    </div>
-    {# END | Joint Actions - relational #}
+    {# ------------------------------------------- Joint Actions - relational #}
+    {%
+      set subHeader = 'relational'
+    %}
+    {%
+      set items = [
+        { label: 'addAssociatedItems', refID:'action-addAssociatedItems' },
+        { label: 'hasAssociatedItem', refID: 'action-hasAssociatedItem' },
+        { label: 'getAllAssociatedItems', refID: 'action-getAllAssociatedItems' },
+        { label: 'removeAssociatedItems', refID: 'action-removeAssociatedItems' },
+        { label: 'removeAllAssociatedItems', refID: 'action-removeAllAssociatedItems' }
+      ]
+    %}
+    {{ nav.subnav(subHeader, items, uri) }}
 
-    {# Joint Actions - spec options #}
-    <div class="nav-sub-group">
-      <div class="nav-sub-header">spec options</div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-actions/#spec-opt-modelName">modelName</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-actions/#spec-opt-fields">fields</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-actions/#spec-opt-fieldsToReturn">fieldsToReturn</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-actions/#spec-opt-defaultOrderBy">defaultOrderBy</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-actions/#spec-opt-forceAssociations">forceAssociations</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-actions/#spec-opt-forceLoadDirect">forceLoadDirect</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-actions/#spec-opt-auth">auth</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-actions/#spec-opt-main">main</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-actions/#spec-opt-association">association</a>
-      </div>
-    </div>
-    {# END | Joint Actions - spec options #}
+    {# ----------------------------------------- Joint Actions - spec options #}
+    {%
+      set subHeader = 'spec options'
+    %}
+    {%
+      set items = [
+        { label: 'modelName', refID:'spec-opt-modelName' },
+        { label: 'fields', refID: 'spec-opt-fields' },
+        { label: 'fieldsToReturn', refID: 'spec-opt-fieldsToReturn' },
+        { label: 'defaultOrderBy', refID: 'spec-opt-defaultOrderBy' },
+        { label: 'forceAssociations', refID: 'spec-opt-forceAssociations' },
+        { label: 'forceLoadDirect', refID: 'spec-opt-forceLoadDirect' },
+        { label: 'auth', refID: 'spec-opt-auth' },
+        { label: 'main', refID: 'spec-opt-main' },
+        { label: 'association', refID: 'spec-opt-association' }
+      ]
+    %}
+    {{ nav.subnav(subHeader, items, uri) }}
 
-    {# Joint Actions - input options #}
-    <div class="nav-sub-group">
-      <div class="nav-sub-header">input options</div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-actions/#input-opt-fields">fields</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-actions/#input-opt-fieldSet">fieldSet</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-actions/#input-opt-associations">associations</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-actions/#input-opt-loadDirect">loadDirect</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-actions/#input-opt-orderBy">orderBy</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-actions/#input-opt-paginate">paginate</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-actions/#input-opt-trx">trx</a>
-      </div>
-      <div class="nav-sub-item">
-        <a href="{{ leadingURI }}/joint-actions/#input-opt-authBundle">authBundle</a>
-      </div>
-    </div>
-    {# END | Joint Actions - input options #}
+    {# ---------------------------------------- Joint Actions - input options #}
+    {%
+      set subHeader = 'input options'
+    %}
+    {%
+      set items = [
+        { label: 'fields', refID:'input-opt-fields' },
+        { label: 'fieldSet', refID: 'input-opt-fieldSet' },
+        { label: 'associations', refID: 'input-opt-associations' },
+        { label: 'loadDirect', refID: 'input-opt-loadDirect' },
+        { label: 'orderBy', refID: 'input-opt-orderBy' },
+        { label: 'paginate', refID: 'input-opt-paginate' },
+        { label: 'trx', refID: 'input-opt-trx' },
+        { label: 'authBundle', refID: 'input-opt-authBundle' }
+      ]
+    %}
+    {{ nav.subnav(subHeader, items, uri) }}
+
+    {# ---------------------------------------- Joint Actions - output values #}
+    {%
+      set subHeader = 'output values'
+    %}
+    {%
+      set items = [
+        { label: 'native', refID:'output-value-native' },
+        { label: 'json-api', refID: 'output-value-json-api' }
+      ]
+    %}
+    {{ nav.subnav(subHeader, items, uri) }}
   </div>
 
-  {# -------------------------- #}
-  {# Joint Action Authorization #}
-  {# -------------------------- #}
+  {#
+  ------------------------------------------------------------------------------
+  Joint Action Authorization
+  ------------------------------------------------------------------------------
+  #}
+  {%
+    set header = 'Joint Action Authorization'
+  %}
+  {%
+    set uri = leadingURI + '/joint-action-authorization'
+  %}
 
   <div class="nav-group">
-    <div class="nav-header"><a href="{{ leadingURI }}/joint-action-authorization">Joint Action Authorization</a></div>
+    {{ nav.linkheader(header, uri) }}
   </div>
 
-  {# ------------------- #}
-  {# Joint Action Errors #}
-  {# ------------------- #}
+  {#
+  ------------------------------------------------------------------------------
+  Joint Action Errors
+  ------------------------------------------------------------------------------
+  #}
+  {%
+    set header = 'Joint Action Errors'
+  %}
+  {%
+    set uri = leadingURI + '/joint-action-errors'
+  %}
 
   <div class="nav-group">
-    <div class="nav-header"><a href="{{ leadingURI }}/joint-action-errors">Joint Action Errors</a></div>
+    {{ nav.linkheader(header, uri) }}
   </div>
 
-  {# ----------------- #}
-  {# Config Syntax API #}
-  {# ----------------- #}
+  {#
+  ------------------------------------------------------------------------------
+  Model Config Syntax
+  ------------------------------------------------------------------------------
+  #}
+  {%
+    set header = 'Model Config Syntax'
+  %}
+  {%
+    set uri = leadingURI + '/model-config-syntax'
+  %}
 
   <div class="nav-group">
-    <div class="nav-header"><a href="{{ leadingURI }}/model-config-syntax">Model Config Syntax</a></div>
+    {{ nav.linkheader(header, uri) }}
   </div>
 
-  <div class="nav-group">
-    <div class="nav-header"><a href="{{ leadingURI }}/method-config-syntax">Method Config Syntax</a></div>
-  </div>
+  {#
+  ------------------------------------------------------------------------------
+  Method Config Syntax
+  ------------------------------------------------------------------------------
+  #}
+  {%
+    set header = 'Method Config Syntax'
+  %}
+  {%
+    set uri = leadingURI + '/method-config-syntax'
+  %}
 
   <div class="nav-group">
-    <div class="nav-header"><a href="{{ leadingURI }}/route-config-syntax">Route Config Syntax</a></div>
+    {{ nav.linkheader(header, uri) }}
+  </div>
+
+  {#
+  ------------------------------------------------------------------------------
+  Route Config Syntax
+  ------------------------------------------------------------------------------
+  #}
+  {%
+    set header = 'Route Config Syntax'
+  %}
+  {%
+    set uri = leadingURI + '/route-config-syntax'
+  %}
+
+  <div class="nav-group">
+    {{ nav.linkheader(header, uri) }}
   </div>
 </div>

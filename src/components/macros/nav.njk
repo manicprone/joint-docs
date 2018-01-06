@@ -1,0 +1,44 @@
+{# -----------------------------------------------------------------------------
+ Nav Macros
+----------------------------------------------------------------------------- #}
+
+{# ------------------- #}
+{# header - Nav Header #}
+{# ------------------- #}
+{% macro header(headerText='') %}
+  <div class="nav-header">{{ headerText }}</div>
+{% endmacro %}
+
+{# ---------------------------- #}
+{# linkheader - Nav Link Header #}
+{# ---------------------------- #}
+{% macro linkheader(headerText='', uri='') %}
+  <div class="nav-header"><a href="{{ uri }}">{{ headerText }}</a></div>
+{% endmacro %}
+
+{# --------------------- #}
+{# items - Nav Item List #}
+{# --------------------- #}
+{% macro items(items=[]) %}
+  {% for item in items %}
+    <div class="nav-item">
+      <a href={{ item.uri }}>{{ item.label }}</a>
+    </div>
+  {% endfor %}
+{% endmacro %}
+
+{# ------------------------------------------ #}
+{# subnav - Inline Page Sub Nav (Collapsible) #}
+{# ------------------------------------------ #}
+{% macro subnav(headerText='', items=[], uri='') %}
+  <details>
+    <summary class="nav-sub-header">{{ headerText }}</summary>
+    <div class="nav-sub-group">
+    {% for item in items %}
+      <div class="nav-sub-item">
+        <a href={{ uri }}/#{{ item.refID }}>{{ item.label }}</a>
+      </div>
+    {% endfor %}
+    </div>
+  </details>
+{% endmacro %}
