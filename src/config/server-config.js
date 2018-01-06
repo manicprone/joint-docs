@@ -10,7 +10,7 @@ export default {
 
   port: {
     development: 3000,
-    production: 80,
+    production: 8080,
   },
 
   basePaths: {
