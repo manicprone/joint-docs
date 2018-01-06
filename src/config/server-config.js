@@ -3,8 +3,15 @@ export default {
   // ---------------
   // Server settings
   // ---------------
-  host: '127.0.0.1',
-  port: 3000,
+  host: {
+    development: '127.0.0.1',
+    production: '127.0.0.1',
+  },
+
+  port: {
+    development: 3000,
+    production: 80,
+  },
 
   basePaths: {
     dist: '/dist',

@@ -1,8 +1,6 @@
-# Joint Docs
+# Joint Kit Docs
 
-Joint JS | Guide & API Reference
-
-[TBC]
+Online documentation for the Joint Kit solution.
 
 <br />
 

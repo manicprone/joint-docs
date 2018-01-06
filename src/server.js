@@ -8,6 +8,9 @@ import serverConfig from './config/server-config';
 import appConfig from './config/app-config';
 import viewRouter from './routers/view';
 
+const env = process.env.NODE_ENV || 'development';
+const isProd = env === 'production';
+
 const appName = appConfig.name;
 const appAlias = appConfig.alias;
 const basePath = serverConfig.basePaths;
@@ -63,12 +66,13 @@ app.get('*', (req, res) => {
 // ---------------
 // Start server...
 // ---------------
-const port = serverConfig.port;
+const host = (isProd) ? serverConfig.host[env] : 'localhost';
+const port = serverConfig.port[env];
 app.listen(port, () => {
   console.info('================================');
   console.info(`${appName} is running`);
   console.info('--------------------------------');
-  console.info(`host:  localhost:${port}`);
+  console.info(`host:  ${host}:${port}`);
   console.info(`alias: ${appAlias}`);
   console.info('================================');
   console.info('');
