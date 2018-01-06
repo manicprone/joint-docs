@@ -1,7 +1,7 @@
 {
   "name": "joint-docs",
-  "version": "0.0.0",
-  "description": "Joint JS | Guide & API Reference",
+  "version": "0.0.1",
+  "description": "Joint Kit | Guide & API Reference",
   "author": "|M| <manicprone@gmail.com>",
   "license": "MIT",
   "main": "src/server.js",
@@ -10,7 +10,7 @@
     "url": "git@github.com:manicprone/joint-docs.git"
   },
   "scripts": {
-    "dev": "babel-node src/server.js",
+    "dev": "cross-env NODE_ENV=development babel-node src/server.js",
     "start": "cross-env NODE_ENV=production babel-node src/server.js",
     "lint": "eslint ./ --cache --ignore-pattern .gitignore",
     "precommit-message": "echo 'Pre-commit checks (linting)...' && exit 0"

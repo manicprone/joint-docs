@@ -347,6 +347,39 @@ validation {
 }
 
 /* -----------------------------------------------------------------------------
+ * Splash Page Content
+ * -------------------------------------------------------------------------- */
+
+.splash-content {
+  margin: 15% auto 20px auto;
+  text-align: center;
+}
+
+.splash-content .title {
+  font-size: 28px;
+}
+.splash-content .title .decorative-script {
+  color: #9a9a9a;
+  font-size: 13px;
+  font-weight: 200;
+  font-style: italic;
+  line-height: 13px;
+}
+
+.splash-content .install-info {
+  margin: 50px auto 0 auto;
+  width: 278px;
+}
+
+.splash-content .links {
+  margin-top: 60px;
+}
+.splash-content .links div {
+  display: inline-block;
+  width: 95px;
+}
+
+/* -----------------------------------------------------------------------------
  * Page Content
  * -------------------------------------------------------------------------- */
 

@@ -16,11 +16,6 @@ const basePaths = appConfig.basePaths;
 //
 // /examples  => inline examples, list of links to running apps, etc
 // -----------------------------------------------------------------------------
-// Notes:
-//
-// + Remove "The Joint Concept" guide, instead just describe the concept
-//   in the  Overview section.
-// -----------------------------------------------------------------------------
 
 const router = express.Router();
 
