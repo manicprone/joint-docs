@@ -1,28 +1,45 @@
 <div class="page-nav">
-  <div class="nav-group">
-    <div class="nav-header">Introduction</div>
-    <div class="nav-item">
-      <a href="{{ leadingURI }}/getting-started">Getting Started</a>
-    </div>
-    <div class="nav-item">
-      <a href="{{ leadingURI }}/the-joint-concept">The Joint Concept</a>
-    </div>
-    <div class="nav-item">
-      <a href="{{ leadingURI }}/joint-in-practice">Joint in Practice</a>
-    </div>
-  </div>
+
+  {#
+  ------------------------------------------------------------------------------
+  Introduction
+  ------------------------------------------------------------------------------
+  #}
+  {%
+    set header = 'Introduction'
+  %}
 
   <div class="nav-group">
-    <div class="nav-header">Dev Guides</div>
-
-    <div class="nav-item">
-      <a href="{{ leadingURI }}/defining-data-models">Defining Data Models</a>
-    </div>
-    <div class="nav-item">
-      <a href="{{ leadingURI }}/building-a-method-library">Building a Method Library</a>
-    </div>
-    <div class="nav-item">
-      <a href="{{ leadingURI }}/building-a-restful-api">Building a RESTful API</a>
-    </div>
+    {{ nav.header(header) }}
+    {%
+      set items = [
+        { label: 'Getting Started', uri:leadingURI + '/getting-started' },
+        { label: 'The Joint Concept', uri:leadingURI + '/the-joint-concept' },
+        { label: 'Joint in Practice', uri:leadingURI + '/joint-in-practice' }
+      ]
+    %}
+    {{ nav.items(items) }}
   </div>
+
+  {#
+  ------------------------------------------------------------------------------
+  Dev Guides
+  ------------------------------------------------------------------------------
+  #}
+  {%
+    set header = 'Dev Guides'
+  %}
+
+  <div class="nav-group">
+    {{ nav.header(header) }}
+    {%
+      set items = [
+        { label: 'Defining Data Models', uri:leadingURI + '/defining-data-models' },
+        { label: 'Building a Method Library', uri:leadingURI + '/building-a-method-library' },
+        { label: 'Building a RESTful API', uri:leadingURI + '/building-a-restful-api' }
+      ]
+    %}
+    {{ nav.items(items) }}
+  </div>
+
 </div>

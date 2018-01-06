@@ -1,6 +1,8 @@
 {% extends "index.njk" %}
 
+{% import "macros/api.njk" as api %}
 {% import "macros/code.njk" as code %}
+{% import "macros/nav.njk" as nav %}
 {% import "macros/text.njk" as text %}
 
 {% block page %}
@@ -15,7 +17,11 @@
     </div>
   </div>
 
-  <div class="page-content {{ section }}">
+  <aside class="page-nav-container">
+    {% include "navs/page-nav_" + section + ".njk" %}
+  </aside>
+
+  <div class="page-content with-nav {{ section }}">
     {% block content %}
       Page Content
     {% endblock %}

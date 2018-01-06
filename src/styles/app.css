@@ -191,7 +191,7 @@ prop {
   border-radius: 4px;
   margin-left: 2px;
   margin-right: 1px;
-  padding: 2px 8px 3px 8px;
+  padding: 2px 8px 2px 8px;
 }
 a:hover prop {
   color: #ffffff;
@@ -355,9 +355,13 @@ validation {
   top: 45px;
   z-index: 10;
   background-color: #ffffff;
-  margin: 0 0 0 265px;
+  margin: 0;
   padding: 30px 40px 40px 40px;
   max-width: 780px;
+}
+
+.page-content.with-nav {
+  margin: 0 0 0 265px;
 }
 
 /* -------------------------------------  Headings */

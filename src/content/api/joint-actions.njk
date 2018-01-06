@@ -1,4 +1,4 @@
-{% extends "main.njk" %}
+{% extends "main-with-nav.njk" %}
 
 {% block content %}
 
@@ -501,7 +501,7 @@ function getUser(input) {
 </p>
 
 <p>
-  The <prop>defaultValue</prop> property supports a set of convenience operations that
+  The <code class="code-ref">defaultValue</code> property supports a set of convenience operations that
   generate dynamic values.
 </p>
 
@@ -517,7 +517,11 @@ function getUser(input) {
     <td><b><code>now</code></b></td>
     <td style="text-align:center;"><i>String</i></td>
     <td>Generates a UTC timestamp for the current date/time.</td>
-    <td></td>
+    <td>
+{% call code.block() -%}
+now => '2017-11-23T03:47:19Z';
+{%- endcall %}
+    </td>
   </tr>
   <tr>
     <td><code><b>kebabCase(</b>&lt;<i>fieldName</i>&gt;<b>)</b></code></td>
@@ -569,7 +573,7 @@ pascalCase(title) => 'TheVeryFirst';
 
 {% call api.apidesc() -%}
   To call an operation, use a <i>String</i> that starts and ends with the
-  <code style="font-size:105%;">%</code> character.
+  <code class="code-ref" style="font-size:105%;">%</code> character.
 {%- endcall %}
 
 {% call code.block('For example:') -%}
@@ -594,9 +598,10 @@ function createTag(input) {
 {%- endcall %}
 
 {% call api.apidesc() -%}
-  To force the execution of the <code>defaultValue</code> option, you can use the <prop>locked</prop> property.
-  The <code>locked</code> property prevents the field from being updated by user input. Using the
-  <code>defaultValue</code> property in conjunction with <code>locked</code> ensures it will always be executed.
+  To force the execution of the <code class="code-ref">defaultValue</code> option,
+  you can use the <prop>locked</prop> property. The <code>locked</code> property prevents the
+  field from being updated by user input. Using the <code>defaultValue</code> property in
+  conjunction with <code>locked</code> ensures it will always be executed.
 {%- endcall %}
 
 {% call code.block('For example:') -%}
@@ -635,7 +640,8 @@ function getUsers(input) {
 </p>
 
 <p>
-  [TBC]
+  The <code class="code-ref">fieldsToReturn</code> property also supports the ability
+  to define multiple return field combinations.
 </p>
 
 {% call code.block('Example usage with field sets:') -%}
@@ -652,6 +658,23 @@ function getUsers(input) {
 
   return joint.getItems(spec, input);
 }
+{%- endcall %}
+
+<br /><br />
+
+{% call api.apidesc() -%}
+  By using an <i>Object</i> value instead of an <i>Array</i>, multiple Field Sets are defined by
+  providing property names (as the aliases), and specifying the <i>Array</i> of fields to return
+  as the values. The input request can then specify which fields to return,
+  using the <a href="#input-opt-fieldSet"><prop>input.fieldSet</prop></a> property.
+{%- endcall %}
+
+{% call api.apidesc() -%}
+  There is one special Field Set alias: <code class="code-ref">default</code>.
+  <br /><br />
+  If the default Field Set is defined, this field combination will be returned whenever the input
+  does not use the <a href="#input-opt-fieldSet"><prop>input.fieldSet</prop></a> property
+  or if an undefined set is requested.
 {%- endcall %}
 
 {{ api.optheader('spec.defaultOrderBy', 'spec-opt-defaultOrderBy') }}
