@@ -2,20 +2,21 @@
 
   {#
   ------------------------------------------------------------------------------
-  Introduction
+  About
   ------------------------------------------------------------------------------
   #}
   {%
-    set header = 'Introduction'
+    set header = 'About'
   %}
 
   <div class="nav-group">
     {{ nav.header(header) }}
     {%
       set items = [
-        { label: 'Getting Started', uri:leadingURI + '/getting-started' },
-        { label: 'The Joint Concept', uri:leadingURI + '/the-joint-concept' },
-        { label: 'Joint in Practice', uri:leadingURI + '/joint-in-practice' }
+        { label: 'Overview', uri:leadingURI + '/overview' },
+        { label: 'License', uri:leadingURI + '/license' },
+        { label: 'Source', uri:leadingURI + '/source' },
+        { label: 'Author\'s Note', uri:leadingURI + '/authors-note' }
       ]
     %}
     {{ nav.items(items) }}

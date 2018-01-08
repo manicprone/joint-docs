@@ -1,0 +1,53 @@
+{% extends "main.njk" %}
+
+{% block content %}
+
+<h2>Author&#39;s Note</h2>
+
+<p>
+  The Joint Kit was conceived, so that I could quickly spin up new server-side
+  applications and RESTful APIs.
+</p>
+
+<p>
+  I found other similar solutions to either be too rigid, with respect to the
+  database schema requirements, or too overarching, attempting to automatically
+  generate a "complete" solution for my desired functionality.
+</p>
+
+<p>
+  I simply wanted to eliminate writing the same foundation data logic over and over,
+  but maintain the freedom to mix-in custom code, at any point, in order to support
+  the nuances of application variance and complexity.
+</p>
+
+<p>
+  Additionally, I wanted to have the logic of my HTTP API reflected as a full
+  method library, to support isomorphic scenarios (where the server-side can access
+  native data objects via functions, while the client-side can access serialized data
+  payloads via HTTP).
+</p>
+
+<p>
+  The Joint Kit package is public, to demonstrate who I am, and what I do.
+</p>
+
+<p>
+  You are absolutely
+  free to use it, fork it, criticize it. But, I do not have plans to accept PRs/MRs
+  or otherwise prioritize code issues/enhancements on any form of intuitive metric.
+  But, I do keep a <code>TODO.md</code> file at the root of the repository, to broadcast
+  what is in the development roadmap.
+</p>
+
+<p>
+  - |M|
+</p>
+
+<br />
+<div>
+  <div style="float:left;"><img style="height:22px;" src="/public/GitHub-Mark-32px.png" /></div>
+  <div style="float:left;margin:2px 0 0 6px;"><a href="https://github.com/manicprone" target="_new">manicprone</a></div>
+</div>
+
+{% endblock %}

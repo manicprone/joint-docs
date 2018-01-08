@@ -6,11 +6,11 @@ const basePaths = appConfig.basePaths;
 // -----------------------------------------------------------------------------
 // Main Nav:
 //
-// /          => splash page (source | overview)
+// /          => splash page (source | docs > about)
 //
-// /overview  => brief intro & features + diagrams
+// /about     => Overview | License | Source | A Note -or- Author's Note
 //
-// /guide     => Getting Started / The Joint Concept / Joint in Practice + Dev Guides
+// /guide     => Getting Started / Conceptual Walk-through / Joint in Practice + Dev Guides
 //
 // /api       => Constructor / Instance / Actions, et al
 //
@@ -26,7 +26,7 @@ router.route('/')
 
 router.route(`${basePaths.docs}/:section?/:content?`)
   .get((req, res) => {
-    const section = req.params.section || 'overview';
+    const section = req.params.section || 'about';
     const content = req.params.content || 'start';
     const contentURI = `${section}/${content}`;
     const leadingURI = `${basePaths.docs}/${section}`;
