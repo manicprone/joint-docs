@@ -432,7 +432,7 @@ validation {
   margin-bottom: 16px;
 }
 
-/* Separators */
+/* -------------------------------------  Separators */
 .page-content .separator-or {
   color: #525252;
 }
@@ -441,6 +441,10 @@ validation {
 .page-content p {
   margin-top: 20px;
   margin-bottom: 8px;
+}
+.page-content lilp {
+  display: block;
+  margin-top: 10px;
 }
 .page-content i {
   color: #525252;
