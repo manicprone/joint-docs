@@ -264,6 +264,7 @@ validation {
 .app-header .title h1 {
   font-size: 23px;
   line-height: 23px;
+  font-weight: 400;
 }
 .app-header .app-nav-container {
   display: inline-block;
@@ -299,13 +300,21 @@ validation {
   margin: 0 0 20px 0;
 }
 .page-nav .nav-header {
+  color: #0b5693;
+  font-size: 17px;
+  border-bottom: 1px solid #dfdfdf;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+  width: 185px;
+}
+.page-nav .nav-link-header {
   font-size: 17px;
   margin-bottom: 18px;
 }
-.page-nav .nav-header a {
+.page-nav .nav-link-header a {
   color: #252525;
 }
-.page-nav .nav-header a:hover {
+.page-nav .nav-link-header a:hover {
   color: #525252;
 }
 .page-nav .nav-sub-header {
@@ -400,10 +409,13 @@ validation {
 /* -------------------------------------  Headings */
 .page-content h1, h2 {
   margin-bottom: 25px;
+  font-size: 28px;
+}
+.page-content h1 {
+  color: #3d3d3d;
 }
 .page-content h2 {
   color: #0b5693;
-  font-size: 28px;
 }
 .page-content h3, h4, h5 {
   margin-top: 35px;
@@ -420,7 +432,7 @@ validation {
   margin-bottom: 16px;
 }
 
-/* Separators */
+/* -------------------------------------  Separators */
 .page-content .separator-or {
   color: #525252;
 }
@@ -429,6 +441,10 @@ validation {
 .page-content p {
   margin-top: 20px;
   margin-bottom: 8px;
+}
+.page-content lilp {
+  display: block;
+  margin-top: 10px;
 }
 .page-content i {
   color: #525252;
