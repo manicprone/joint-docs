@@ -46,6 +46,14 @@ export default joint;
   Define your data models using a JSON descriptor:
 </p>
 
+<details>
+<summary>Using a <b>model config</b></summary>
+
+<br />
+<p>
+  Connect model names to your data schema:
+</p>
+
 {# ======================= BEGIN | Code Block  "/joint/model-config.js" ===== #}
 {% call code.block(filename='/joint/model-config.js') -%}
 export default {
@@ -75,14 +83,9 @@ export default {
 {# ======================== END  | Code Block  "/joint/model-config.js" ===== #}
 
 <br />
-
 <p>
-  Then, use the <func>generate</func> <span>func</span>tion to dynamically build and register your models:
+  Use the <func>generate</func> <span>func</span>tion to dynamically build and register your models:
 </p>
-
-<callout>
-  Models are registered as: &nbsp; <code>joint.model.&lt;modelName&gt;</code>
-</callout>
 
 {# ============================== BEGIN | Code Block  "/joint/index.js" ===== #}
 {% call code.block(filename='/joint/index.js') -%}
@@ -100,6 +103,11 @@ export default joint;
 {%- endcall %}
 {# =============================== END  | Code Block  "/joint/index.js" ===== #}
 
+<br />
+<p>
+  Models are registered as: &nbsp; <code>joint.model.&lt;modelName&gt;</code>
+</p>
+
 {# ============================= BEGIN | Code Block  "example-usage.js" ===== #}
 {% call code.block(filename='example-usage.js') -%}
 import joint from '../joint';
@@ -107,6 +115,7 @@ import joint from '../joint';
 if (joint.model.Profile) console.log('The Profile model exists !!!');
 {%- endcall %}
 {# ============================== END  | Code Block  "example-usage.js" ===== #}
+</details>
 
 <h3>Create a Method Library</h3>
 
@@ -198,7 +207,15 @@ export function deleteProfile(input) {
 {{ text.dangle('or') }}
 
 <p>
-  You can define the methods using a JSON descriptor:
+  You can configure the methods using a JSON descriptor:
+</p>
+
+<details>
+<summary>Using a <b>method config</b></summary>
+
+<br />
+<p>
+  Define the methods...
 </p>
 
 {# ====================== BEGIN | Code Block  "/joint/method-config.js" ===== #}
@@ -275,12 +292,8 @@ export default {
 <br />
 
 <p>
-  Then, use the <func>generate</func> <span>func</span>tion to dynamically generate your methods:
+  Use the <func>generate</func> <span>func</span>tion to dynamically generate your methods:
 </p>
-
-<callout>
-  Methods are registered as: &nbsp; <code>joint.method.&lt;modelName&gt;.&lt;methodName&gt;</code>
-</callout>
 
 {# ============================== BEGIN | Code Block  "/joint/index.js" ===== #}
 {% call code.block(filename='/joint/index.js') -%}
@@ -299,6 +312,11 @@ export default joint;
 {%- endcall %}
 {# =============================== END  | Code Block  "/joint/index.js" ===== #}
 
+<br />
+<p>
+  Methods are registered as: &nbsp; <code>joint.method.&lt;modelName&gt;.&lt;methodName&gt;</code>
+</p>
+
 {# ============================== BEGIN | Code Block  "example-usage.js" ===== #}
 {% call code.block(filename='example-usage.js') -%}
 import joint from '../joint';
@@ -313,6 +331,7 @@ joint.method.Profile.getProfiles(input)
   .catch((error) => { ... });
 {%- endcall %}
 {# =============================== END  | Code Block  "example-usage.js" ===== #}
+</details>
 
 <h3>Create RESTful Endpoints</h3>
 
@@ -401,6 +420,9 @@ module.exports = router;
   You can define the router using a JSON descriptor:
 </p>
 
+<details>
+<summary>Using a <b>route config</b></summary>
+
 {# ======================= BEGIN | Code Block  "/joint/route-config.js" ===== #}
 {% call code.block(filename='/joint/route-config.js') -%}
 export default {
@@ -427,7 +449,7 @@ export default {
 <br />
 
 <p>
-  Then, use the <func>generate</func> <span>func</span>tion to dynamically generate your router:
+  Use the <func>generate</func> <span>func</span>tion to dynamically generate your router:
 </p>
 
 <callout>
@@ -454,6 +476,12 @@ export default joint;
 {%- endcall %}
 {# =============================== END  | Code Block  "/joint/index.js" ===== #}
 
+<br />
+
+<p>
+  Provide the generated router to your running server:
+</p>
+
 {# ==================================== BEGIN | Code Block  "server.js" ===== #}
 {% call code.block(filename='server.js') -%}
 import express from 'express';
@@ -463,7 +491,7 @@ const app = express();
 
 <comment>...</comment>
 
-<hilite>app.use('/api', joint.router);</hilite> <comment>// provide the router to your running server</comment>
+<hilite>app.use('/api', joint.router);</hilite>
 
 <comment>...</comment>
 <comment>
@@ -476,6 +504,7 @@ const app = express();
 </comment>
 {%- endcall %}
 {# ===================================== END  | Code Block  "server.js" ===== #}
+</details>
 
 
 {% endblock %}
