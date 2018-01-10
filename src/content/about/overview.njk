@@ -5,20 +5,23 @@
 <h2>Overview</h2>
 
 <p>
-  The Joint Kit is a flexible development library for:
+  The Joint Kit is a Node-based development library for rapidly building
+  data layers within your application.
 </p>
 
+{% call text.framedblock(headingText='Use the Joint Kit to:', maxWidth='410px') -%}
 <ul class="definition">
   <li>
-    <div>connecting your Node application to a new or existing database schema</div>
+    <div>connect your Node app to persisted data schemas</div>
   </li>
   <li>
-    <div>building a server-side method library</div>
+    <div>build server-side method libraries</div>
   </li>
   <li>
-    <div>building a RESTful API for client applications</div>
+    <div>build RESTful APIs for client apps</div>
   </li>
 </ul>
+{%- endcall %}
 
 <p>
   Here&#39;s where the Joint Kit fits into your application:
@@ -31,30 +34,57 @@
 <h3>Quick to Implement</h3>
 
 <p>
-  At it&#39;s core, the Joint Kit provides a library of abstract data actions,
-  that perform the essential data operation logic for any application.
+  At its core, the Joint Kit is an abstract data ops library,
+  exposed through a set of JavaScript functions.
 
   <lilp>
-  The actions are implemented to your specific data schema and your desired functionality,
-  using simple JSON configuration objects. This makes implementation quick and easy.
+  The functions provide a comprehensive range of both generic and
+  specialized data operation scenarios, that are essential to nearly any
+  data-persistent application.
+  </lilp>
+
+  <lilp>
+  The redundant, tedious logic behind each data operation (the majority of the work)
+  is already handled for you... you just need to define the concrete behavior
+  of your operations using JSON objects.
+  This makes implementation easy and quick.
   </lilp>
 </p>
 
 <h3>Very Little Programming</h3>
 
 <p>
-  Nearly the entire solution can be performed with a configuration syntax (in JSON),
+  Nearly the entire solution can be defined using a configuration syntax (in JSON),
   leaving the programming logic to an extreme minimum.
+
+  <lilp>
+  In this case, the custom data layers are dynamically generated on application startup,
+  and thus the configurations can be hot-swapped to load variations based upon
+  application environment, etc.
+  </lilp>
 </p>
 
-<h3>Flexible</h3>
+<h3>Powerful and Flexible</h3>
 
 <p>
-  If you want more complexity and deeper integration, you can leverage the library
-  as a programmatic solution, granting the flexibility to augment the out-of-the-box
-  capabilities with your own specialized logic.
+  However, if you want more complexity, integration, and control...
+  you can leverage the library as a purely programmatic solution.
+
+  <lilp>
+  Let the Joint Kit handle the generic aspects of your data operations (the 80%),
+  while you supplement the implementation with your own hand-rolled logic (the 20%).
+  </lilp>
+
+  <lilp>
+  You can create multiple instances from the Kit (referred to as <i>Joints</i>)
+  within a single application; each isolated to service separate data
+  repositories, schemas, and implementation behavior.
+  </lilp>
+
+  <lilp>
+  You can also mix-and-match both implementation methods (configuration and programmatic)
+  with the same Joint instance.
+  </lilp>
 </p>
-
-
 
 {% endblock %}

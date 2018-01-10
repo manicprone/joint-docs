@@ -3,10 +3,22 @@
 ----------------------------------------------------------------------------- #}
 
 {# ------------------------------------------------ #}
-{# dangle - Indented Dangle Clause (Text Separator) #}
+{# dangle - Indented Dangle Clause (text separator) #}
 {# ------------------------------------------------ #}
 {% macro dangle(text, withWings=true) %}
   <dangle>
     {% if withWings %}-{% endif %}<span>{{ text }}</span>{% if withWings %}-{% endif %}
   </dangle>
+{% endmacro %}
+
+{# ---------------------------------------------- #}
+{# framedblock - Framed Text Block (for emphasis) #}
+{# ---------------------------------------------- #}
+{% macro framedblock(headingText, maxWidth) %}
+  <div class="framed-block" {% if maxWidth %}style="max-width:{{ maxWidth }}"{% endif %}>
+  {% if headingText %}
+  <div class="header">{{ headingText }}</div>
+  {% endif %}
+    {{ caller() }}
+  </div>
 {% endmacro %}

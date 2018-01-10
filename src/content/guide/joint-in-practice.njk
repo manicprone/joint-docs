@@ -8,22 +8,20 @@
   To implement solutions with the Joint Kit, you create <i>Joints</i>.
 </p>
 
-<p>
-  A Joint connects to:
-</p>
-
+{% call text.framedblock(headingText='A Joint connects to:', maxWidth='490px') -%}
 <ul class="definition">
   <li>
     <div style="width:180px"><i>your persistence service</i></div>
-    <div style="width:27px">&#10132;</div>
+    <div style="color:#0b5693;width:25px">&#10132;</div>
     <div>to implement a data method layer</div>
   </li>
   <li>
     <div style="width:180px"><i>your server framework</i></div>
-    <div style="width:27px">&#10132;</div>
+    <div style="color:#0b5693;width:25px">&#10132;</div>
     <div>to implement an HTTP API layer</div>
   </li>
 </ul>
+{%- endcall %}
 
 <h3>Create a Joint</h3>
 
@@ -127,7 +125,7 @@ if (joint.model.Profile) console.log('The Profile model exists !!!');
   You can hand-roll the methods yourself:
 </p>
 
-<details>
+<details class="third-party">
 <summary>Hand-rolling a CRUD set of methods</summary>
 
 {# ========================== BEGIN | Code Block  "/methods/profile.js" ===== #}
@@ -343,7 +341,7 @@ joint.method.Profile.getProfiles(input)
   You can hand-roll the router yourself:
 </p>
 
-<details>
+<details class="third-party">
 <summary>Hand-rolling a router</summary>
 
 {# =========================== BEGIN | Code Block  "/router/profile.js" ===== #}
