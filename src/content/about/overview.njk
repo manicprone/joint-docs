@@ -5,11 +5,11 @@
 <h2>Overview</h2>
 
 <p>
-  The Joint Kit is a Node-based development library for rapidly building
-  data layers within your application.
+  The Joint Kit is a Node-based development library for rapidly building data layers
+  within your application.
 </p>
 
-{% call text.framedblock(headingText='Use the Joint Kit to:', maxWidth='410px') -%}
+{% call text.framedblock(headingText='Use the Joint Kit to:', maxWidth='405px') -%}
 <ul class="definition">
   <li>
     <div>connect your Node app to persisted data schemas</div>
@@ -28,46 +28,51 @@
 </p>
 
 <p>
-  [TBC - Diagram]
+  [TBC - Diagram for server-side app]
+</p>
+
+<p>
+  [TBC - Diagram for isomorphic app]
 </p>
 
 <h3>Quick to Implement</h3>
 
 <p>
-  At its core, the Joint Kit is an abstract data ops library,
-  exposed through a set of JavaScript functions.
+  At its core, the Joint Kit is a data operations library,
+  exposing a set of abstract data actions (as JavaScript functions)
+  that can be hooked to nearly any data schema.
 
   <lilp>
-  The functions provide a comprehensive range of both generic and
-  specialized data operation scenarios, that are essential to nearly any
-  data-persistent application.
+  The action library provides a comprehensive foundation of data operation
+  functionality, which can satisfy the requirements for a range of data handling
+  scenarios.
   </lilp>
 
   <lilp>
-  The redundant, tedious logic behind each data operation (the majority of the work)
+  The redundant, tedious logic behind each data action (the majority of the work)
   is already handled for you... you just need to define the concrete behavior
-  of your operations using JSON objects.
+  for your application, using simple JSON objects.
   This makes implementation easy and quick.
   </lilp>
 </p>
 
-<h3>Very Little Programming</h3>
+<h3>Configuration-Driven</h3>
 
 <p>
   Nearly the entire solution can be defined using a configuration syntax (in JSON),
   leaving the programming logic to an extreme minimum.
 
   <lilp>
-  In this case, the custom data layers are dynamically generated on application startup,
-  and thus the configurations can be hot-swapped to load variations based upon
-  application environment, etc.
+  With this approach, your custom data layers are dynamically generated on
+  application startup, and thus the configurations can be hot-swapped to load
+  variations based upon application environment, etc.
   </lilp>
 </p>
 
-<h3>Powerful and Flexible</h3>
+<h3>Programmatically Flexible</h3>
 
 <p>
-  However, if you want more complexity, integration, and control...
+  If you want more complexity, integration, and control...
   you can leverage the library as a purely programmatic solution.
 
   <lilp>
@@ -85,6 +90,16 @@
   You can also mix-and-match both implementation methods (configuration and programmatic)
   with the same Joint instance.
   </lilp>
+</p>
+
+<br /><br />
+
+<p>
+  To get a deeper perspective on the solution, check out the Conceptual Walk-through.
+</p>
+
+<p>
+  Or, head straight to Getting Started for installation details.
 </p>
 
 {% endblock %}

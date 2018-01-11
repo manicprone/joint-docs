@@ -283,7 +283,7 @@ validation {
   overflow-y: auto;
   background-color: #f5f5f5;
   margin: 0;
-  width: 265px;
+  width: 250px;
 }
 
 .page-nav {
@@ -402,7 +402,7 @@ validation {
 }
 
 .page-content.with-nav {
-  margin: 0 0 0 265px;
+  margin: 0 0 0 250px;
 }
 
 /* -------------------------------------  Headings */
