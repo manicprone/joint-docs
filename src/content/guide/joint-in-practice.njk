@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h2>Joint in Practice</h2>
+<h2>A Joint in Practice</h2>
 
 <p>
   To implement solutions with the Joint Kit, you create <i>Joints</i>.
@@ -23,7 +23,8 @@
 </ul>
 {%- endcall %}
 
-<h3>Create a Joint</h3>
+<br />
+{{ text.oh3('Create a Joint', '1') }}
 
 {# ============================== BEGIN | Code Block  "/joint/index.js" ===== #}
 {% call code.block(filename='/joint/index.js') -%}
@@ -38,7 +39,8 @@ export default joint;
 {%- endcall %}
 {# =============================== END  | Code Block  "/joint/index.js" ===== #}
 
-<h3>Define Data Models</h3>
+<br />
+{{ text.oh3('Define Data Models', '2') }}
 
 <p>
   Define your data models using a JSON descriptor:
@@ -115,10 +117,12 @@ if (joint.model.Profile) console.log('The Profile model exists !!!');
 {# ============================== END  | Code Block  "example-usage.js" ===== #}
 </details>
 
-<h3>Create a Method Library</h3>
+<br />
+{{ text.oh3('Create a Method Library', '3') }}
 
 <p>
-  From the provided set of abstract data actions (<a href="{{ rootURI }}/api/joint-actions">Joint Actions</a>), you can quickly implement a customized method library.
+  Leverage the provided set of abstract data actions (<a href="{{ rootURI }}/api/joint-actions">Joint Actions</a>),
+  to quickly implement a custom method library.
 </p>
 
 <p>
@@ -331,7 +335,8 @@ joint.method.Profile.getProfiles(input)
 {# =============================== END  | Code Block  "example-usage.js" ===== #}
 </details>
 
-<h3>Create RESTful Endpoints</h3>
+<br />
+{{ text.oh3('Create RESTful Endpoints', '4') }}
 
 <p>
   On top of your Joint methods, you can quickly expose a RESTful API layer.

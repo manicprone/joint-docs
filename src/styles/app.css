@@ -248,7 +248,7 @@ validation {
 }
 .app-header .title {
   display: inline-block;
-  margin: 3px 100px 0 25px;
+  margin: 3px 180px 0 25px;
 }
 .app-header .title h1 {
   font-size: 23px;
@@ -421,6 +421,33 @@ validation {
   margin-bottom: 25px;
 }
 
+/* Ordered headings */
+.page-content .ordered-header {
+  border-top: 1px solid #d9d9d9;
+  border-right: 1px solid #d9d9d9;
+  border-bottom: 1px solid #d9d9d9;
+  border-left: 5px solid #9a9a9a;
+  border-radius: 6px;
+  margin: 35px 0;
+  padding: 0 15px;
+}
+.page-content .ordered-header h3 {
+  display: inline-block;
+  font-size: 25px;
+  line-height: 25px;
+  border-left: 2px solid #d9d9d9;
+  margin: 14px 0;
+  padding: 8px 0 8px 15px;
+}
+.page-content .ordered-header .number {
+  display: inline-block;
+  color: #b22823;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 26px;
+  margin-right: 12px;
+}
+
 /* API function & property headings */
 .page-content.api h4 {
   background-color: #e9e9e9;
@@ -467,7 +494,6 @@ validation {
 }
 .page-content .framed-block {
   background: rgba(8,90,169,0.1);
-  /*border: 2px solid rgba(11,86,147,0.1);*/
   border: 2px solid #cde4f4;
   border-radius: 6px;
   margin-top: 22px;
