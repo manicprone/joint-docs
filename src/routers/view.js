@@ -2,6 +2,7 @@ import express from 'express';
 import appConfig from '../config/app-config';
 
 const basePaths = appConfig.basePaths;
+const rootPages = appConfig.rootPages;
 
 // -----------------------------------------------------------------------------
 // Main Nav:
@@ -27,12 +28,17 @@ router.route('/')
 router.route(`${basePaths.docs}/:section?/:content?`)
   .get((req, res) => {
     const section = req.params.section || 'about';
-    const content = req.params.content || 'start';
+    const content = req.params.content;
+
+    if (!content) {
+      return res.redirect(`${basePaths.docs}/${section}/${rootPages[section]}`);
+    }
+
     const contentURI = `${section}/${content}`;
     const leadingURI = `${basePaths.docs}/${section}`;
     const context = { section, content, rootURI: basePaths.docs, leadingURI };
 
-    res.render(contentURI, context);
+    return res.render(contentURI, context);
   });
 
 module.exports = router;

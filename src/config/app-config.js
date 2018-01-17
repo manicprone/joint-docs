@@ -18,4 +18,14 @@ export default {
     docs: '/docs',
   },
 
+  // ------------------------
+  // Root pages (per section)
+  // ------------------------
+  rootPages: {
+    about: 'overview',
+    guide: 'getting-started',
+    api: 'joint-constructor',
+    examples: 'start',
+  },
+
 };
