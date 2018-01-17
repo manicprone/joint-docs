@@ -55,14 +55,6 @@ app.use(basePath.styles, express.static('./src/styles'));
 app.use('/', viewRouter);
 app.disable('view cache');
 
-// -----------------
-// Serve requests...
-// -----------------
-// app.get('*', (req, res) => {
-//   res.setHeader('Content-Type', 'text/html');
-//   res.send(`${appName} is available`);
-// });
-
 // ---------------
 // Start server...
 // ---------------
