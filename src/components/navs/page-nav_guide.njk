@@ -13,12 +13,12 @@
     {{ nav.header(header) }}
     {%
       set items = [
-        { label: 'Getting Started', uri:leadingURI + '/getting-started' },
-        { label: 'Conceptual Walk-through', uri:leadingURI + '/conceptual-walk-through' },
-        { label: 'Joint in Practice', uri:leadingURI + '/joint-in-practice' }
+        { label: 'Getting Started', id: 'getting-started' },
+        { label: 'Conceptual Walkthrough', id: 'conceptual-walkthrough' },
+        { label: 'A Joint in Practice', id: 'joint-in-practice' }
       ]
     %}
-    {{ nav.items(items) }}
+    {{ nav.items(items, leadingURI, content) }}
   </div>
 
   {#
@@ -34,12 +34,12 @@
     {{ nav.header(header) }}
     {%
       set items = [
-        { label: 'Defining Data Models', uri:leadingURI + '/defining-data-models' },
-        { label: 'Building a Method Library', uri:leadingURI + '/building-a-method-library' },
-        { label: 'Building a RESTful API', uri:leadingURI + '/building-a-restful-api' }
+        { label: 'Defining Data Models', id: 'defining-data-models' },
+        { label: 'Building a Method Library', id: 'building-a-method-library' },
+        { label: 'Building a RESTful API', id: 'building-a-restful-api' }
       ]
     %}
-    {{ nav.items(items) }}
+    {{ nav.items(items, leadingURI, content) }}
   </div>
 
 </div>

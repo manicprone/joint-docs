@@ -38,21 +38,17 @@
 <h3>Quick to Implement</h3>
 
 <p>
-  At its core, the Joint Kit is a data operations library,
-  exposing a set of abstract data actions (as JavaScript functions)
-  that can be hooked to nearly any data schema.
+  At its core, the Joint Kit is a data operations library.
 
   <lilp>
-  The action library provides a comprehensive foundation of data operation
-  functionality, which can satisfy the requirements for a range of data handling
-  scenarios.
+  It exposes a set of abstract data actions (as JavaScript functions)
+  that can be hooked to your custom data schema.
   </lilp>
 
   <lilp>
   The redundant, tedious logic behind each data action (the majority of the work)
   is already handled for you... you just need to define the concrete behavior
-  for your application, using simple JSON objects.
-  This makes implementation easy and quick.
+  for your application, using configrable JSON objects.
   </lilp>
 </p>
 
@@ -64,8 +60,12 @@
 
   <lilp>
   With this approach, your custom data layers are dynamically generated on
-  application startup, and thus the configurations can be hot-swapped to load
-  variations based upon application environment, etc.
+  application startup.
+  </lilp>
+
+  <lilp>
+  Configurations can therefore be hot-swapped, to load variations based upon
+  application environment, etc.
   </lilp>
 </p>
 
@@ -79,12 +79,14 @@
   Let the Joint Kit handle the generic aspects of your data operations (the 80%),
   while you supplement the implementation with your own hand-rolled logic (the 20%).
   </lilp>
+</p>
 
-  <lilp>
+<h3>Isolated Services</h3>
+
+<p>
   You can create multiple instances from the Kit (referred to as <i>Joints</i>)
   within a single application; each isolated to service separate data
   repositories, schemas, and implementation behavior.
-  </lilp>
 
   <lilp>
   You can also mix-and-match both implementation methods (configuration and programmatic)
@@ -95,11 +97,13 @@
 <br /><br />
 
 <p>
-  To get a deeper perspective on the solution, check out the Conceptual Walk-through.
+  To get a deeper perspective on the solution, check out
+  the <a href="{{ rootURI }}/guide/conceptual-walkthrough">Conceptual Walkthrough</a>
 </p>
 
 <p>
-  Or, head straight to Getting Started for installation details.
+  Or, head straight to <a href="{{ rootURI }}/guide/getting-started">Getting Started</a> 
+  for installation details.
 </p>
 
 {% endblock %}

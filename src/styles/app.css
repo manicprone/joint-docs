@@ -7,11 +7,16 @@
  * General HTML
  * -------------------------------------------------------------------------- */
 
+html {
+  height: 100%;
+}
+
 body {
   font-family: "Source Sans Pro", sans-serif;
   color: #252525;
   font-weight: 400;
   font-size: 16px;
+  background-color: #ffffff;
   margin: 0;
 }
 
@@ -76,6 +81,76 @@ td.code {
   font-family: "Source Code Pro", monospace;
   font-style: normal;
   font-weight: 400;
+}
+
+/* -----------------------------------------------------------------------------
+ * Splash Page Content
+ * -------------------------------------------------------------------------- */
+
+.splash-content {
+  text-align: center;
+  margin: 12% auto 20px auto;
+}
+
+.splash-content .title-wrapper {
+  padding: 30px 0;
+}
+
+.splash-content .title {
+  font-size: 48px;
+  margin-right: 10px;
+}
+.splash-content .title .decorative-script {
+  color: #9a9a9a;
+  font-size: 13px;
+  font-weight: 200;
+  font-style: italic;
+  line-height: 13px;
+}
+
+.splash-content .version-info {
+  margin-top: 6px;
+  margin-left: 10px;
+}
+.splash-content .version-info .heading {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #afafaf;
+  margin-right: 4px;
+}
+.splash-content .version-info .version {
+  font-size: 12px;
+  color: #525252;
+  background-color: #ccdce8;
+  border: 1px solid #99c7e8;
+  border-radius: 4px;
+  padding: 1px 10px;
+}
+
+.splash-content .install-info {
+  margin: 50px auto 10px auto;
+  width: 278px;
+}
+
+.splash-content .links {
+  text-align: center;
+  margin-top: 40px;
+}
+.splash-content .links div {
+  display: inline-block;
+  margin: 0 35px;
+  width: 70px;
+}
+.splash-content .links a {
+  color: #999999;
+  font-size: 14px;
+  text-transform: uppercase;
+  padding-bottom: 10px;
+}
+.splash-content .links a:hover {
+  color: #111111;
+  border-bottom: 3px solid #0b5693;
 }
 
 /* -----------------------------------------------------------------------------
@@ -240,33 +315,66 @@ validation {
   z-index: 100;
   text-align: left;
   background-color: #ececec;
-  padding: 7px 0;
   border-bottom: 1px solid #b2b2b2;
   box-shadow: 0 1px 18px 2px #dedede;
-  height: 30px;
+  height: 44px;
   width: 100%;
+  clear: both;
 }
 .app-header .title {
-  display: inline-block;
-  margin: 3px 100px 0 25px;
+  float: left;
+  margin-left: 30px;
+  margin-right: 100px;
 }
 .app-header .title h1 {
+  float: left;
   font-size: 23px;
-  line-height: 23px;
+  line-height: 43px;
   font-weight: 400;
 }
+.app-header .title h1 a {
+  color: #252525;
+}
+
+.app-header .version-info {
+  float: left;
+  margin: 12px 0 0 24px;
+}
+.app-header .version-info .version {
+  font-size: 12px;
+  color: #525252;
+  background-color: #ccdce8;
+  border: 1px solid #99c7e8;
+  border-radius: 4px;
+  padding: 1px 10px;
+}
+
 .app-header .app-nav-container {
-  display: inline-block;
+  float: left;
+}
+.app-header .app-nav {
+  margin-top: 13px;
 }
 
 /* -----------------------------------------------------------------------------
  * App Nav
  * -------------------------------------------------------------------------- */
 
-.app-nav span {
-  font-size: 15px;
+.app-nav .nav-item {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 400;
   line-height: 15px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
   margin-right: 15px;
+}
+.app-nav .nav-item.selected {
+  border-bottom: 2px solid #0b5693;
+  padding-bottom: 7px;
+}
+.app-nav .nav-item.selected a {
+  color: #111111;
 }
 
 /* -----------------------------------------------------------------------------
@@ -281,12 +389,13 @@ validation {
   z-index: 10;
   overflow-x: hidden;
   overflow-y: auto;
-  background-color: #f5f5f5;
+  background-color: #fafafa;
   margin: 0;
   width: 250px;
 }
 
 .page-nav {
+  border-right: 1px solid #f1f1f1;
   padding: 20px;
 }
 .page-nav .nav-group {
@@ -323,13 +432,17 @@ validation {
 }
 .page-nav .nav-item {
   font-size: 15px;
-  margin: 0 0 7px 4px;
+  margin: 0 0 9px 4px;
 }
 .page-nav .nav-item a {
   color: #252525;
 }
 .page-nav .nav-item a:hover {
   color: #525252;
+}
+.page-nav .nav-item.selected a {
+  color: #111111;
+  font-weight: 600;
 }
 .page-nav .nav-sub-item {
   font-size: 14px;
@@ -352,39 +465,6 @@ validation {
   border: none;
   margin: 0;
   padding: 0;
-}
-
-/* -----------------------------------------------------------------------------
- * Splash Page Content
- * -------------------------------------------------------------------------- */
-
-.splash-content {
-  margin: 15% auto 20px auto;
-  text-align: center;
-}
-
-.splash-content .title {
-  font-size: 28px;
-}
-.splash-content .title .decorative-script {
-  color: #9a9a9a;
-  font-size: 13px;
-  font-weight: 200;
-  font-style: italic;
-  line-height: 13px;
-}
-
-.splash-content .install-info {
-  margin: 50px auto 0 auto;
-  width: 278px;
-}
-
-.splash-content .links {
-  margin-top: 60px;
-}
-.splash-content .links div {
-  display: inline-block;
-  width: 95px;
 }
 
 /* -----------------------------------------------------------------------------
@@ -419,6 +499,33 @@ validation {
 .page-content h3, h4, h5 {
   margin-top: 35px;
   margin-bottom: 25px;
+}
+
+/* Ordered headings */
+.page-content .ordered-header {
+  border-top: 1px solid #d9d9d9;
+  border-right: 1px solid #d9d9d9;
+  border-bottom: 1px solid #d9d9d9;
+  border-left: 5px solid #9a9a9a;
+  border-radius: 6px;
+  margin: 35px 0;
+  padding: 0 15px;
+}
+.page-content .ordered-header h3 {
+  display: inline-block;
+  font-size: 25px;
+  line-height: 25px;
+  border-left: 1px solid #d9d9d9;
+  margin: 14px 0;
+  padding: 8px 0 8px 15px;
+}
+.page-content .ordered-header .number {
+  display: inline-block;
+  color: #b22823;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 26px;
+  margin-right: 12px;
 }
 
 /* API function & property headings */
@@ -467,7 +574,6 @@ validation {
 }
 .page-content .framed-block {
   background: rgba(8,90,169,0.1);
-  /*border: 2px solid rgba(11,86,147,0.1);*/
   border: 2px solid #cde4f4;
   border-radius: 6px;
   margin-top: 22px;

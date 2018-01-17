@@ -22,3 +22,13 @@
     {{ caller() }}
   </div>
 {% endmacro %}
+
+{# --------------------------- #}
+{# oh3 - Ordered Header (<h3>) #}
+{# --------------------------- #}
+{% macro oh3(headingText, number) %}
+  <div class="ordered-header">
+    <div class="number">{{ number }}</div>
+    <h3>{{ headingText }}</h3>
+  </div>
+{% endmacro %}

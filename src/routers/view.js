@@ -2,15 +2,16 @@ import express from 'express';
 import appConfig from '../config/app-config';
 
 const basePaths = appConfig.basePaths;
+const rootPages = appConfig.rootPages;
 
 // -----------------------------------------------------------------------------
 // Main Nav:
 //
 // /          => splash page (source | docs > about)
 //
-// /about     => Overview | License | Source | A Note -or- Author's Note
+// /about     => Overview | License | Source | Author's Note
 //
-// /guide     => Getting Started / Conceptual Walk-through / Joint in Practice + Dev Guides
+// /guide     => Getting Started / Conceptual Walkthrough / A Joint in Practice + Dev Guides
 //
 // /api       => Constructor / Instance / Actions, et al
 //
@@ -27,12 +28,17 @@ router.route('/')
 router.route(`${basePaths.docs}/:section?/:content?`)
   .get((req, res) => {
     const section = req.params.section || 'about';
-    const content = req.params.content || 'start';
+    const content = req.params.content;
+
+    if (!content) {
+      return res.redirect(`${basePaths.docs}/${section}/${rootPages[section]}`);
+    }
+
     const contentURI = `${section}/${content}`;
     const leadingURI = `${basePaths.docs}/${section}`;
     const context = { section, content, rootURI: basePaths.docs, leadingURI };
 
-    res.render(contentURI, context);
+    return res.render(contentURI, context);
   });
 
 module.exports = router;
