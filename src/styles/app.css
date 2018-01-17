@@ -113,8 +113,9 @@ td.code {
   margin-left: 10px;
 }
 .splash-content .version-info .heading {
-  font-size: 11px;
+  font-size: 10px;
   text-transform: uppercase;
+  letter-spacing: 0.6px;
   color: #afafaf;
   margin-right: 4px;
 }
@@ -145,11 +146,11 @@ td.code {
   color: #999999;
   font-size: 14px;
   text-transform: uppercase;
+  padding-bottom: 10px;
 }
 .splash-content .links a:hover {
   color: #111111;
   border-bottom: 3px solid #0b5693;
-  padding-bottom: 10px;
 }
 
 /* -----------------------------------------------------------------------------
@@ -322,10 +323,11 @@ validation {
 }
 .app-header .title {
   float: left;
-  margin-left: 25px;
-  margin-right: 180px;
+  margin-left: 30px;
+  margin-right: 100px;
 }
 .app-header .title h1 {
+  float: left;
   font-size: 23px;
   line-height: 43px;
   font-weight: 400;
@@ -333,6 +335,20 @@ validation {
 .app-header .title h1 a {
   color: #252525;
 }
+
+.app-header .version-info {
+  float: left;
+  margin: 12px 0 0 24px;
+}
+.app-header .version-info .version {
+  font-size: 12px;
+  color: #525252;
+  background-color: #ccdce8;
+  border: 1px solid #99c7e8;
+  border-radius: 4px;
+  padding: 1px 10px;
+}
+
 .app-header .app-nav-container {
   float: left;
 }
@@ -373,12 +389,13 @@ validation {
   z-index: 10;
   overflow-x: hidden;
   overflow-y: auto;
-  background-color: #f5f5f5;
+  background-color: #fafafa;
   margin: 0;
   width: 250px;
 }
 
 .page-nav {
+  border-right: 1px solid #f1f1f1;
   padding: 20px;
 }
 .page-nav .nav-group {
