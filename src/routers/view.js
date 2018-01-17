@@ -1,44 +1,63 @@
 import express from 'express';
 import appConfig from '../config/app-config';
 
-const basePaths = appConfig.basePaths;
-const rootPages = appConfig.rootPages;
+const basePathDocs = appConfig.basePaths.docs || '';
+const defaultSection = appConfig.appSettings.defaultSection;
+const rootPages = appConfig.appSettings.rootPages;
 
 // -----------------------------------------------------------------------------
-// Main Nav:
-//
-// /          => splash page (source | docs > about)
+// App Navigation
+// -----------------------------------------------------------------------------
+// /          => (Splash Page) source | docs => about/overview
 //
 // /about     => Overview | License | Source | Author's Note
 //
-// /guide     => Getting Started / Conceptual Walkthrough / A Joint in Practice + Dev Guides
+// /guide     => Installation | Conceptual Walkthrough | A Joint in Practice | Dev Guides
 //
-// /api       => Constructor / Instance / Actions, et al
+// /api       => Constructor | Instance | Actions | et al
 //
-// /examples  => inline examples, list of links to running apps, etc
+// /examples  => (inline code examples, list of links to running apps)
 // -----------------------------------------------------------------------------
 
 const router = express.Router();
+
+router.get('*', (req, res, next) => {
+  res.set('Content-Type', 'text/html');
+  next();
+});
 
 router.route('/')
   .get((req, res) => {
     res.render('splash');
   });
 
-router.route(`${basePaths.docs}/:section?/:content?`)
+router.route(`${basePathDocs}/:section?/:content?`)
   .get((req, res) => {
-    const section = req.params.section || 'about';
+    const section = req.params.section || defaultSection;
     const content = req.params.content;
 
+    // If page is not specified, redirect to configured starting page...
     if (!content) {
-      return res.redirect(`${basePaths.docs}/${section}/${rootPages[section]}`);
+      return res.redirect(`${basePathDocs}/${section}/${rootPages[section]}`);
     }
 
+    // Prepare context info for all templates...
     const contentURI = `${section}/${content}`;
-    const leadingURI = `${basePaths.docs}/${section}`;
-    const context = { section, content, rootURI: basePaths.docs, leadingURI };
+    const leadingURI = `${basePathDocs}/${section}`;
+    const context = { section, content, rootURI: basePathDocs, leadingURI };
 
-    return res.render(contentURI, context);
+    return res.render(contentURI, context, (err, html) => {
+      if (err) {
+        // On invalid uri, redirect to fall-back (default) section/page...
+        return res.redirect(`${basePathDocs}/${defaultSection}/${rootPages[defaultSection]}`);
+      }
+      return res.send(html);
+    });
+  });
+
+router.route('*')
+  .get((req, res) => {
+    res.redirect('/');
   });
 
 module.exports = router;
