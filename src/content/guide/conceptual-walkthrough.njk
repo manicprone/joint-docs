@@ -1,0 +1,28 @@
+{% extends "main.njk" %}
+
+{% block content %}
+
+<h2>Conceptual Walkthrough</h2>
+
+<p>
+  To implement solutions with the Joint Kit, you create <i>Joints</i>.
+</p>
+
+{% call text.framedblock(headingText='A Joint connects to:', maxWidth='490px') -%}
+<ul class="definition">
+  <li>
+    <div style="width:180px"><i>your persistence service</i></div>
+    <div style="color:#0b5693;width:25px">&#10132;</div>
+    <div>to implement a data method layer</div>
+  </li>
+  <li>
+    <div style="width:180px"><i>your server framework</i></div>
+    <div style="color:#0b5693;width:25px">&#10132;</div>
+    <div>to implement an HTTP API layer</div>
+  </li>
+</ul>
+{%- endcall %}
+
+<br />
+
+{% endblock %}

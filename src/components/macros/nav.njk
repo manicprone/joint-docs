@@ -19,10 +19,10 @@
 {# --------------------- #}
 {# items - Nav Item List #}
 {# --------------------- #}
-{% macro items(items=[]) %}
+{% macro items(items=[], leadingURI='', activePage='') %}
   {% for item in items %}
-    <div class="nav-item">
-      <a href={{ item.uri }}>{{ item.label }}</a>
+    <div class="nav-item {{ "selected" if activePage === item.id }}">
+      <a href={{ leadingURI + "/" + item.id }}>{{ item.label }}</a>
     </div>
   {% endfor %}
 {% endmacro %}

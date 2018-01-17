@@ -13,13 +13,13 @@
     {{ nav.header(header) }}
     {%
       set items = [
-        { label: 'Overview', uri:leadingURI + '/overview' },
-        { label: 'License', uri:leadingURI + '/license' },
-        { label: 'Source', uri:leadingURI + '/source' },
-        { label: 'Author\'s Note', uri:leadingURI + '/authors-note' }
+        { label: 'Overview', id: 'overview' },
+        { label: 'License', id: 'license' },
+        { label: 'Source', id: 'source' },
+        { label: 'Author\'s Note', id: 'authors-note' }
       ]
     %}
-    {{ nav.items(items) }}
+    {{ nav.items(items, leadingURI, content) }}
   </div>
 
 </div>

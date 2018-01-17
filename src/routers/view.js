@@ -8,9 +8,9 @@ const basePaths = appConfig.basePaths;
 //
 // /          => splash page (source | docs > about)
 //
-// /about     => Overview | License | Source | A Note -or- Author's Note
+// /about     => Overview | License | Source | Author's Note
 //
-// /guide     => Getting Started / Conceptual Walk-through / Joint in Practice + Dev Guides
+// /guide     => Getting Started / Conceptual Walkthrough / A Joint in Practice + Dev Guides
 //
 // /api       => Constructor / Instance / Actions, et al
 //
