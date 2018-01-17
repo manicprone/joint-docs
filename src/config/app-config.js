@@ -18,14 +18,23 @@ export default {
     docs: '/docs',
   },
 
-  // ------------------------
-  // Root pages (per section)
-  // ------------------------
-  rootPages: {
-    about: 'overview',
-    guide: 'getting-started',
-    api: 'joint-constructor',
-    examples: 'start',
+  // -------------------------------------------
+  // App settings
+  // -------------------------------------------
+  // Core configuration settings for the app.
+  // These values cannot be altered by the user.
+  // -------------------------------------------
+  appSettings: {
+    // The default section (when not provided, or with router error)
+    defaultSection: 'about',
+
+    // Root content pages (per section)
+    rootPages: {
+      about: 'overview',
+      guide: 'installation',
+      api: 'joint-constructor',
+      examples: 'start',
+    },
   },
 
 };
