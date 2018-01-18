@@ -10,30 +10,48 @@
 </p>
 
 <p>
-  Use the Joint Kit to quickly:
+  Use the Joint Kit to:
 </p>
 
-{% call text.framedblock(maxWidth='340px') -%}
+{% call text.framedblock(maxWidth='320px') -%}
 <ul class="definition">
   <li>
-    <div>connect your Node app to persisted data</div>
+    <div>Connect your Node app to a data store</div>
   </li>
   <li>
-    <div>build server-side method libraries</div>
+    <div>Build server-side method libraries</div>
   </li>
   <li>
-    <div>build RESTful APIs for client apps</div>
+    <div>Build RESTful APIs for client apps</div>
   </li>
 </ul>
 {%- endcall %}
 
 <br />
 
-<callout>
-  The solution sits on top of your database service/ORM
-  (to provide custom data logic), and behind your server framework
-  (to provide custom http middleware logic).
-</callout>
+<p>
+  Architecturally, the Joint Kit sits between your persisted data service
+  and your HTTP server framework.
+</p>
+
+<p>
+  The Joint Kit leverages:
+</p>
+
+{% call text.framedblock(maxWidth='485px') -%}
+<ul class="definition">
+  <li>
+    <div style="width:180px"><i>your persistence service</i></div>
+    <div style="color:#0b5693;width:25px">&#10132;</div>
+    <div>to implement a data method layer</div>
+  </li>
+  <li>
+    <div style="width:180px"><i>your server framework</i></div>
+    <div style="color:#0b5693;width:25px">&#10132;</div>
+    <div>to implement an HTTP API layer</div>
+  </li>
+</ul>
+{%- endcall %}
 
 <br />
 
@@ -44,6 +62,8 @@
 <div class="diagram diagram-frame">
   <img src="/public/where-joint-kit-fits-in-your-app.svg" />
 </div>
+
+<br />
 
 <h3>Quick to Implement</h3>
 

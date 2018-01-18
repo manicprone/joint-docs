@@ -3,8 +3,6 @@
 
 ## Backlog
 
-* Create diagram(s) to describe the concepts / where Joint fits in the application stack.
-
 * A Joint in Practice: Separate code blocks into steps (by file).
   Also, keep the paragraph text above the code blocks, if needed.
   e.g.

@@ -322,7 +322,7 @@ validation {
   background-color: #ececec;
   border-bottom: 1px solid #b2b2b2;
   box-shadow: 0 1px 18px 2px #dedede;
-  height: 44px;
+  height: 49px;
   width: 100%;
   clear: both;
 }
@@ -334,7 +334,7 @@ validation {
 .app-header .title h1 {
   float: left;
   font-size: 23px;
-  line-height: 43px;
+  line-height: 48px;
   font-weight: 400;
 }
 .app-header .title h1 a {
@@ -343,7 +343,7 @@ validation {
 
 .app-header .version-info {
   float: left;
-  margin: 12px 0 0 24px;
+  margin: 15px 0 0 24px;
 }
 .app-header .version-info .version {
   font-size: 12px;
@@ -358,7 +358,7 @@ validation {
   float: left;
 }
 .app-header .app-nav {
-  margin-top: 13px;
+  margin-top: 14px;
 }
 
 /* -----------------------------------------------------------------------------
@@ -388,7 +388,7 @@ validation {
 
 .page-nav-container {
   position: fixed;
-  top: 45px;
+  top: 50px;
   left: 0;
   bottom: 0;
   z-index: 10;
@@ -478,7 +478,7 @@ validation {
 
 .page-content {
   position: relative;
-  top: 45px;
+  top: 50px;
   z-index: 10;
   background-color: #ffffff;
   margin: 0;
@@ -669,7 +669,7 @@ td .code-ref {
 
 /* -------------------------------------  Diagrams */
 .page-content .diagram {
-  margin-top: 15px;
+  margin-top: 20px;
 }
 .page-content .diagram img {
   width: 100%;
