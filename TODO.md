@@ -3,6 +3,8 @@
 
 ## Backlog
 
+* Create diagram(s) to describe the concepts / where Joint fits in the application stack.
+
 * A Joint in Practice: Separate code blocks into steps (by file).
   Also, keep the paragraph text above the code blocks, if needed.
   e.g.
@@ -44,7 +46,5 @@
   | => Use a route config
   | => Generate the router
   | => Provide to your running server --> write complete code
-
-* Create diagram(s) to describe the concepts / where Joint fits in the application stack.
 
 * Put prev / next navigation links between the sections, to make the full doc navigable.

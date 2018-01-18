@@ -5,14 +5,18 @@
 <h2>Overview</h2>
 
 <p>
-  The Joint Kit is a Node-based development library for rapidly building data layers
-  within your application.
+  The Joint Kit is a server-side development library for building data layers
+  within your Node application.
 </p>
 
-{% call text.framedblock(headingText='Use the Joint Kit to:', maxWidth='405px') -%}
+<p>
+  Use the Joint Kit to quickly:
+</p>
+
+{% call text.framedblock(maxWidth='340px') -%}
 <ul class="definition">
   <li>
-    <div>connect your Node app to persisted data schemas</div>
+    <div>connect your Node app to persisted data</div>
   </li>
   <li>
     <div>build server-side method libraries</div>
@@ -23,17 +27,23 @@
 </ul>
 {%- endcall %}
 
+<br />
+
+<callout>
+  The solution sits on top of your database service/ORM
+  (to provide custom data logic), and behind your server framework
+  (to provide custom http middleware logic).
+</callout>
+
+<br />
+
 <p>
   Here&#39;s where the Joint Kit fits into your application:
 </p>
 
-<p>
-  [TBC - Diagram for server-side app]
-</p>
-
-<p>
-  [TBC - Diagram for isomorphic app]
-</p>
+<div class="diagram diagram-frame">
+  <img src="/public/where-joint-kit-fits-in-your-app.svg" />
+</div>
 
 <h3>Quick to Implement</h3>
 
@@ -55,7 +65,7 @@
 <h3>Configuration-Driven</h3>
 
 <p>
-  Nearly the entire solution can be defined using a configuration syntax (in JSON),
+  Nearly the entire solution can be defined using a configuration syntax (JSON),
   leaving the programming logic to an extreme minimum.
 
   <lilp>
@@ -90,7 +100,7 @@
 
   <lilp>
   You can also mix-and-match both implementation methods (configuration and programmatic)
-  with the same Joint instance.
+  within the same Joint instance.
   </lilp>
 </p>
 
