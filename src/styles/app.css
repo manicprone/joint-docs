@@ -216,7 +216,7 @@ optsig .param {
 optsig .param label {
   display: inline-block;
   color: #7e7e7e;
-  font-weight: 200;
+  font-weight: 400;
   margin-right: 20px;
   width: 80px;
 }
@@ -431,7 +431,7 @@ validation {
   color: #727272;
   font-size: 14px;
   font-style: italic;
-  font-weight: 200;
+  font-weight: 400;
   margin-bottom: 15px;
   padding-right: 4px;
 }
@@ -483,7 +483,7 @@ validation {
   background-color: #ffffff;
   margin: 0;
   padding: 30px 40px 40px 40px;
-  max-width: 780px;
+  max-width: 650px;
 }
 
 .page-content.with-nav {
@@ -579,10 +579,11 @@ validation {
   display: inline-block;
 }
 .page-content .framed-block {
-  background: rgba(8,90,169,0.1);
-  border: 2px solid #cde4f4;
-  border-radius: 6px;
-  margin-top: 22px;
+  color: #424242;
+  background-color: #fafafa;
+  border: 1px solid #d9d9d9;
+  border-radius: 3px;
+  margin-top: 10px;
   padding: 8px 12px;
 }
 .page-content .framed-block .header {
@@ -664,4 +665,16 @@ td .code-ref {
   border-radius: 3px;
   overflow-x: scroll;
   padding: 0;
+}
+
+/* -------------------------------------  Diagrams */
+.page-content .diagram {
+  margin-top: 15px;
+}
+.page-content .diagram img {
+  width: 100%;
+}
+.page-content .diagram-frame {
+  border: 1px solid #d9d9d9;
+  padding: 30px;
 }
