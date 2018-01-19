@@ -1,6 +1,17 @@
 # Joint Kit Docs Planning
 
 
+## Upcoming Features
+
+* Introduce the full example data scenario in "Conceptual Walkthrough" (when
+  showing the database schema), but only showcase the code/features for
+  the User model. Then, in "A Joint in Practice" => provide the full implementation.
+
+  At the end of the "Walkthrough", guide the reader to continue with "In Practice",
+  as essentially a tutorial.
+
+* Add prev / next navigation links between sections, to guide the reader.
+
 ## Backlog
 
 * A Joint in Practice: Separate code blocks into steps (by file).
@@ -44,5 +55,3 @@
   | => Use a route config
   | => Generate the router
   | => Provide to your running server --> write complete code
-
-* Put prev / next navigation links between the sections, to make the full doc navigable.

@@ -5,7 +5,7 @@
 {# ------------------------- #}
 {# block - Inline Code Block #}
 {# ------------------------- #}
-{% macro block(heading, filename) %}
+{% macro block(heading, filename, maxWidth) %}
   {% if heading %}
   <div class="code-block-heading">
     <span>{{ heading }}</span>
@@ -16,7 +16,7 @@
     <span>{{ filename }}</span>
   </div>
   {% endif %}
-  <div class="code-block">
+  <div class="code-block" {% if maxWidth %}style="max-width:{{ maxWidth }}"{% endif %}>
     <pre>{{ caller() }}</pre>
   </div>
 {% endmacro %}

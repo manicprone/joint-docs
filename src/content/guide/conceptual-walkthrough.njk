@@ -5,24 +5,234 @@
 <h2>Conceptual Walkthrough</h2>
 
 <p>
-  To implement solutions with the Joint Kit, you create <i>Joints</i>.
+  So, you want to build a Node app.
 </p>
 
-{% call text.framedblock(headingText='A Joint connects to:', maxWidth='490px') -%}
-<ul class="definition">
-  <li>
-    <div style="width:180px"><i>your persistence service</i></div>
-    <div style="color:#0b5693;width:25px">&#10132;</div>
-    <div>to implement a data method layer</div>
-  </li>
-  <li>
-    <div style="width:180px"><i>your server framework</i></div>
-    <div style="color:#0b5693;width:25px">&#10132;</div>
-    <div>to implement an HTTP API layer</div>
-  </li>
-</ul>
+<p>
+  If your app requires accessing and/or modifying data from a
+  database... the Joint Kit can help.
+</p>
+
+<br />
+
+<p>
+  Let&#39;s say you want to build a simple blogging service.
+</p>
+
+<p>
+  The service will:
+
+  <ul>
+    <li>Manage user accounts (for administrators and bloggers)</li>
+    <li>Manage user roles (for granting authorization)</li>
+    <li>Manage payment methods for paying subscribers (a user can have multiple)</li>
+    <li>Manage one blog profile per user (for their public identity)</li>
+    <li>Manage the blog posts created by a blog profile</li>
+    <li>Provide a RESTful API, so a client application can render the UI.</li>
+  </ul>
+</p>
+
+<br />
+
+<p>
+  First, get your database prepared and your table schema created.
+</p>
+
+<p>
+  [TBC - Diagram of data schema]
+</p>
+
+<br />
+
+<p>
+  Then, connect your app to the database using your persistence service.
+  (Currently, Bookshelf is the only supported option)
+</p>
+
+<details class="third-party">
+<summary>Connecting to your database using Bookshelf</summary>
+
+{% call code.block(filename='/services/bookshelf.js') -%}
+<comment>// Configure knex connection...</comment>
+const knex = require('knex')({
+  client: 'pg',
+  connection: {
+    host: '127.0.0.1',
+    port: '5432',
+    database: 'simple_blog',
+    user: 'simple_blog_app',
+    password: 'simple_blog_app_password',
+  },
+  useNullAsDefault: true,
+});
+
+<comment>// Initialize bookshelf...</comment>
+const bookshelf = require('bookshelf')(knex);
+
+<comment>// Enable required plugins...</comment>
+bookshelf.plugin('registry');
+bookshelf.plugin('pagination');
+
+export default bookshelf;
+{%- endcall %}
+</details>
+
+<br />
+
+<p>
+  Now, the Joint Kit can take it from here...
+</p>
+
+<br />
+
+<p>
+  To use the Joint Kit, you create <i>Joints</i>.
+
+  <lilp>
+  You can think of Joints as isolated data services.
+  Each Joint hooks to a specific data repository, interacts only with the data
+  it is permitted, and performs independently-configured behavior.
+  </lilp>
+</p>
+
+<br />
+
+<p>
+  Let&#39;s generate the data operation logic for a "User" of our
+  blogging service.
+</p>
+
+<br />
+
+<p>
+  Create a Joint, providing your configured Bookshelf instance.
+</p>
+
+{% call code.block(maxWidth="400px") -%}
+import Joint from 'joint-kit';
+import bookshelf from './services/bookshelf';
+
+const joint = new Joint({
+  service: bookshelf,
+});
 {%- endcall %}
 
 <br />
+
+<p>
+  The Joint now has access to the database.
+</p>
+
+<br />
+
+<p>
+  We need to define the "User" resource (the data model), so we can operate on
+  it as an object.
+
+  <lilp>
+  We can do this, using a <b>model config</b>.
+  </lilp>
+</p>
+
+<callout>
+  The effort for configuring data models is effectively mapping a logical name
+  to each of your tables, and defining any relationships (associations) that
+  exist amongst them.
+</callout>
+
+<br />
+
+{% call code.block() -%}
+const modelConfig = [
+  {
+    name: 'User',
+    tableName: 'user_account',
+    associations: {
+      profile: {
+        type: 'toOne',
+        path: 'id => Profile.user_id', <comment>// one-to-one</comment>
+      },
+      pay_accounts: {
+        type: 'toMany',
+        path: 'id => PaymentAccount.user_id', <comment>// one-to-many</comment>
+      },
+      roles: {
+        type: 'toMany',
+        path: 'id => UserRoleRef.user_id => UserRoleRef.role_id => Role.id', <comment>// many-to-many</comment>
+      },
+    },
+  },
+  ...
+];
+{%- endcall %}
+
+<p>
+  The <b>model config</b> uses a straight-forward JSON syntax.
+</p>
+
+<br />
+
+<p>
+  Run the `generate` function on it, and the models will be defined and loaded
+  onto the Joint.
+</p>
+
+{% call code.block(maxWidth="300px") -%}
+joint.generate({ modelConfig });
+{%- endcall %}
+
+<br />
+
+<p>
+  To define the data operations for our "User" resource (the methods),
+  we can use a <b>method config</b>.
+</p>
+
+<callout>
+  Defining the operations for a model involves: specifying the model name,
+  providing a method name that you can use in your code, selecting the appropriate
+  Joint Action to handle the core logic, and defining any custom rules or behavior
+  specific to your requirements.
+</callout>
+
+<br />
+
+{% call code.block() -%}
+const methodConfig = [
+  {
+    modelName: 'User',
+    methods: [
+      {
+        name: 'createUser',
+        action: 'createItem',
+        spec: {
+          fields: [
+            { name: 'username', type: 'String', required: true },
+            { name: 'email', type: 'String' },
+          ],
+        },
+      },
+      {
+        name: 'getUser',
+        action: 'getItem',
+        spec: {
+          fields: [
+            { name: 'id', type: 'Number', requiredOr: true },
+            { name: 'username', type: 'String', requiredOr: true },
+          ],
+        },
+      },
+      {
+        name: 'getUsers',
+        action: 'getItems',
+        spec: {
+          defaultOrderBy: '-created_at,username',
+        },
+      },
+    ],
+  },
+];
+{%- endcall %}
+
 
 {% endblock %}
