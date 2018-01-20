@@ -52,7 +52,7 @@
 <details class="third-party">
 <summary>Connecting to your database using Bookshelf</summary>
 
-{% call code.block(filename='/services/bookshelf.js') -%}
+{% call code.block(filename='/services/bookshelf.js', raised=true) -%}
 <comment>// Configure knex connection...</comment>
 const knex = require('knex')({
   client: 'pg',
@@ -108,7 +108,7 @@ export default bookshelf;
   Create a Joint, providing your configured Bookshelf instance.
 </p>
 
-{% call code.block(maxWidth="400px") -%}
+{% call code.block(maxWidth='400px', raised=true) -%}
 import Joint from 'joint-kit';
 import bookshelf from './services/bookshelf';
 
@@ -142,7 +142,7 @@ const joint = new Joint({
 
 <br />
 
-{% call code.block() -%}
+{% call code.block(raised=true) -%}
 const modelConfig = [
   {
     name: 'User',
@@ -173,11 +173,11 @@ const modelConfig = [
 <br />
 
 <p>
-  Run the `generate` function on it, and the models will be defined and loaded
+  Run the <func>generate</func> function on it, and the models will be defined and loaded
   onto the Joint.
 </p>
 
-{% call code.block(maxWidth="300px") -%}
+{% call code.block(maxWidth='300px', raised=true) -%}
 joint.generate({ modelConfig });
 {%- endcall %}
 
@@ -197,7 +197,7 @@ joint.generate({ modelConfig });
 
 <br />
 
-{% call code.block() -%}
+{% call code.block(raised=true) -%}
 const methodConfig = [
   {
     modelName: 'User',
