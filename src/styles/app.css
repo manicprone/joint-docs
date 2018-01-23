@@ -143,7 +143,7 @@ td.code {
 
 .splash-content .links {
   text-align: center;
-  margin-top: 40px;
+  margin-top: 34px;
 }
 .splash-content .links div {
   display: inline-block;
@@ -179,7 +179,7 @@ td.code {
    letter-spacing: 1.0px;
  }
  m-pipe {
-   color: #525252;
+   color: #121212;
    letter-spacing: 1.0px;
  }
 
@@ -435,7 +435,7 @@ validation {
   padding: 28px 20px 20px 20px;
 }
 .page-nav .nav-group {
-  margin-bottom: 1.5em;
+  margin-bottom: 20px;
 }
 .page-nav .nav-sub-group {
   margin: 0 0 20px 0;
@@ -471,7 +471,7 @@ validation {
 }
 .page-nav .nav-item {
   font-size: 15px;
-  margin: 0 0 12px 0;
+  margin: 0 0 17px 0;
 }
 .page-nav .nav-item a {
   color: #525252;
@@ -675,6 +675,15 @@ validation {
   max-width: 450px !important;
 }
 
+/* Table layout format */
+.page-content table.layout td,
+.page-content table.layout p {
+  color: #525252;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+}
+
 /* -------------------------------------  Collapsible Details */
 .page-content details {
   border-left: 7px solid #0b5693;
@@ -721,11 +730,17 @@ td .code-ref {
   padding: 0 5px 2px 5px;
 }
 .code-block-heading {
-  color: #8C8C8C;
-  font-size: 87%;
-  text-align: left;
-  margin: 12px 7px 3px 0;
+  color: #727272;
+  font-size: 14px;
+  text-align: center;
+  margin: 12px 0 3px 0;
   padding: 3px 4px;
+}
+.code-block-footnote {
+  color: #525252;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 8px;
 }
 .code-block {
   font-size: 14px;
@@ -738,10 +753,23 @@ td .code-ref {
 }
 .code-block.raised {
   border: 1px solid #ececec;
-  border-radius: 2px;
+  border-radius: 5px;
   -webkit-box-shadow: 0 10px 6px -6px #777;
   -moz-box-shadow: 0 10px 6px -6px #777;
   box-shadow: -2px 7px 6px -6px #777;
+}
+.code-block.config {}
+
+/* Table layout format */
+table.layout .code-block {
+  font-size: 14px;
+  line-height: 17px;
+}
+table.layout .code-block .code-filename {
+  margin-top: 0;
+}
+table.layout .code-block-heading {
+  margin-top: 0;
 }
 
 /* -------------------------------------  Diagrams */

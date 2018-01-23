@@ -5,92 +5,11 @@
 <h2>Conceptual Walkthrough</h2>
 
 <p>
-  So, you want to build a Node app.
-</p>
-
-<p>
-  If your app requires accessing and/or modifying data from a
-  database... the Joint Kit can help.
-</p>
-
-<br />
-
-<p>
-  Let&#39;s say you want to build a simple blogging service.
-</p>
-
-<p>
-  The service will:
-
-  <ul>
-    <li>Manage user accounts (for administrators and bloggers)</li>
-    <li>Manage user roles (for granting authorization)</li>
-    <li>Manage payment methods for paying subscribers (a user can have multiple)</li>
-    <li>Manage one blog profile per user (for their public identity)</li>
-    <li>Manage the blog posts created by a blog profile</li>
-    <li>Provide a RESTful API, so a client application can render the UI.</li>
-  </ul>
-</p>
-
-<br />
-
-<p>
-  First, get your database prepared and your table schema created.
-</p>
-
-<p>
-  [TBC - Diagram of data schema]
-</p>
-
-<br />
-
-<p>
-  Then, connect your app to the database using your persistence service.
-  (Currently, Bookshelf is the only supported option)
-</p>
-
-<details class="third-party">
-<summary>Connecting to your database using Bookshelf</summary>
-
-{% call code.block(filename='/services/bookshelf.js', raised=true) -%}
-<comment>// Configure knex connection...</comment>
-const knex = require('knex')({
-  client: 'pg',
-  connection: {
-    host: '127.0.0.1',
-    port: '5432',
-    database: 'simple_blog',
-    user: 'simple_blog_app',
-    password: 'simple_blog_app_password',
-  },
-  useNullAsDefault: true,
-});
-
-<comment>// Initialize bookshelf...</comment>
-const bookshelf = require('bookshelf')(knex);
-
-<comment>// Enable required plugins...</comment>
-bookshelf.plugin('registry');
-bookshelf.plugin('pagination');
-
-export default bookshelf;
-{%- endcall %}
-</details>
-
-<br />
-
-<p>
-  Now, the Joint Kit can take it from here...
-</p>
-
-<br />
-
-<p>
-  To use the Joint Kit, you create <i>Joints</i>.
+  To implement solutions with the Joint Kit, you create <i>Joints</i>.
 
   <lilp>
   You can think of Joints as isolated data services.
-  Each Joint hooks to a specific data repository, interacts only with the data
+  A Joint hooks to a specific data repository, interacts only with the data
   it is permitted, and performs independently-configured behavior.
   </lilp>
 </p>
@@ -98,141 +17,166 @@ export default bookshelf;
 <br />
 
 <p>
-  Let&#39;s generate the data operation logic for a "User" of our
-  blogging service.
+  Create a Joint, providing your configured service instance.
 </p>
 
 <br />
 
-<p>
-  Create a Joint, providing your configured Bookshelf instance.
-</p>
-
-{% call code.block(maxWidth='400px', raised=true) -%}
-import Joint from 'joint-kit';
-import bookshelf from './services/bookshelf';
-
+{% call code.block(maxWidth='240px', raised=true) -%}
 const joint = new Joint({
-  service: bookshelf,
-});
+  service: myService
+})
 {%- endcall %}
 
+<table class="layout">
+<tr>
+  <td>
+    [img - service]
+  </td>
+  <td>
+    [img - arrow]
+  </td>
+  <td>
+    [img - database]
+  </td>
+</tr>
+</table>
+
 <br />
 
 <p>
-  The Joint now has access to the database.
+  Use JSON objects to generate a method library for your data schema.
 </p>
 
 <br />
 
-<p>
-  We need to define the "User" resource (the data model), so we can operate on
-  it as an object.
-
-  <lilp>
-  We can do this, using a <b>model config</b>.
-  </lilp>
-</p>
-
-<callout>
-  The effort for configuring data models is effectively mapping a logical name
-  to each of your tables, and defining any relationships (associations) that
-  exist amongst them.
-</callout>
+<table class="layout">
+<tr>
+  <td style="vertical-align:middle;">
+    Define your models.
+  </td>
+  <td width="475px;">
+{% call code.block(heading='modelConfig [ ]', maxWidth='320px', raised=true) -%}
+{
+  name: 'User',
+  tableName: 'user_account',
+  associations: {
+    profiles: {
+      type: 'toMany',
+      path: 'id => Profile.user_id'
+    }
+  }
+}
+{%- endcall %}
+  </td>
+</tr>
+</table>
 
 <br />
 
-{% call code.block(raised=true) -%}
-const modelConfig = [
-  {
-    name: 'User',
-    tableName: 'user_account',
-    associations: {
-      profile: {
-        type: 'toOne',
-        path: 'id => Profile.user_id', <comment>// one-to-one</comment>
-      },
-      pay_accounts: {
-        type: 'toMany',
-        path: 'id => PaymentAccount.user_id', <comment>// one-to-many</comment>
-      },
-      roles: {
-        type: 'toMany',
-        path: 'id => UserRoleRef.user_id => UserRoleRef.role_id => Role.id', <comment>// many-to-many</comment>
-      },
+<table class="layout">
+<tr>
+  <td style="vertical-align:middle;">
+    Define the operations.
+  </td>
+  <td width="475px;">
+{% call code.block(heading='methodConfig [ ]', maxWidth='465px', raised=true) -%}
+{
+  modelName: 'User',
+  methods: [
+    {
+      name: 'getUser',
+      action: 'getItem',
+      spec: {
+        fields: [
+          { name: 'id', type: 'Number', requiredOr: true },
+          { name: 'username', type: 'String', requiredOr: true }
+        ]
+      }
     },
-  },
-  ...
-];
+    <comment>...</comment>
+  ]
+}
+{%- endcall %}
+  </td>
+</tr>
+</table>
+
+<br />
+
+<table class="layout">
+<tr>
+  <td>
+{% call code.block(maxWidth='400px', raised=true) -%}
+joint.generate({ modelConfig, methodConfig })
+{%- endcall %}
+  </td>
+  <td>
+    [img - arrow]
+  </td>
+  <td>
+    [img - database with schemas]
+  </td>
+</tr>
+</table>
+
+<br />
+
+<p>
+  Use the Promised-based methods programmatically in your code.
+</p>
+
+<br />
+
+{% call code.block(maxWidth='220px', raised=true) -%}
+const input = {
+  fields: { id: 333 }
+}
 {%- endcall %}
 
-<p>
-  The <b>model config</b> uses a straight-forward JSON syntax.
-</p>
-
-<br />
-
-<p>
-  Run the <func>generate</func> function on it, and the models will be defined and loaded
-  onto the Joint.
-</p>
-
-{% call code.block(maxWidth='300px', raised=true) -%}
-joint.generate({ modelConfig });
+<table class="layout">
+<tr>
+  <td>
+{% call code.block(maxWidth='295px', raised=true) -%}
+joint.method.User.getUser(input)
 {%- endcall %}
-
-<br />
-
-<p>
-  To define the data operations for our "User" resource (the methods),
-  we can use a <b>method config</b>.
-</p>
-
-<callout>
-  Defining the operations for a model involves: specifying the model name,
-  providing a method name that you can use in your code, selecting the appropriate
-  Joint Action to handle the core logic, and defining any custom rules or behavior
-  specific to your requirements.
-</callout>
-
-<br />
-
+  </td>
+  <td>
+    .then(data =>
+  </td>
+  <td>
 {% call code.block(raised=true) -%}
-const methodConfig = [
-  {
-    modelName: 'User',
-    methods: [
-      {
-        name: 'createUser',
-        action: 'createItem',
-        spec: {
-          fields: [
-            { name: 'username', type: 'String', required: true },
-            { name: 'email', type: 'String' },
-          ],
-        },
-      },
-      {
-        name: 'getUser',
-        action: 'getItem',
-        spec: {
-          fields: [
-            { name: 'id', type: 'Number', requiredOr: true },
-            { name: 'username', type: 'String', requiredOr: true },
-          ],
-        },
-      },
-      {
-        name: 'getUsers',
-        action: 'getItems',
-        spec: {
-          defaultOrderBy: '-created_at,username',
-        },
-      },
-    ],
-  },
-];
+{
+  ...
+}
 {%- endcall %}
+  </td>
+</tr>
+</table>
 
+<br />
+
+<p>
+  Expose the operations as a RESTful API.
+</p>
+
+<br />
+
+<table class="layout">
+<tr>
+  <td style="vertical-align:middle;">
+    Define the router logic.
+  </td>
+  <td width="475px;">
+{% call code.block(heading='routeConfig [ ]', maxWidth='465px', raised=true) -%}
+{
+  uri: '/profile/{id,username}',
+  get: { method: 'Profile.getProfile' },
+  post: { method: 'Profile.updateProfile', body: true }
+}
+{%- endcall %}
+  </td>
+</tr>
+</table>
 
 {% endblock %}

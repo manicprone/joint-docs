@@ -5,9 +5,9 @@
 {# ------------------------- #}
 {# block - Inline Code Block #}
 {# ------------------------- #}
-{% macro block(heading, filename, maxWidth, raised=false) %}
+{% macro block(heading, filename, footnote, maxWidth, config=false, raised=false) %}
   {% if heading %}
-  <div class="code-block-heading">
+  <div class="code-block-heading" {% if maxWidth %}style="max-width:{{ maxWidth }}"{% endif %}>
     <span>{{ heading }}</span>
   </div>
   {% endif %}
@@ -16,7 +16,12 @@
     <span>{{ filename }}</span>
   </div>
   {% endif %}
-  <div class="code-block {{ "raised" if raised }}" {% if maxWidth %}style="max-width:{{ maxWidth }}"{% endif %}>
+  <div class="code-block {{ "config" if config }} {{ "raised" if raised }}" {% if maxWidth %}style="max-width:{{ maxWidth }}"{% endif %}>
     <pre>{{ caller() }}</pre>
   </div>
+  {% if footnote %}
+  <div class="code-block-footnote" {% if maxWidth %}style="max-width:{{ maxWidth }}"{% endif %}>
+    <span>{{ footnote }}</span>
+  </div>
+  {% endif %}
 {% endmacro %}
