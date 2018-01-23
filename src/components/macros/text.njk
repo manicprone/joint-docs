@@ -14,10 +14,10 @@
 {# ---------------------------------------------- #}
 {# framedblock - Framed Text Block (for emphasis) #}
 {# ---------------------------------------------- #}
-{% macro framedblock(headingText, maxWidth) %}
-  <div class="framed-block" {% if maxWidth %}style="max-width:{{ maxWidth }}"{% endif %}>
+{% macro framedblock(headingText, maxWidth, raised=false) %}
+  <div class="framed-block {{ "raised" if raised }}" {% if maxWidth %}style="max-width:{{ maxWidth }}"{% endif %}>
   {% if headingText %}
-  <div class="header">{{ headingText }}</div>
+    <div class="header">{{ headingText }}</div>
   {% endif %}
     {{ caller() }}
   </div>
@@ -31,4 +31,27 @@
     <div class="number">{{ number }}</div>
     <h3>{{ headingText }}</h3>
   </div>
+{% endmacro %}
+
+{# ------------------------- #}
+{# msig - The |M| signature  #}
+{# ------------------------- #}
+{% macro msig(uri, withLeadingMark=false) %}
+  <m-sig>
+  {% if withLeadingMark %}
+    <span class="leading-mark">-</span>
+    {% endif %}
+
+    {% if uri %}
+    <a href="https://github.com/manicprone" target="_new">
+      <span class="m-sign">
+        <m-pipe>|</m-pipe>M<m-pipe>|</m-pipe>
+      </span>
+    </a>
+    {% else %}
+    <span class="m-sign">
+      <m-pipe>|</m-pipe>M<m-pipe>|</m-pipe>
+    </span>
+    {% endif %}
+  </m-sig>
 {% endmacro %}

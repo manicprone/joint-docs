@@ -4,19 +4,31 @@
 
 <h2>Overview</h2>
 
+<h3>What is the Joint Kit?</h3>
+
 <p>
-  The Joint Kit is a server-side development library for building data layers
-  within your Node application.
+  The Joint Kit is a server-side toolset for building data layers with NodeJS.
 </p>
 
 <p>
-  Use the Joint Kit to:
+  It provides a library of abstract data operations, that hook to your
+  custom data schema and operate according to your specific requirements.
 </p>
 
-{% call text.framedblock(maxWidth='320px') -%}
+<p>
+  The solution is configuration-driven &mdash; allowing you to quickly implement
+  robust data operation logic, using a config-like JSON syntax.
+</p>
+
+<p>
+  You can use the Joint Kit to:
+</p>
+
+<lilp>
+{% call text.framedblock(maxWidth='350px', raised=true) -%}
 <ul class="definition">
   <li>
-    <div>Connect your Node app to a data store</div>
+    <div>Build data models for your persisted data</div>
   </li>
   <li>
     <div>Build server-side method libraries</div>
@@ -26,19 +38,22 @@
   </li>
 </ul>
 {%- endcall %}
+</lilp>
 
 <br />
 
+<h3>Where does it fit in my application?</h3>
+
 <p>
   Architecturally, the Joint Kit sits between your persisted data service
-  and your HTTP server framework.
+  (e.g. ORM) and your HTTP server framework.
 </p>
 
 <p>
   The Joint Kit leverages:
 </p>
 
-{% call text.framedblock(maxWidth='485px') -%}
+{% call text.framedblock(maxWidth='490px', raised=true) -%}
 <ul class="definition">
   <li>
     <div style="width:180px"><i>your persistence service</i></div>
@@ -52,6 +67,12 @@
   </li>
 </ul>
 {%- endcall %}
+
+<br />
+
+<callout>
+  Currently, only Bookshelf (db service) and Express (server framework) are supported.
+</callout>
 
 <br />
 
@@ -71,22 +92,25 @@
   At its core, the Joint Kit is a data operations library.
 
   <lilp>
-  It exposes a set of abstract data actions (as JavaScript functions)
-  that can be hooked to your custom data schema.
+  It provides a set of abstract data actions that can be quickly configured
+  to operate on your custom data schema.
   </lilp>
 
   <lilp>
-  The redundant, tedious logic behind each data action (the majority of the work)
-  is already handled for you... you just need to define the concrete behavior
-  for your application, using configrable JSON objects.
+  The redundant, tedious logic behind each action (the majority of the work)
+  is already handled for you...
+  </lilp>
+
+  <lilp>
+  &nbsp;&nbsp;&nbsp; you just specify the concrete behavior.
   </lilp>
 </p>
 
 <h3>Configuration-Driven</h3>
 
 <p>
-  Nearly the entire solution can be defined using a configuration syntax (JSON),
-  leaving the programming logic to an extreme minimum.
+  Nearly the entire solution can be defined using a JSON-based configuration
+  syntax, leaving the programming logic to an extreme minimum.
 
   <lilp>
   With this approach, your custom data layers are dynamically generated on
@@ -114,7 +138,7 @@
 <h3>Isolated Services</h3>
 
 <p>
-  You can create multiple instances from the Kit (referred to as <i>Joints</i>)
+  You can create multiple instances from the Joint Kit (referred to as <i>Joints</i>)
   within a single application; each isolated to service separate data
   repositories, schemas, and implementation behavior.
 
@@ -126,14 +150,16 @@
 
 <br /><br />
 
-<p>
+<div>
   To get a deeper perspective on the solution, check out the
   <a href="{{ rootURI }}/guide/conceptual-walkthrough">Conceptual Walkthrough</a>
-</p>
+</div>
 
-<p>
+<br /><br />
+
+<div>
   Or, head straight to <a href="{{ rootURI }}/guide/installation">Installation</a>
   to get developing.
-</p>
+</div>
 
 {% endblock %}

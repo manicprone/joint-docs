@@ -6,23 +6,177 @@
 
 <p>
   To implement solutions with the Joint Kit, you create <i>Joints</i>.
+
+  <lilp>
+  You can think of Joints as isolated data services.
+  A Joint hooks to a specific data repository, interacts only with the data
+  it is permitted, and performs independently-configured behavior.
+  </lilp>
 </p>
 
-{% call text.framedblock(headingText='A Joint connects to:', maxWidth='490px') -%}
-<ul class="definition">
-  <li>
-    <div style="width:180px"><i>your persistence service</i></div>
-    <div style="color:#0b5693;width:25px">&#10132;</div>
-    <div>to implement a data method layer</div>
-  </li>
-  <li>
-    <div style="width:180px"><i>your server framework</i></div>
-    <div style="color:#0b5693;width:25px">&#10132;</div>
-    <div>to implement an HTTP API layer</div>
-  </li>
-</ul>
-{%- endcall %}
+<br />
+
+<p>
+  Create a Joint, providing your configured service instance.
+</p>
 
 <br />
+
+{% call code.block(maxWidth='240px', raised=true) -%}
+const joint = new Joint({
+  service: myService
+})
+{%- endcall %}
+
+<table class="layout">
+<tr>
+  <td>
+    [img - service]
+  </td>
+  <td>
+    [img - arrow]
+  </td>
+  <td>
+    [img - database]
+  </td>
+</tr>
+</table>
+
+<br />
+
+<p>
+  Use JSON objects to generate a method library for your data schema.
+</p>
+
+<br />
+
+<table class="layout">
+<tr>
+  <td style="vertical-align:middle;">
+    Define your models.
+  </td>
+  <td width="475px;">
+{% call code.block(heading='modelConfig [ ]', maxWidth='320px', raised=true) -%}
+{
+  name: 'User',
+  tableName: 'user_account',
+  associations: {
+    profiles: {
+      type: 'toMany',
+      path: 'id => Profile.user_id'
+    }
+  }
+}
+{%- endcall %}
+  </td>
+</tr>
+</table>
+
+<br />
+
+<table class="layout">
+<tr>
+  <td style="vertical-align:middle;">
+    Define the operations.
+  </td>
+  <td width="475px;">
+{% call code.block(heading='methodConfig [ ]', maxWidth='465px', raised=true) -%}
+{
+  modelName: 'User',
+  methods: [
+    {
+      name: 'getUser',
+      action: 'getItem',
+      spec: {
+        fields: [
+          { name: 'id', type: 'Number', requiredOr: true },
+          { name: 'username', type: 'String', requiredOr: true }
+        ]
+      }
+    },
+    <comment>...</comment>
+  ]
+}
+{%- endcall %}
+  </td>
+</tr>
+</table>
+
+<br />
+
+<table class="layout">
+<tr>
+  <td>
+{% call code.block(maxWidth='400px', raised=true) -%}
+joint.generate({ modelConfig, methodConfig })
+{%- endcall %}
+  </td>
+  <td>
+    [img - arrow]
+  </td>
+  <td>
+    [img - database with schemas]
+  </td>
+</tr>
+</table>
+
+<br />
+
+<p>
+  Use the Promised-based methods programmatically in your code.
+</p>
+
+<br />
+
+{% call code.block(maxWidth='220px', raised=true) -%}
+const input = {
+  fields: { id: 333 }
+}
+{%- endcall %}
+
+<table class="layout">
+<tr>
+  <td>
+{% call code.block(maxWidth='295px', raised=true) -%}
+joint.method.User.getUser(input)
+{%- endcall %}
+  </td>
+  <td>
+    .then(data =>
+  </td>
+  <td>
+{% call code.block(raised=true) -%}
+{
+  ...
+}
+{%- endcall %}
+  </td>
+</tr>
+</table>
+
+<br />
+
+<p>
+  Expose the operations as a RESTful API.
+</p>
+
+<br />
+
+<table class="layout">
+<tr>
+  <td style="vertical-align:middle;">
+    Define the router logic.
+  </td>
+  <td width="475px;">
+{% call code.block(heading='routeConfig [ ]', maxWidth='465px', raised=true) -%}
+{
+  uri: '/profile/{id,username}',
+  get: { method: 'Profile.getProfile' },
+  post: { method: 'Profile.updateProfile', body: true }
+}
+{%- endcall %}
+  </td>
+</tr>
+</table>
 
 {% endblock %}

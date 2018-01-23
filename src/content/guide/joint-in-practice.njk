@@ -411,24 +411,22 @@ module.exports = router;
 
 {# ======================= BEGIN | Code Block  "/joint/route-config.js" ===== #}
 {% call code.block(filename='/joint/route-config.js') -%}
-export default {
-  routes: [
-    {
-      uri: '/profile',
-      post: { method: 'Profile.createProfile', successStatus: 201, body: true },
-    },
-    {
-      uri: '/profile/:id',
-      get: { method: 'Profile.getProfile' },
-      post: { method: 'Profile.updateProfile', body: true },
-      delete: { method: 'Profile.deleteProfile', successStatus: 204 },
-    },
-    {
-      uri: '/profiles',
-      get: { method: 'Profile.getProfiles' },
-    },
-  ],
-};
+export default [
+  {
+    uri: '/profile',
+    post: { method: 'Profile.createProfile', successStatus: 201, body: true },
+  },
+  {
+    uri: '/profile/:id',
+    get: { method: 'Profile.getProfile' },
+    post: { method: 'Profile.updateProfile', body: true },
+    delete: { method: 'Profile.deleteProfile', successStatus: 204 },
+  },
+  {
+    uri: '/profiles',
+    get: { method: 'Profile.getProfiles' },
+  },
+];
 {%- endcall %}
 {# ======================== END  | Code Block  "/joint/route-config.js" ===== #}
 

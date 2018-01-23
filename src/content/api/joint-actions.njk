@@ -234,76 +234,97 @@ joint.&lt;<i>action</i>&gt;(spec, input, output)
     <th>Option</th>
     <th>Description</th>
     <th style="text-align:center;">Type</th>
-    <th>Actions Supported</th>
+    <th style="text-align:center;">Actions</th>
     <th style="text-align:center;">Required?</th>
   </tr>
   <tr>
     <td><a href="#spec-opt-modelName"><code>modelName</code></a></td>
-    <td>The model name of the resource upon which to act.</td>
+    <td>
+      The model name of the resource upon which to act.
+    </td>
     <td style="text-align:center;"><i>String</i></td>
-    <td><i>all</i></td>
+    <td style="text-align:center;"><i>all</i></td>
     <td style="text-align:center;">Yes</td>
   </tr>
   <tr>
     <td><a href="#spec-opt-fields"><code>fields</code></a></td>
-    <td>The root property for defining accepted fields.</td>
+    <td>
+      The root property for defining accepted fields.
+    </td>
     <td style="text-align:center;"><i>Array</i></td>
-    <td><i>all</i></td>
+    <td style="text-align:center;"><i>all</i></td>
     <td style="text-align:center;">Yes (except getItems)</td>
   </tr>
   <tr>
     <td><a href="#spec-opt-fieldsToReturn"><code>fieldsToReturn</code></a></td>
     <td>
-      Restricts the fields to return with the payload. Supports <b>Field Sets</b>.
-      <p>
+      Restricts the fields to return with the payload.
+      Supports <b>Field Sets</b>.
+      <lilp>
         See the <a href="#spec-concept-fieldSets">Field Sets</a> section, for information on
         how to use this feature.
-      </p>
+      </lilp>
     </td>
     <td style="text-align:center;"><i>Array</i><br />-or-<br /><i>Object</i></td>
-    <td>getItem, getItems</td>
+    <td style="text-align:center;">getItem, getItems</td>
     <td style="text-align:center;">No</td>
   </tr>
   <tr>
     <td><a href="#spec-opt-defaultOrderBy"><code>defaultOrderBy</code></a></td>
-    <td>The default sort order for a collection payload.</td>
+    <td>
+      The default sort order for a collection payload.
+    </td>
     <td style="text-align:center;"><i>String</i></td>
-    <td>getItems</td>
+    <td style="text-align:center;">getItems</td>
     <td style="text-align:center;">No</td>
   </tr>
   <tr>
     <td><a href="#spec-opt-forceAssociations"><code>forceAssociations</code></a></td>
-    <td>Binds the <code class="code-ref">associations</code> to return, for all action requests.</td>
+    <td>
+      Binds the <code class="code-ref">associations</code> to return,
+      for all action requests.
+    </td>
     <td style="text-align:center;"><i>Array</i></td>
-    <td>getItem, getItems</td>
+    <td style="text-align:center;">getItem, getItems</td>
     <td style="text-align:center;">No</td>
   </tr>
   <tr>
     <td><a href="#spec-opt-forceLoadDirect"><code>forceLoadDirect</code></a></td>
-    <td>Binds the <code class="code-ref">loadDirect</code> associations to return, for all action requests.</td>
+    <td>
+      Binds the <code class="code-ref">loadDirect</code> associations to return,
+      for all action requests.
+    </td>
     <td style="text-align:center;"><i>Array</i></td>
-    <td>getItem, getItems</td>
+    <td style="text-align:center;">getItem, getItems</td>
     <td style="text-align:center;">No</td>
   </tr>
   <tr>
     <td><a href="#spec-opt-auth"><code>auth</code></a></td>
-    <td>The root property for defining authorization on the action.</td>
+    <td>
+      The root property for defining authorization on the action.
+    </td>
     <td style="text-align:center;"><i>Object</i></td>
-    <td><i>all</i></td>
+    <td style="text-align:center;"><i>all</i></td>
     <td style="text-align:center;">No</td>
   </tr>
   <tr>
     <td><a href="#spec-opt-main"><code>main</code></a></td>
-    <td>The root property to wrap the <code class="code-ref">spec</code> options for the main resource, in an association action.</td>
+    <td>
+      The root property to wrap the <code class="code-ref">spec</code> options
+      for the main resource, in an association action.
+    </td>
     <td style="text-align:center;"><i>Object</i></td>
-    <td><i>all association actions</i></td>
+    <td style="text-align:center;"><i>all assoc actions</i></td>
     <td style="text-align:center;">Yes</td>
   </tr>
   <tr>
     <td><a href="#spec-opt-association"><code>association</code></a></td>
-    <td>The root property to wrap the <code class="code-ref">spec</code> options for the associated resource, in an association action.</td>
+    <td>
+      The root property to wrap the <code class="code-ref">spec</code> options
+      for the associated resource, in an association action.
+    </td>
     <td style="text-align:center;"><i>Object</i></td>
-    <td><i>all association actions</i></td>
+    <td style="text-align:center;"><i>all assoc actions</i></td>
     <td style="text-align:center;">Yes</td>
   </tr>
 </table>
@@ -370,37 +391,37 @@ function getUser(input) {
     <th>Property</th>
     <th>Description</th>
     <th style="text-align:center;">Type</th>
-    <th>Actions Supported</th>
+    <th style="text-align:center;">Actions</th>
     <th style="text-align:center;">Required?</th>
   </tr>
   <tr>
     <td><code>fields.name</code></td>
     <td>
       The field name.
-      <p>
+      <lilp>
         This value must match the underlying field name in the
         persistence layer (e.g. the column name of the database table).
-      </p>
+      </lilp>
     </td>
     <td style="text-align:center;"><i>String</i></td>
-    <td><i>all</i></td>
+    <td style="text-align:center;"><i>all</i></td>
     <td style="text-align:center;">Yes</td>
   </tr>
   <tr>
     <td><code>fields.type</code></td>
     <td>
       The field data type.
-      <p>
+      <lilp>
         Can be: <code class="code-ref">'String'</code>, <code class="code-ref">'Number'</code>,
         <code class="code-ref">'Boolean'</code>, <code class="code-ref">'JSON'</code>.
-      </p>
-      <p>
+      </lilp>
+      <lilp>
         When an input value is provided for the field, it is explicitly cast to the defined type, to
         ensure the proper value is persisted.
-      </p>
+      </lilp>
     </td>
     <td style="text-align:center;"><i>String</i></td>
-    <td><i>all</i></td>
+    <td style="text-align:center;"><i>all</i></td>
     <td style="text-align:center;">Yes</td>
   </tr>
   <tr>
@@ -408,12 +429,12 @@ function getUser(input) {
     <td>
       If the field is required for the action.
       By default, a field is considered <i>not required</i>.
-      <p>
+      <lilp>
         If a required field is not provided by the input, the Promise is rejected and an error is returned.
-      </p>
+      </lilp>
     </td>
     <td style="text-align:center;"><i>Boolean</i></td>
-    <td><i>all</i></td>
+    <td style="text-align:center;"><i>all</i></td>
     <td style="text-align:center;">No</td>
   </tr>
   <tr>
@@ -421,53 +442,53 @@ function getUser(input) {
     <td>
       If the field is required for the action (within an OR set).
       By default, a field is considered <i>not required</i>.
-      <p>
+      <lilp>
         If a required field is not provided by the input, the Promise is rejected and an error is returned.
-      </p>
+      </lilp>
     </td>
     <td style="text-align:center;"><i>Boolean</i></td>
-    <td><i>all</i></td>
+    <td style="text-align:center;"><i>all</i></td>
     <td style="text-align:center;">No</td>
   </tr>
   <tr>
     <td><code>fields.lookup</code></td>
     <td>
       Denotes the field is required to pre-fetch the resource before a mutation can occur.
-      <p>
+      <lilp>
         If a lookup field is not provided by the input, the Promise is rejected and an error is returned.
-      </p>
+      </lilp>
     </td>
     <td style="text-align:center;"><i>Boolean</i></td>
-    <td>upsertItem, updateItem, deleteItem</td>
+    <td style="text-align:center;">upsertItem, updateItem, deleteItem</td>
     <td style="text-align:center;">Yes for upsertItem, updateItem</td>
   </tr>
   <tr>
     <td><code>fields.lookupOr</code></td>
     <td>
       Denotes the field is required (within an OR set) to pre-fetch the resource before a mutation can occur.
-      <p>
+      <lilp>
         If a lookup field is not provided by the input, the Promise is rejected and an error is returned.
-      </p>
+      </lilp>
     </td>
     <td style="text-align:center;"><i>Boolean</i></td>
-    <td>upsertItem, updateItem, deleteItem</td>
+    <td style="text-align:center;">upsertItem, updateItem, deleteItem</td>
     <td style="text-align:center;">Yes for upsertItem, updateItem</td>
   </tr>
   <tr>
     <td><code>fields.locked</code></td>
     <td>
       Denotes the field cannot be updated by user input.
-      Instead, the value is populated via the <b><code>defaultValue</code></b> property.
-      <p>
-        Either generate the <b><code>defaultValue</code></b> when hand-rolling the method logic yourself,
+      Instead, the value is populated via the <code class="code-ref">defaultValue</code> property.
+      <lilp>
+        Either generate the <code class="code-ref">defaultValue</code> when hand-rolling the method logic yourself,
         or you can utilize the <b>Dynamic Values</b> feature.
-      </p>
-      <p>
+      </lilp>
+      <lilp>
         If the user input provides a value, it will be ignored.
-      </p>
+      </lilp>
     </td>
     <td style="text-align:center;"><i>Boolean</i></td>
-    <td>createItem, upsertItem, updateItem, getItem, getItems</td>
+    <td style="text-align:center;">createItem, upsertItem, updateItem, getItem, getItems</td>
     <td style="text-align:center;">No</td>
   </tr>
   <tr>
@@ -479,18 +500,18 @@ function getUser(input) {
       </p>
       <ul>
         <li><b><code>now</code></b></li>
-        <li><code><b>kebabCase(</b>&lt;<i>fieldName</i>&gt;<b>)</b></code></li>
-        <li><code><b>snakeCase(</b>&lt;<i>fieldName</i>&gt;<b>)</b></code></li>
-        <li><code><b>camelCase(</b>&lt;<i>fieldName</i>&gt;<b>)</b></code></li>
-        <li><code><b>pascalCase(</b>&lt;<i>fieldName</i>&gt;<b>)</b></code></li>
+        <li><code><b>kebabCase(</b><i>fieldName</i><b>)</b></code></li>
+        <li><code><b>snakeCase(</b><i>fieldName</i><b>)</b></code></li>
+        <li><code><b>camelCase(</b><i>fieldName</i><b>)</b></code></li>
+        <li><code><b>pascalCase(</b><i>fieldName</i><b>)</b></code></li>
       </ul>
-      <p>
+      <p style="margin-bottom:0;">
         See the <a href="#spec-concept-dynamicValues">Dynamic Values</a> section, for information on
         how to use this feature.
       </p>
     </td>
     <td style="text-align:center;"><i>Mixed</i></td>
-    <td>createItem, upsertItem, updateItem, getItem, getItems</td>
+    <td style="text-align:center;">createItem, upsertItem, updateItem, getItem, getItems</td>
     <td style="text-align:center;">No</td>
   </tr>
 </table>
@@ -501,7 +522,7 @@ function getUser(input) {
 </p>
 
 <p>
-  The <code class="code-ref">defaultValue</code> property supports a set of convenience operations that
+  The <prop>defaultValue</prop> property supports a set of convenience operations that
   generate dynamic values.
 </p>
 
@@ -509,7 +530,7 @@ function getUser(input) {
 <table>
   <tr>
     <th>Operation</th>
-    <th style="text-align:center;">Generated Type</th>
+    <th style="text-align:center;">Type</th>
     <th>Description</th>
     <th>Example</th>
   </tr>
@@ -518,52 +539,52 @@ function getUser(input) {
     <td style="text-align:center;"><i>String</i></td>
     <td>Generates a UTC timestamp for the current date/time.</td>
     <td>
-{% call code.block() -%}
-now => '2017-11-23T03:47:19Z';
+{% call code.block(maxWidth='235px') -%}
+now => '2017-11-23T03:47:19Z'
 {%- endcall %}
     </td>
   </tr>
   <tr>
-    <td><code><b>kebabCase(</b>&lt;<i>fieldName</i>&gt;<b>)</b></code></td>
+    <td><code><b>kebabCase(</b><span style="font-size:12px;font-style:italic;">fieldName</span><b>)</b></code></td>
     <td style="text-align:center;"><i>String</i></td>
     <td>Generates the Kebab case of the value provided by the <i>fieldName</i> input.</td>
     <td>
-{% call code.block() -%}
+{% call code.block(maxWidth='235px') -%}
 <comment>// title: 'The Very First'</comment>
-kebabCase(title) => 'the-very-first';
+kebabCase(title) => 'the-very-first'
 {%- endcall %}
     </td>
   </tr>
   <tr>
-    <td><code><b>snakeCase(</b>&lt;<i>fieldName</i>&gt;<b>)</b></code></td>
+    <td><code><b>snakeCase(</b><span style="font-size:12px;font-style:italic;">fieldName</span><b>)</b></code></td>
     <td style="text-align:center;"><i>String</i></td>
     <td>Generates the Snake case of the value provided by the <i>fieldName</i> input.</td>
     <td>
-{% call code.block() -%}
+{% call code.block(maxWidth='235px') -%}
 <comment>// title: 'The Very First'</comment>
-snakeCase(title) => 'the_very_first';
+snakeCase(title) => 'the_very_first'
 {%- endcall %}
     </td>
   </tr>
   <tr>
-    <td><code><b>camelCase(</b>&lt;<i>fieldName</i>&gt;<b>)</b></code></td>
+    <td><code><b>camelCase(</b><span style="font-size:12px;font-style:italic;">fieldName</span><b>)</b></code></td>
     <td style="text-align:center;"><i>String</i></td>
     <td>Generates the Camel case of the value provided by the <i>fieldName</i> input.</td>
     <td>
-{% call code.block() -%}
+{% call code.block(maxWidth='235px') -%}
 <comment>// title: 'The Very First'</comment>
-camelCase(title) => 'theVeryFirst';
+camelCase(title) => 'theVeryFirst'
 {%- endcall %}
     </td>
   </tr>
   <tr>
-    <td><code><b>pascalCase(</b>&lt;<i>fieldName</i>&gt;<b>)</b></code></td>
+    <td><code><b>pascalCase(</b><span style="font-size:12px;font-style:italic;">fieldName</span><b>)</b></code></td>
     <td style="text-align:center;"><i>String</i></td>
     <td>Generates the Pascal case of the value provided by the <i>fieldName</i> input.</td>
     <td>
-{% call code.block() -%}
+{% call code.block(maxWidth='235px') -%}
 <comment>// title: 'The Very First'</comment>
-pascalCase(title) => 'TheVeryFirst';
+pascalCase(title) => 'TheVeryFirst'
 {%- endcall %}
     </td>
   </tr>
@@ -593,15 +614,16 @@ function createTag(input) {
 <br /><br />
 
 {% call api.apidesc() -%}
-  If the specified <code>fieldName</code> does not provide a value when the action request
-  is executed, or the operation is not recognized, a <code>null</code> value will be generated.
+  If the specified <code><i>fieldName</i></code> does not provide a value when the action request
+  is executed, or the operation is not recognized, a <i>null</i> value will be generated.
 {%- endcall %}
 
 {% call api.apidesc() -%}
   To force the execution of the <code class="code-ref">defaultValue</code> option,
-  you can use the <prop>locked</prop> property. The <code>locked</code> property prevents the
-  field from being updated by user input. Using the <code>defaultValue</code> property in
-  conjunction with <code>locked</code> ensures it will always be executed.
+  you can use the <prop>locked</prop> property. The <code class="code-ref">locked</code>
+  property prevents the field from being updated by user input. Using the
+  <code class="code-ref">defaultValue</code> property in conjunction with
+  <code class="code-ref">locked</code> ensures it will always be executed.
 {%- endcall %}
 
 {% call code.block('For example:') -%}
@@ -671,10 +693,11 @@ function getUsers(input) {
 
 {% call api.apidesc() -%}
   There is one special Field Set alias: <code class="code-ref">default</code>.
-  <br /><br />
-  If the default Field Set is defined, this field combination will be returned whenever the input
+  <lilp>
+  If the <code class="code-ref">default</code> Field Set is defined, this field combination will be returned whenever the input
   does not use the <a href="#input-opt-fieldSet"><prop>input.fieldSet</prop></a> property
   or if an undefined set is requested.
+  </lilp>
 {%- endcall %}
 
 {{ api.optheader('spec.defaultOrderBy', 'spec-opt-defaultOrderBy') }}
@@ -702,9 +725,10 @@ function getUsers(input) {
 {{ api.optsig(['Array'], 'getItem, getItems', 'No') }}
 
 {% call api.apidesc() -%}
-  Binds the <code>associations</code> to return, for all action requests.
-  <br /><br />
+  Binds the <code class="code-ref">associations</code> to return, for all action requests.
+  <lilp>
   See <a href="#input-opt-associations"><prop>input.associations</prop></a> for more details.
+  </lilp>
 {%- endcall %}
 
 {% call code.block('Example usage:') -%}
@@ -724,9 +748,10 @@ function getProfiles(input) {
 {{ api.optsig(['Array'], 'getItem, getItems', 'No') }}
 
 {% call api.apidesc() -%}
-  Binds the <code>loadDirect</code> associations to return, for all action requests.
-  <br /><br />
+  Binds the <code class="code-ref">loadDirect</code> associations to return, for all action requests.
+  <lilp>
   See <a href="#input-opt-loadDirect"><prop>input.loadDirect</prop></a> for more details.
+  </lilp>
 {%- endcall %}
 
 {% call code.block('Example usage:') -%}
@@ -753,7 +778,7 @@ function getUsers(input) {
     <th>Property</th>
     <th>Description</th>
     <th style="text-align:center;">Type</th>
-    <th>Actions Supported</th>
+    <th style="text-align:center;">Actions</th>
     <th style="text-align:center;">Required?</th>
   </tr>
   <tr>
@@ -790,12 +815,14 @@ function getUsers(input) {
     <th>Option</th>
     <th>Description</th>
     <th style="text-align:center;">Type</th>
-    <th>Actions Supported</th>
+    <th style="text-align:center;">Actions</th>
     <th style="text-align:center;">Required?</th>
   </tr>
   <tr>
     <td><a href="#input-opt-fields"><code>fields</code></a></td>
-    <td>The root property for providing field data.</td>
+    <td>
+      The root property for providing field data.
+    </td>
     <td style="text-align:center;"><i>Object</i></td>
     <td><i>all</i></td>
     <td style="text-align:center;">Yes (except getItems)</td>
@@ -804,10 +831,10 @@ function getUsers(input) {
     <td><a href="#input-opt-fieldSet"><code>fieldSet</code></a></td>
     <td>
       The <b>Field Set</b> to return.
-      <p>
+      <lilp>
         See the <a href="#input-concept-fieldSets">Field Sets</a> section, for information on
         how to use this feature.
-      </p>
+      </lilp>
     </td>
     <td style="text-align:center;"><i>String</i></td>
     <td>getItem, getItems</td>
