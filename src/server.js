@@ -59,7 +59,7 @@ app.disable('view cache');
 // Start server...
 // ---------------
 const host = (isProd) ? serverConfig.host[env] : 'localhost';
-const port = serverConfig.port[env];
+const port = process.env.PORT || serverConfig.port[env];
 app.listen(port, () => {
   console.info('================================');
   console.info(`${appName} is running`);
