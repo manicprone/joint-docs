@@ -1,5 +1,7 @@
 {% extends "index.njk" %}
 
+{% import "macros/code.njk" as code %}
+
 {% block page %}
 
   <div class="splash-content">
@@ -13,9 +15,9 @@
         <span class="version">0.0.18</span>
       </div>
       <div class="install-info">
-        <div class="code-block">
-          <pre>npm install joint-kit --save</pre>
-        </div>
+{% call code.block(maxWidth='278px', raised=true) -%}
+npm install joint-kit --save
+{%- endcall %}
       </div>
     </div>
 
