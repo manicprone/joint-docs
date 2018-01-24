@@ -12,7 +12,8 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development babel-node src/server.js",
     "prebuild": "rm -rf dist/*",
-    "build": "babel src -d dist",
+    "copy-assets": "cp -R src/components src/content src/pages src/styles dist",
+    "build": "npm run copy-assets && babel src -d dist",
     "prestart": "npm run build",
     "start": "NODE_ENV=production node dist/server.js",
     "lint": "eslint ./ --cache --ignore-pattern .gitignore",
