@@ -4,14 +4,17 @@
   "description": "Joint Kit | Guide & API Reference",
   "author": "|M| <manicprone@gmail.com>",
   "license": "MIT",
-  "main": "src/server.js",
+  "main": "dist/server.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:manicprone/joint-docs.git"
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=development babel-node src/server.js",
-    "start": "cross-env NODE_ENV=production babel-node src/server.js",
+    "prebuild": "rm -rf dist/*",
+    "build": "babel src -d dist",
+    "prestart": "npm run build",
+    "start": "NODE_ENV=production node dist/server.js",
     "lint": "eslint ./ --cache --ignore-pattern .gitignore",
     "precommit-message": "echo 'Pre-commit checks (linting)...' && exit 0"
   },
