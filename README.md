@@ -6,27 +6,41 @@ Online documentation for the Joint Kit solution.
 
 ## WIP
 
-Not ready for public use until version 0.1.0 - Syntax and logic are in frequent flux.
+Not ready for public use until joint-kit version 0.1.0 - Syntax and logic are in frequent flux.
+
+**NOTE** The online docs are not yet complete. They are actively being developed,
+to coincide with the public release of Joint Kit.
 
 <br />
 
 ## Table of Contents
 
-### For Developers
+* [The Software Stack][section-the-software-stack]
 * [Dev Run][section-dev-run]
 * [Dev Lint][section-dev-lint]
 
+
+## The Software Stack
+
 <br />
+
+| Layer | Implementation |
+| ----- | -------------- |
+| Language | JavaScript ES6 |
+| Templating Engine | Nunjucks |
+| Server Framework | Express |
+| Core Utilities | Lodash |
+| Linting | ESLint (airbnb) |
+
 
 ## Dev Run
 
 [TBC]
 
-```sh
+``` sh
 $ npm run dev
 ```
 
-<br />
 
 ## Dev Lint
 
@@ -34,13 +48,12 @@ The app uses [ESLint][link-eslint-site] for source code linting. The linting wil
 
 [TBC]
 
-```sh
+``` sh
 $ npm run lint
 ```
 
-<br />
 
-
+[section-the-software-stack]: #the-software-stack
 [section-dev-run]: #dev-run
 [section-dev-lint]: #dev-lint
 
