@@ -15,7 +15,7 @@
 ## Backlog
 
 * A Joint in Practice: Separate code blocks into steps (by file).
-  Also, keep the paragraph text above the code blocks, if needed.
+  Also, keep the paragraph text above the code blocks, and add numbers to the steps !!!
   e.g.
 
   You can define your data models using the native service:

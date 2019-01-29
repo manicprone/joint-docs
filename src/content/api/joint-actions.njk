@@ -39,17 +39,17 @@ joint.&lt;<i>action</i>&gt;(spec, input, output)
     <th style="text-align:center;">Required?</th>
   </tr>
   <tr>
-    <td><a href="#joint-action-spec"><code>spec</code></a></td>
+    <td><a href="#action-spec"><code>spec</code></a></td>
     <td>Defines the functionality of the action.</td>
     <td style="text-align:center;">Yes</td>
   </tr>
   <tr>
-    <td><a href="#joint-action-input"><code>input</code></td>
+    <td><a href="#action-input"><code>input</code></td>
     <td>Supplies the data for an individual action request.</td>
     <td style="text-align:center;">Yes</td>
   </tr>
   <tr>
-    <td><a href="#joint-action-output"><code>output</code></td>
+    <td><a href="#action-output"><code>output</code></td>
     <td>Specifies the format of the returned payload. Defaults to <code class="code-ref">'native'</code>.</td>
     <td style="text-align:center;">No</td>
   </tr>
@@ -63,27 +63,27 @@ joint.&lt;<i>action</i>&gt;(spec, input, output)
     <th>Description</th>
   </tr>
   <tr>
-    <td><a href="#joint-action-createItem"><code>createItem</code></a></td>
+    <td><a href="#action-createItem"><code>createItem</code></a></td>
     <td>Create operation for a single item.</td>
   </tr>
   <tr>
-    <td><a href="#joint-action-upsertItem"><code>upsertItem</code></a></td>
+    <td><a href="#action-upsertItem"><code>upsertItem</code></a></td>
     <td>Upsert operation for a single item.</td>
   </tr>
   <tr>
-    <td><a href="#joint-action-updateItem"><code>updateItem</code></a></td>
+    <td><a href="#action-updateItem"><code>updateItem</code></a></td>
     <td>Update operation for a single item.</td>
   </tr>
   <tr>
-    <td><a href="#joint-action-getItem"><code>getItem</code></a></td>
+    <td><a href="#action-getItem"><code>getItem</code></a></td>
     <td>Read operation for retrieving a single item.</td>
   </tr>
   <tr>
-    <td><a href="#joint-action-getItems"><code>getItems</code></a></td>
+    <td><a href="#action-getItems"><code>getItems</code></a></td>
     <td>Read operation for retrieving a collection of items.</td>
   </tr>
   <tr>
-    <td><a href="#joint-action-deleteItem"><code>deleteItem</code></a></td>
+    <td><a href="#action-deleteItem"><code>deleteItem</code></a></td>
     <td>Delete operation for single item.</td>
   </tr>
 </table>
@@ -96,28 +96,28 @@ joint.&lt;<i>action</i>&gt;(spec, input, output)
     <th>Description</th>
   </tr>
   <tr>
-    <td><a href="#joint-action-addAssociatedItems"><code>addAssociatedItems</code></a></td>
+    <td><a href="#action-addAssociatedItems"><code>addAssociatedItems</code></a></td>
     <td>Operation for associating one to many items of a type to a main resource.</td>
   </tr>
   <tr>
-    <td><a href="#joint-action-hasAssociatedItem"><code>hasAssociatedItem</code></a></td>
+    <td><a href="#action-hasAssociatedItem"><code>hasAssociatedItem</code></a></td>
     <td>Operation for checking the existence of an association on a main resource.</td>
   </tr>
   <tr>
-    <td><a href="#joint-action-getAllAssociatedItems"><code>getAllAssociatedItems</code></a></td>
+    <td><a href="#action-getAllAssociatedItems"><code>getAllAssociatedItems</code></a></td>
     <td>Operation for retrieving all associations of a type from a main resource.</td>
   </tr>
   <tr>
-    <td><a href="#joint-action-removeAssociatedItems"><code>removeAssociatedItems</code></a></td>
+    <td><a href="#action-removeAssociatedItems"><code>removeAssociatedItems</code></a></td>
     <td>Operation for disassociating one to many items of a type from a main resource.</td>
   </tr>
   <tr>
-    <td><a href="#joint-action-removeAllAssociatedItems"><code>removeAllAssociatedItems</code></a></td>
+    <td><a href="#action-removeAllAssociatedItems"><code>removeAllAssociatedItems</code></a></td>
     <td>Operation for removing all associations of a type from a main resource.</td>
   </tr>
 </table>
 
-{{ api.funcheader('createItem', 'joint-action-createItem') }}
+{{ api.funcheader('createItem', 'action-createItem') }}
 
 {{ api.actionsig('The newly created item.') }}
 
@@ -127,7 +127,7 @@ joint.&lt;<i>action</i>&gt;(spec, input, output)
   [TBC]
 </p>
 
-{{ api.funcheader('upsertItem', 'joint-action-upsertItem') }}
+{{ api.funcheader('upsertItem', 'action-upsertItem') }}
 
 {{ api.actionsig('The upserted item.') }}
 
@@ -137,7 +137,7 @@ joint.&lt;<i>action</i>&gt;(spec, input, output)
   [TBC]
 </p>
 
-{{ api.funcheader('updateItem', 'joint-action-updateItem') }}
+{{ api.funcheader('updateItem', 'action-updateItem') }}
 
 {{ api.actionsig('The updated item.') }}
 
@@ -147,7 +147,7 @@ joint.&lt;<i>action</i>&gt;(spec, input, output)
   [TBC]
 </p>
 
-{{ api.funcheader('getItem', 'joint-action-getItem') }}
+{{ api.funcheader('getItem', 'action-getItem') }}
 
 {{ api.actionsig('The requested item.') }}
 
@@ -157,7 +157,7 @@ joint.&lt;<i>action</i>&gt;(spec, input, output)
   [TBC]
 </p>
 
-{{ api.funcheader('getItems', 'joint-action-getItems') }}
+{{ api.funcheader('getItems', 'action-getItems') }}
 
 {{ api.actionsig('The requested collection of items.') }}
 
@@ -167,7 +167,7 @@ joint.&lt;<i>action</i>&gt;(spec, input, output)
   [TBC]
 </p>
 
-{{ api.funcheader('deleteItem', 'joint-action-deleteItem') }}
+{{ api.funcheader('deleteItem', 'action-deleteItem') }}
 
 {{ api.actionsig('An empty object.') }}
 
@@ -177,7 +177,7 @@ joint.&lt;<i>action</i>&gt;(spec, input, output)
   [TBC]
 </p>
 
-{{ api.funcheader('addAssociatedItems', 'joint-action-addAssociatedItems') }}
+{{ api.funcheader('addAssociatedItems', 'action-addAssociatedItems') }}
 
 {{ api.actionsig('') }}
 
@@ -187,7 +187,7 @@ joint.&lt;<i>action</i>&gt;(spec, input, output)
   [TBC]
 </p>
 
-{{ api.funcheader('hasAssociatedItem', 'joint-action-hasAssociatedItem') }}
+{{ api.funcheader('hasAssociatedItem', 'action-hasAssociatedItem') }}
 
 {{ api.actionsig('true -or- false') }}
 
@@ -197,7 +197,7 @@ joint.&lt;<i>action</i>&gt;(spec, input, output)
   [TBC]
 </p>
 
-{{ api.funcheader('getAllAssociatedItems', 'joint-action-getAllAssociatedItems') }}
+{{ api.funcheader('getAllAssociatedItems', 'action-getAllAssociatedItems') }}
 
 {{ api.actionsig('') }}
 
@@ -207,7 +207,7 @@ joint.&lt;<i>action</i>&gt;(spec, input, output)
   [TBC]
 </p>
 
-{{ api.funcheader('removeAssociatedItems', 'joint-action-removeAssociatedItems') }}
+{{ api.funcheader('removeAssociatedItems', 'action-removeAssociatedItems') }}
 
 {{ api.actionsig('') }}
 
@@ -217,7 +217,7 @@ joint.&lt;<i>action</i>&gt;(spec, input, output)
   [TBC]
 </p>
 
-{{ api.funcheader('removeAllAssociatedItems', 'joint-action-removeAllAssociatedItems') }}
+{{ api.funcheader('removeAllAssociatedItems', 'action-removeAllAssociatedItems') }}
 
 {{ api.actionsig('') }}
 
@@ -227,7 +227,7 @@ joint.&lt;<i>action</i>&gt;(spec, input, output)
   [TBC]
 </p>
 
-<h3 id="joint-action-spec">Spec Options</h3>
+<h3 id="action-spec">Spec Options</h3>
 
 <table>
   <tr>
@@ -808,7 +808,7 @@ function getUsers(input) {
   [TBC]
 </p>
 
-<h3 id="joint-action-input">Input Options</h3>
+<h3 id="action-input">Input Options</h3>
 
 <table>
   <tr>
@@ -965,7 +965,7 @@ profileMethods.createProfile(input)
   [TBC]
 </p>
 
-<h3 id="joint-action-output">Output Values</h3>
+<h3 id="action-output">Output Values</h3>
 
 <p>
   The <code>output</code> value configures the format of the returned payload.

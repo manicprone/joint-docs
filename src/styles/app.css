@@ -276,7 +276,7 @@ func {
   font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
   color: #ffffff;
   font-size: 14px;
-  line-height: 17px;
+  line-height: 26px;
   font-weight: 400;
   background-color: #255f8e;
   border-radius: 4px;
@@ -707,13 +707,20 @@ validation {
   max-width: 450px !important;
 }
 
-/* Table layout format */
+/* Table layout formats */
 .page-content table.layout td,
 .page-content table.layout p {
   color: #525252;
   font-size: 16px;
   font-weight: 400;
   line-height: 22px;
+  /* border: none; */
+}
+
+.page-content table.layout.nopad td,
+.page-content table.layout.nopad p {
+  border: none;
+  padding: 0;
 }
 
 /* -------------------------------------  Collapsible Details */
@@ -801,6 +808,9 @@ table.layout .code-block .code-filename {
   margin-top: 0;
 }
 table.layout .code-block-heading {
+  margin-top: 0;
+}
+table.layout .framed-block {
   margin-top: 0;
 }
 

@@ -11,12 +11,19 @@
 
   <div class="nav-group">
     {{ nav.header(header) }}
-    {%
+    {#
       set items = [
         { label: 'Overview', id: 'overview' },
         { label: 'License', id: 'license' },
         { label: 'Source', id: 'source' },
         { label: 'Author\'s Note', id: 'authors-note' }
+      ]
+    #}
+    {%
+      set items = [
+        { label: 'Overview', id: 'overview' },
+        { label: 'License', id: 'license' },
+        { label: 'Source', id: 'source' }
       ]
     %}
     {{ nav.items(items, leadingURI, content) }}
