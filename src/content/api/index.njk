@@ -1,0 +1,21 @@
+{% extends "main.njk" %}
+
+{% block content %}
+
+{% include "api/joint-constructor.njk" %}
+<br /><br />
+{% include "api/joint-instance.njk" %}
+<br /><br />
+{% include "api/joint-actions.njk" %}
+<br /><br />
+{% include "api/joint-action-authorization.njk" %}
+<br /><br />
+{% include "api/joint-action-errors.njk" %}
+<br /><br />
+{% include "api/model-config-syntax.njk" %}
+<br /><br />
+{% include "api/method-config-syntax.njk" %}
+<br /><br />
+{% include "api/route-config-syntax.njk" %}
+
+{% endblock %}

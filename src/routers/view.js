@@ -34,21 +34,23 @@ router.route('/')
 router.route(`${basePathDocs}/:section?/:content?`)
   .get((req, res) => {
     const section = req.params.section || defaultSection;
-    const content = req.params.content;
+    let content = req.params.content;
+    const defaultRootPage = rootPages[section];
 
-    // If page is not specified, redirect to configured starting page...
+    // Handle request when page is not specified
     if (!content) {
-      return res.redirect(`${basePathDocs}/${section}/${rootPages[section]}`);
+      if (defaultRootPage !== 'index') return res.redirect(`${basePathDocs}/${section}/${defaultRootPage}`);
+      content = defaultRootPage; // the special "index" case
     }
 
-    // Prepare context info for all templates...
+    // Prepare context info for all templates
     const contentURI = `${section}/${content}`;
     const leadingURI = `${basePathDocs}/${section}`;
     const context = { section, content, rootURI: basePathDocs, leadingURI };
 
     return res.render(contentURI, context, (err, html) => {
       if (err) {
-        // On invalid uri, redirect to fall-back (default) section/page...
+        // On invalid uri, redirect to fall-back (default) section/page
         return res.redirect(`${basePathDocs}/${defaultSection}/${rootPages[defaultSection]}`);
       }
       return res.send(html);

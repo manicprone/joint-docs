@@ -8,9 +8,6 @@ Online documentation for the Joint Kit solution.
 
 Not ready for public use until joint-kit version 0.1.0 - Syntax and logic are in frequent flux.
 
-**NOTE** The online docs are not yet complete. They are actively being developed,
-to coincide with the public release of Joint Kit.
-
 <br />
 
 ## Table of Contents
@@ -38,7 +35,7 @@ to coincide with the public release of Joint Kit.
 [TBC]
 
 ``` sh
-$ npm run dev
+$ yarn dev
 ```
 
 
@@ -49,7 +46,7 @@ The app uses [ESLint][link-eslint-site] for source code linting. The linting wil
 [TBC]
 
 ``` sh
-$ npm run lint
+$ yarn lint
 ```
 
 
