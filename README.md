@@ -35,7 +35,7 @@ Not ready for public use until joint-kit version 0.1.0 - Syntax and logic are in
 [TBC]
 
 ``` sh
-$ yarn dev
+$ npm run dev
 ```
 
 
@@ -46,7 +46,7 @@ The app uses [ESLint][link-eslint-site] for source code linting. The linting wil
 [TBC]
 
 ``` sh
-$ yarn lint
+$ npm run lint
 ```
 
 
