@@ -8,9 +8,6 @@ Online documentation for the Joint Kit solution.
 
 Not ready for public use until joint-kit version 0.1.0 - Syntax and logic are in frequent flux.
 
-**NOTE** The online docs are not yet complete. They are actively being developed,
-to coincide with the public release of Joint Kit.
-
 <br />
 
 ## Table of Contents

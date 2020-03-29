@@ -1,0 +1,63 @@
+{% extends "main.njk" %}
+
+{% block content %}
+
+<h2>Features</h2>
+
+<h3>Configuration-Driven</h3>
+
+<p>
+  Nearly the entire solution can be defined using a JSON-based configuration
+  syntax, leaving the programming logic to an extreme minimum.
+
+  <lilp>
+  With this approach, your custom data layers are dynamically generated on
+  application startup.
+  </lilp>
+
+  <lilp>
+  Configurations can therefore be hot-swapped, to load variations based upon
+  application environment, etc.
+  </lilp>
+</p>
+
+<h3>Programmatically Flexible</h3>
+
+<p>
+  If you want more complexity, integration, and control...
+  you can leverage the library as a purely programmatic solution.
+
+  <lilp>
+  Let the Joint Kit handle the generic aspects of your data operations (the 80%),
+  while you supplement the implementation with your own hand-rolled logic (the 20%).
+  </lilp>
+</p>
+
+<h3>Isolated Services</h3>
+
+<p>
+  You can create multiple instances from the Joint Kit (referred to as <i>Joints</i>)
+  within a single application; each isolated to service separate data
+  repositories, schemas, and implementation behavior.
+
+  <lilp>
+  You can also mix-and-match both implementation methods (configuration and programmatic)
+  within the same Joint instance.
+  </lilp>
+</p>
+
+<br />
+
+<ul class="nav-cues-wrapper">
+  <li class="nav-cue-item">
+    To get a deeper perspective on the solution, check out the
+    <a href="{{ rootURI }}/guide/conceptual-walkthrough">Conceptual Walkthrough</a>
+  </li>
+
+  <li class="nav-cue-item">
+    Or, head straight to <a href="{{ rootURI }}/guide/installation">Installation</a>
+    to get developing.
+  </li>
+</ul>
+
+{% endblock %}

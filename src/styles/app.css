@@ -782,7 +782,7 @@ td .code-ref {
   margin-top: 8px;
 }
 .code-block {
-  font-size: 14px;
+  font-size: 13px;
   line-height: 18px;
   background-color: #f8f8f8;
   border: 1px solid #e2e2e2;
@@ -801,7 +801,7 @@ td .code-ref {
 
 /* Table layout format */
 table.layout .code-block {
-  font-size: 14px;
+  font-size: 13px;
   line-height: 17px;
 }
 table.layout .code-block .code-filename {
