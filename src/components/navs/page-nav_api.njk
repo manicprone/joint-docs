@@ -8,12 +8,9 @@
   {%
     set header = 'Joint Constructor'
   %}
-  {%
-    set uri = leadingURI + '/joint-constructor'
-  %}
 
   <div class="nav-group">
-    {{ nav.linkheader(header, uri) }}
+    {{ nav.linkheader(header, leadingURI + '/#joint-constructor') }}
 
     {# ------------------------------------------- Joint Constructor - params #}
     {%
@@ -27,7 +24,7 @@
         { label: 'settings', refID:'constructor-param-settings' }
       ]
     %}
-    {{ nav.subnav(subHeader, items, uri) }}
+    {{ nav.subnav(subHeader, items, leadingURI) }}
   </div>
 
   {#
@@ -38,12 +35,9 @@
   {%
     set header = 'Joint Instance'
   %}
-  {%
-    set uri = leadingURI + '/joint-instance'
-  %}
 
   <div class="nav-group">
-    {{ nav.linkheader(header, uri) }}
+    {{ nav.linkheader(header, leadingURI + '/#joint-instance') }}
 
     {# ------------------------------------------ Joint Instance - properties #}
     {%
@@ -62,7 +56,7 @@
         { label: 'routeConfig', refID:'instance-prop-routeConfig' }
       ]
     %}
-    {{ nav.subnav(subHeader, items, uri) }}
+    {{ nav.subnav(subHeader, items, leadingURI) }}
 
     {# ------------------------------------------ Joint Instance - functions  #}
     {%
@@ -78,7 +72,7 @@
         { label: 'info', refID:'instance-func-info' }
       ]
     %}
-    {{ nav.subnav(subHeader, items, uri) }}
+    {{ nav.subnav(subHeader, items, leadingURI) }}
 
     {# ---------------------------------------------- Joint Instance - models #}
     {%
@@ -91,7 +85,7 @@
         { label: 'modelNameByTable', refID:'instance-obj-modelNameByTable' }
       ]
     %}
-    {{ nav.subnav(subHeader, items, uri) }}
+    {{ nav.subnav(subHeader, items, leadingURI) }}
 
     {# --------------------------------------------- Joint Instance - methods #}
     {%
@@ -103,7 +97,7 @@
         { label: 'specByMethod', refID:'instance-obj-specByMethod' }
       ]
     %}
-    {{ nav.subnav(subHeader, items, uri) }}
+    {{ nav.subnav(subHeader, items, leadingURI) }}
 
     {# ---------------------------------------------- Joint Instance - router #}
     {%
@@ -114,7 +108,7 @@
         { label: 'router', refID:'instance-func-router' }
       ]
     %}
-    {{ nav.subnav(subHeader, items, uri) }}
+    {{ nav.subnav(subHeader, items, leadingURI) }}
   </div>
 
   {#
@@ -125,12 +119,9 @@
   {%
     set header = 'Joint Actions'
   %}
-  {%
-    set uri = leadingURI + '/joint-actions'
-  %}
 
   <div class="nav-group">
-    {{ nav.linkheader(header, uri) }}
+    {{ nav.linkheader(header, leadingURI + '/#joint-actions') }}
 
     {# ------------------------------------------------- Joint Actions - CRUD #}
     {%
@@ -146,7 +137,7 @@
         { label: 'deleteItem', refID: 'action-deleteItem' }
       ]
     %}
-    {{ nav.subnav(subHeader, items, uri) }}
+    {{ nav.subnav(subHeader, items, leadingURI) }}
 
     {# ------------------------------------------- Joint Actions - relational #}
     {%
@@ -161,7 +152,7 @@
         { label: 'removeAllAssociatedItems', refID: 'action-removeAllAssociatedItems' }
       ]
     %}
-    {{ nav.subnav(subHeader, items, uri) }}
+    {{ nav.subnav(subHeader, items, leadingURI) }}
 
     {# ----------------------------------------- Joint Actions - spec options #}
     {%
@@ -180,7 +171,7 @@
         { label: 'association', refID: 'spec-opt-association' }
       ]
     %}
-    {{ nav.subnav(subHeader, items, uri) }}
+    {{ nav.subnav(subHeader, items, leadingURI) }}
 
     {# ---------------------------------------- Joint Actions - input options #}
     {%
@@ -198,7 +189,7 @@
         { label: 'authBundle', refID: 'input-opt-authBundle' }
       ]
     %}
-    {{ nav.subnav(subHeader, items, uri) }}
+    {{ nav.subnav(subHeader, items, leadingURI) }}
 
     {# ---------------------------------------- Joint Actions - output values #}
     {%
@@ -210,7 +201,7 @@
         { label: 'json-api', refID: 'output-value-json-api' }
       ]
     %}
-    {{ nav.subnav(subHeader, items, uri) }}
+    {{ nav.subnav(subHeader, items, leadingURI) }}
   </div>
 
   {#
@@ -221,12 +212,9 @@
   {%
     set header = 'Joint Action Authorization'
   %}
-  {%
-    set uri = leadingURI + '/joint-action-authorization'
-  %}
 
   <div class="nav-group">
-    {{ nav.linkheader(header, uri) }}
+    {{ nav.linkheader(header, leadingURI + '/#joint-action-authorization') }}
   </div>
 
   {#
@@ -237,12 +225,9 @@
   {%
     set header = 'Joint Action Errors'
   %}
-  {%
-    set uri = leadingURI + '/joint-action-errors'
-  %}
 
   <div class="nav-group">
-    {{ nav.linkheader(header, uri) }}
+    {{ nav.linkheader(header, leadingURI + '/#joint-action-errors') }}
   </div>
 
   {#
@@ -253,12 +238,9 @@
   {%
     set header = 'Model Config Syntax'
   %}
-  {%
-    set uri = leadingURI + '/model-config-syntax'
-  %}
 
   <div class="nav-group">
-    {{ nav.linkheader(header, uri) }}
+    {{ nav.linkheader(header, leadingURI + '/#model-config-syntax') }}
   </div>
 
   {#
@@ -269,12 +251,9 @@
   {%
     set header = 'Method Config Syntax'
   %}
-  {%
-    set uri = leadingURI + '/method-config-syntax'
-  %}
 
   <div class="nav-group">
-    {{ nav.linkheader(header, uri) }}
+    {{ nav.linkheader(header, leadingURI + '/#method-config-syntax') }}
   </div>
 
   {#
@@ -285,11 +264,8 @@
   {%
     set header = 'Route Config Syntax'
   %}
-  {%
-    set uri = leadingURI + '/route-config-syntax'
-  %}
 
   <div class="nav-group">
-    {{ nav.linkheader(header, uri) }}
+    {{ nav.linkheader(header, leadingURI + '/#route-config-syntax') }}
   </div>
 </div>

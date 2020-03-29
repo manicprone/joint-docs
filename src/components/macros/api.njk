@@ -6,21 +6,24 @@
 {# funcheader - Function Header #}
 {# ---------------------------- #}
 {% macro funcheader(headingText='', refID='') %}
-  <h4 id={{ refID }}>{{ headingText }}</h3>
+  <div id={{ refID }}></div>
+  <h4>{{ headingText }}</h4>
 {% endmacro %}
 
 {# ------------------------- #}
 {# optheader - Option Header #}
 {# ------------------------- #}
 {% macro optheader(headingText='', refID='') %}
-  <h4 id={{ refID }}>{{ headingText }}</h3>
+  <div id={{ refID }}></div>
+  <h4>{{ headingText }}</h4>
 {% endmacro %}
 
 {# ------------------------ #}
 {# valheader - Value Header #}
 {# ------------------------ #}
 {% macro valheader(headingText='', refID='') %}
-  <h4 id={{ refID }}>{{ headingText }}</h3>
+  <div id={{ refID }}></div>
+  <h4>{{ headingText }}</h4>
 {% endmacro %}
 
 {# ---------------------------- #}

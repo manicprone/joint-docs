@@ -32,8 +32,8 @@ export default {
     rootPages: {
       about: 'overview',
       guide: 'installation',
-      api: 'joint-constructor',
-      examples: 'start',
+      api: 'index',
+      examples: 'index',
     },
   },
 
