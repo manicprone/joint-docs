@@ -12,15 +12,15 @@
 <h3>Example Instantiation</h3>
 
 {% call code.block() -%}
-import express from 'express';
-import Joint from 'joint-kit';
-import bookshelf from './services/bookshelf'; <comment>// your configured bookshelf service</comment>
+import express from 'express'
+import Joint from 'joint-kit'
+import bookshelf from './services/bookshelf' <comment>// your configured bookshelf service</comment>
 
 const joint = new Joint({
   service: bookshelf,
   server: express,
   output: 'json-api',
-});
+})
 {%- endcall %}
 
 <h3 id="params">Constructor Parameters</h3>
