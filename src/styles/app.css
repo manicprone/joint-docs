@@ -745,6 +745,22 @@ validation {
   margin-left: 15px;
 }
 
+.page-content td details {
+  border-left: none;
+  margin: 0;
+  padding: 0;
+}
+.page-content td details[open] {
+  margin-left: 0;
+  padding-left: 0;
+}
+.page-content td details[open] summary {
+  margin-left: 0;
+}
+.page-content td details summary::-webkit-details-marker {
+  display:none;
+}
+
 /* -------------------------------------  Code-related */
 .code-filename {
   font-family: monospace;
