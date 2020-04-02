@@ -27,12 +27,28 @@
   {% endfor %}
 {% endmacro %}
 
+{# ---------------------------- #}
+{# subnav - Inline Page Sub Nav #}
+{# ---------------------------- #}
+{% macro subnav(headerText='', items=[], uri='') %}
+  <div>
+    <div class="nav-sub-header"><a href={{ uri }}/#{{ headerText }}>{{ headerText }}</a></div>
+    <div class="nav-sub-group">
+    {% for item in items %}
+      <div class="nav-sub-item">
+        <a href={{ uri }}/#{{ item.refID }}>{{ item.label }}</a>
+      </div>
+    {% endfor %}
+    </div>
+  </div>
+{% endmacro %}
+
 {# ------------------------------------------ #}
 {# subnav - Inline Page Sub Nav (collapsible) #}
 {# ------------------------------------------ #}
-{% macro subnav(headerText='', items=[], uri='') %}
+{% macro subnavcollapse(headerText='', items=[], uri='') %}
   <details>
-    <summary class="nav-sub-header">{{ headerText }}</summary>
+    <summary class="nav-sub-header collapsible">{{ headerText }}</summary>
     <div class="nav-sub-group">
     {% for item in items %}
       <div class="nav-sub-item">

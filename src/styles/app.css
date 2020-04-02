@@ -469,6 +469,14 @@ validation {
 }
 .page-nav .nav-sub-header {
   color: #727272;
+  font-size: 15px;
+  font-style: italic;
+  font-weight: 400;
+  margin: 0 0 15px 6px;
+  padding-right: 4px;
+}
+.page-nav .nav-sub-header .collapsible {
+  color: #727272;
   font-size: 14px;
   font-style: italic;
   font-weight: 400;
@@ -743,6 +751,22 @@ validation {
 }
 .page-content details[open] summary {
   margin-left: 15px;
+}
+
+.page-content td details {
+  border-left: none;
+  margin: 0;
+  padding: 0;
+}
+.page-content td details[open] {
+  margin-left: 0;
+  padding-left: 0;
+}
+.page-content td details[open] summary {
+  margin-left: 0;
+}
+.page-content td details summary::-webkit-details-marker {
+  display:none;
 }
 
 /* -------------------------------------  Code-related */

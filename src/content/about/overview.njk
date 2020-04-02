@@ -34,26 +34,46 @@
 
 <h3>How does it work?</h3>
 
-<table class="layout nopad">
-<tr>
-  <td width="360px;">
-    It provides a set of abstract CRUD actions,
-    <br />
-    that hook to your existing data schema,
-    <br />
-    and operate as you specify.
-  </td>
-  <td>
-{% call text.framedblock(maxWidth='88px', raised=true) -%}
-<b>createItem</b><br />
-<b>updateItem</b><br />
-<b>getItem</b><br />
-<b>getItems</b><br />
-...
+<p>
+  The Joint Kit provides a set of abstract CRUD and relational data actions:
+</p>
+
+<table class="layout nopad" style="max-width:490px;">
+  <tr>
+    <td width="170x;">
+{% call text.framedblock(raised=true) -%}
+<div style="margin-bottom:4px;"><b>createItem</b></div>
+<div style="margin-bottom:4px;"><b>updateItem</b></div>
+<div style="margin-bottom:4px;"><b>getItem</b></div>
+<div style="margin-bottom:4px;"><b>getItems</b></div>
+<div style="margin-bottom:4px;"><b>upsertItem</b></div>
+<div style="margin-bottom:4px;"><b>deleteItem</b></div>
 {%- endcall %}
-  </td>
-</tr>
+    </td>
+    <td width="40px;">&nbsp;</td>
+    <td>
+{% call text.framedblock(raised=true) -%}
+<div style="margin-bottom:4px;"><b>getAllAssociatedItems</b></div>
+<div style="margin-bottom:4px;"><b>hasAssociatedItem</b></div>
+<div style="margin-bottom:4px;"><b>addAssociatedItems</b></div>
+<div style="margin-bottom:4px;"><b>removeAssociatedItems</b></div>
+<div style="margin-bottom:4px;"><b>removeAllAssociatedItems</b></div>
+{%- endcall %}
+    </td>
+  </tr>
 </table>
+
+<p>
+  that hook to your custom database and data schema:
+</p>
+
+{{ api.apidesc('Postgres, MySQL, SQLite') }}
+
+<p>
+  and expose out-of-the-box logic that you compose per your specification:
+</p>
+
+{{ api.apidesc('logical operation, filtering, data & relationship transformation, validation, authorization') }}
 
 <br />
 
@@ -114,6 +134,10 @@ const user = await <b>joint.method.User.getOne</b>(input)
 {% call code.block(maxWidth='510px', raised=true) -%}
 GET <span><b>/profile/3</b></span>
 {%- endcall %}
+
+<br />
+
+{{ api.apidesc('The data result can be automatically serialized into JSON API spec format') }}
 
 <br />
 
