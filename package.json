@@ -32,7 +32,7 @@
     "compression": "^1.7.1",
     "cookie-parser": "^1.4.3",
     "express": "^4.15.3",
-    "lodash": "4.17.15",
+    "lodash": "4.17.21",
     "nunjucks": "^3.0.1",
     "serve-favicon": "^2.4.5"
   },
