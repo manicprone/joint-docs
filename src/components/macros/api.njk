@@ -73,3 +73,28 @@
   <apidesc>{{ caller() }}</apidesc>
   {% endif %}
 {% endmacro %}
+
+{# ---------------------- #}
+{# apireturn - API Return #}
+{# ---------------------- #}
+{% macro apireturn(text) %}
+  <apireturn>
+    <span>Returns</span>
+    <span style="margin:0 8px 0 4px;">&#10132;</span>
+    {{ text }}
+  </apireturn>
+{% endmacro %}
+
+{# --------------------------------------------- #}
+{# apisupportedspec - API Supported Spec Options #}
+{# --------------------------------------------- #}
+{% macro apisupportedspec(specOpts=[]) %}
+  <apisupportedspec>
+    <label>Supported spec options</label>
+    <ul>
+    {% for specOpt in specOpts %}
+      <li>{{ specOpt }}</li>
+    {% endfor %}
+    </ul>
+  </apisupportedspec>
+{% endmacro %}

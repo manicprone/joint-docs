@@ -124,7 +124,6 @@
     %}
     {%
       set items = [
-        { label: 'modelName', refID:'spec-opt-modelName' },
         { label: 'fields', refID: 'spec-opt-fields' },
         { label: 'fieldsToReturn', refID: 'spec-opt-fieldsToReturn' },
         { label: 'defaultOrderBy', refID: 'spec-opt-defaultOrderBy' },
@@ -151,18 +150,6 @@
         { label: 'paginate', refID: 'input-opt-paginate' },
         { label: 'trx', refID: 'input-opt-trx' },
         { label: 'authBundle', refID: 'input-opt-authBundle' }
-      ]
-    %}
-    {{ nav.subnav(subHeader, items, leadingURI) }}
-
-    {# ---------------------------------------- Joint Actions - output values #}
-    {%
-      set subHeader = 'output values'
-    %}
-    {%
-      set items = [
-        { label: 'native', refID:'output-value-native' },
-        { label: 'json-api', refID: 'output-value-json-api' }
       ]
     %}
     {{ nav.subnav(subHeader, items, leadingURI) }}

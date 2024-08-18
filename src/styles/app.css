@@ -34,12 +34,14 @@ p {
 }
 
 a {
-  color: #676767;
+  /* color: #676767; */
+  color: #0b5693;
   cursor: pointer;
   text-decoration: none;
 }
 a:hover {
-  color: #111111;
+  /* color: #111111; */
+  color: #63a4d3;
 }
 a.disabled {
   pointer-events: none;
@@ -225,14 +227,40 @@ callout code {
   font-size: 13px;
 }
 
-/* -------------------------------------  API-related */
-apidesc {
+/* -------------------------------------------------------------  API-related */
+/* apidesc {
   display: block;
   color: #525252;
   line-height: 22px;
   border-left: 4px solid #8cb0cc;
   margin: 0 30px 32px 8px;
   padding: 7px 0 7px 15px;
+} */
+apidesc {
+  display: block;
+  color: #525252;
+  font-size: 17px;
+  line-height: 22px;
+  margin: 0 30px 8px 0;
+  padding: 7px 0 7px 0;
+}
+
+apireturn {
+  display: block;
+  color: #525252;
+  line-height: 22px;
+  margin: 0 30px 24px 0;
+  padding: 7px 0 7px 0;
+}
+
+apisupportedspec {
+  display: block;
+  color: #525252;
+  line-height: 22px;
+  margin: 0 30px 32px 0;
+}
+apisupportedspec label {
+  font-weight: 600;
 }
 
 optsig {
@@ -441,7 +469,7 @@ validation {
   padding: 28px 20px 20px 20px;
 }
 .page-nav .nav-group {
-  margin-bottom: 20px;
+  margin-bottom: 28px;
 }
 .page-nav .nav-sub-group {
   margin: 0 0 20px 0;
@@ -475,6 +503,15 @@ validation {
   margin: 0 0 15px 6px;
   padding-right: 4px;
 }
+.page-nav .nav-sub-header a {
+  color: #676767;
+  cursor: pointer;
+  text-decoration: none;
+}
+.page-nav .nav-sub-header a:hover {
+  color: #111111;
+}
+
 .page-nav .nav-sub-header .collapsible {
   color: #727272;
   font-size: 14px;
@@ -509,7 +546,7 @@ validation {
   color: #525252;
 }
 
-/* -------------------------------------  Collapsible Details */
+/* -----------------------------------------------------  Collapsible Details */
 .page-nav details {
   margin-top: 0;
   margin-left: 2px;
@@ -540,7 +577,7 @@ validation {
   margin: 0 0 0 250px;
 }
 
-/* -------------------------------------  Headings */
+/* ----------------------------------------------------------------  Headings */
 .page-content h1, h2 {
   font-size: 28px;
   font-weight: 500;
@@ -594,6 +631,7 @@ validation {
 
 /* API function & property headings */
 .page-content.api h4 {
+  font-size: 18px;
   background-color: #e9e9e9;
   border: 1px solid #b9b9b9;
   border-radius: 3px;
@@ -602,7 +640,13 @@ validation {
   padding: 12px 8px;
 }
 
-/* -------------------------------------  Navigable Cues */
+/* ------------------------------------------------------------  Divider Line */
+.page-content hr {
+  border-top: 1px solid #d9d9d9;
+  margin: 55px 0 50px 0;
+}
+
+/* ----------------------------------------------------------  Navigable Cues */
 .nav-cues-wrapper {
   border-top: 1px solid #e1e1e1;
   margin-top: 20px;
@@ -628,12 +672,12 @@ validation {
   background-color: #f8f8f8;
 }
 
-/* -------------------------------------  Separators */
+/* --------------------------------------------------------------  Separators */
 .page-content .separator-or {
   color: #525252;
 }
 
-/* -------------------------------------  Text & Lists */
+/* ------------------------------------------------------------  Text & Lists */
 .page-content p {
   line-height: 22px;
   margin-top: 24px;
@@ -689,7 +733,7 @@ validation {
   margin-top: 8px;
 }
 
-/* -------------------------------------  Tables */
+/* ------------------------------------------------------------------  Tables */
 .page-content table {
   margin-top: 10px;
   max-width: 780px;
@@ -731,7 +775,7 @@ validation {
   padding: 0;
 }
 
-/* -------------------------------------  Collapsible Details */
+/* -----------------------------------------------------  Collapsible Details */
 .page-content details {
   border-left: 7px solid #0b5693;
   margin: 12px 0 0 5px;
@@ -769,7 +813,7 @@ validation {
   display:none;
 }
 
-/* -------------------------------------  Code-related */
+/* ------------------------------------------------------------  Code-related */
 .code-filename {
   font-family: monospace;
   color: #8C8C8C;
@@ -793,9 +837,9 @@ td .code-ref {
   padding: 0 5px 2px 5px;
 }
 .code-block-heading {
-  color: #727272;
-  font-size: 14px;
-  text-align: center;
+  color: #525252;
+  font-weight: 600;
+  text-align: left;
   margin: 12px 0 3px 0;
   padding: 3px 4px;
 }

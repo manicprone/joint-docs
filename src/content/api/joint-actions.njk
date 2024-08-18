@@ -32,7 +32,7 @@
 </p>
 
 <callout>
-  See <a href="#spec">spec options</a> for details and examples.
+  See <a href="#spec"><b>spec options</b></a> for details and examples.
 </callout>
 
 <h3 id="method-input">Method Input</h3>
@@ -50,8 +50,10 @@
 </p>
 
 <callout>
-  See <a href="#input">input options</a> for details and examples.
+  See <a href="#input"><b>input options</b></a> for details and examples.
 </callout>
+
+<br />
 
 <h3 id="CRUD">Base Actions (CRUD)</h3>
 
@@ -86,73 +88,174 @@
   </tr>
 </table>
 
+{# --------------------------------------------------------------- createItem #}
+
 {{ api.funcheader('createItem', 'action-createItem') }}
 
 {{ api.apidesc('Create operation for a single item.') }}
 
-{{ api.actionsig('The newly created item.') }}
+{{ api.apireturn('The created item.') }}
 
-<b>Supported spec options</b>
+{{ api.apisupportedspec(['fields', 'auth']) }}
 
-<ul>
-  <li>modelName</li>
-  <li>fields</li>
-  <li>auth</li>
-</ul>
+{% call code.block('Example method config:') -%}
+{
+  modelName: 'User',
+
+  methods: [
+    {
+      name: 'create',
+      action: 'createItem',
+      spec: {
+        fields: {
+          { name: 'email', type: 'String', required: true },
+          { name: 'first_name', type: 'String', required: true },
+          { name: 'last_name', type: 'String', required: true },
+          { name: 'title', type: 'String' }
+        }
+      }
+    }
+  ]
+}
+{%- endcall %}
+
+
+{# --------------------------------------------------------------- upsertItem #}
 
 {{ api.funcheader('upsertItem', 'action-upsertItem') }}
 
-{{ api.actionsig('The upserted item.') }}
-
 {{ api.apidesc('Upsert operation for a single item.') }}
 
-<p>
-  [TBC]
-</p>
+{{ api.apireturn('The upserted item.') }}
+
+{{ api.apisupportedspec(['fields', 'auth']) }}
+
+{% call code.block('Example method config:') -%}
+{
+  modelName: 'User',
+
+  methods: [
+    {
+      name: 'upsert',
+      action: 'upsertItem',
+      spec: {
+        fields: {
+        }
+      }
+    }
+  ]
+}
+{%- endcall %}
+
+{# --------------------------------------------------------------- updateItem #}
 
 {{ api.funcheader('updateItem', 'action-updateItem') }}
 
-{{ api.actionsig('The updated item.') }}
-
 {{ api.apidesc('Update operation for a single item.') }}
 
-<b>Supported spec options</b>
+{{ api.apireturn('The updated item.') }}
 
-<ul>
-  <li>modelName</li>
-  <li>fields</li>
-  <li>auth</li>
-</ul>
+{{ api.apisupportedspec(['fields', 'auth']) }}
+
+{% call code.block('Example method config:') -%}
+{
+  modelName: 'User',
+
+  methods: [
+    {
+      name: 'update',
+      action: 'updateItem',
+      spec: {
+        fields: {
+        }
+      }
+    }
+  ]
+}
+{%- endcall %}
+
+{# ------------------------------------------------------------------ getItem #}
 
 {{ api.funcheader('getItem', 'action-getItem') }}
 
-{{ api.actionsig('The requested item.') }}
-
 {{ api.apidesc('Read operation for retrieving a single item.') }}
 
-<p>
-  [TBC]
-</p>
+{{ api.apireturn('The requested item.') }}
+
+{{ api.apisupportedspec(['fields', 'auth']) }}
+
+{% call code.block('Example method config:') -%}
+{
+  modelName: 'User',
+
+  methods: [
+    {
+      name: 'getOne',
+      action: 'getItem',
+      spec: {
+        fields: {
+        }
+      }
+    }
+  ]
+}
+{%- endcall %}
+
+{# ----------------------------------------------------------------- getItems #}
 
 {{ api.funcheader('getItems', 'action-getItems') }}
 
-{{ api.actionsig('The requested collection of items.') }}
-
 {{ api.apidesc('Read operation for retrieving a collection of items.') }}
 
-<p>
-  [TBC]
-</p>
+{{ api.apireturn('An array of the requested items.') }}
+
+{{ api.apisupportedspec(['fields', 'auth']) }}
+
+{% call code.block('Example method config:') -%}
+{
+  modelName: 'User',
+
+  methods: [
+    {
+      name: 'getMany',
+      action: 'getItems',
+      spec: {
+        fields: {
+        }
+      }
+    }
+  ]
+}
+{%- endcall %}
+
+{# --------------------------------------------------------------- deleteItem #}
 
 {{ api.funcheader('deleteItem', 'action-deleteItem') }}
 
-{{ api.actionsig('An empty object.') }}
-
 {{ api.apidesc('Delete operation for single item.') }}
 
-<p>
-  [TBC]
-</p>
+{{ api.apireturn('An empty object.') }}
+
+{{ api.apisupportedspec(['fields', 'auth']) }}
+
+{% call code.block('Example method config:') -%}
+{
+  modelName: 'User',
+
+  methods: [
+    {
+      name: 'delete',
+      action: 'deletItem',
+      spec: {
+        fields: {
+        }
+      }
+    }
+  ]
+}
+{%- endcall %}
+
+<br />
 
 <h3 id="relational">Association Actions (Relational)</h3>
 
@@ -183,15 +286,15 @@
   </tr>
 </table>
 
+{# ------------------------------------------------------- addAssociatedItems #}
+
 {{ api.funcheader('addAssociatedItems', 'action-addAssociatedItems') }}
 
 {{ api.actionsig('') }}
 
 {{ api.apidesc('Operation for associating one to many items of a type to a main resource.') }}
 
-<p>
-  [TBC]
-</p>
+{# -------------------------------------------------------- hasAssociatedItem #}
 
 {{ api.funcheader('hasAssociatedItem', 'action-hasAssociatedItem') }}
 
@@ -199,9 +302,7 @@
 
 {{ api.apidesc('Operation for checking the existence of an association on a main resource.') }}
 
-<p>
-  [TBC]
-</p>
+{# ---------------------------------------------------- getAllAssociatedItems #}
 
 {{ api.funcheader('getAllAssociatedItems', 'action-getAllAssociatedItems') }}
 
@@ -209,9 +310,7 @@
 
 {{ api.apidesc('Operation for retrieving all associations of a type from a main resource.') }}
 
-<p>
-  [TBC]
-</p>
+{# ---------------------------------------------------- removeAssociatedItems #}
 
 {{ api.funcheader('removeAssociatedItems', 'action-removeAssociatedItems') }}
 
@@ -219,9 +318,7 @@
 
 {{ api.apidesc('Update operation for a single item.') }}
 
-<p>
-  [TBC]
-</p>
+{# ------------------------------------------------- removeAllAssociatedItems #}
 
 {{ api.funcheader('removeAllAssociatedItems', 'action-removeAllAssociatedItems') }}
 
@@ -229,9 +326,7 @@
 
 {{ api.apidesc('Operation for removing all associations of a type from a main resource.') }}
 
-<p>
-  [TBC]
-</p>
+<br />
 
 <h3 id="spec">Spec Options</h3>
 
@@ -242,15 +337,6 @@
     <th style="text-align:center;">Type</th>
     <th style="text-align:center;">Actions</th>
     <th style="text-align:center;">Required?</th>
-  </tr>
-  <tr>
-    <td><a href="#spec-opt-modelName"><code>modelName</code></a></td>
-    <td>
-      The model name of the resource upon which to act.
-    </td>
-    <td style="text-align:center;"><i>String</i></td>
-    <td style="text-align:center;"><i>all</i></td>
-    <td style="text-align:center;">Yes</td>
   </tr>
   <tr>
     <td><a href="#spec-opt-fields"><code>fields</code></a></td>
@@ -334,23 +420,6 @@
     <td style="text-align:center;">Yes</td>
   </tr>
 </table>
-
-{{ api.optheader('spec.modelName', 'spec-opt-modelName') }}
-
-{{ api.optsig(['String'], 'all', 'Yes') }}
-
-{{ api.apidesc('The model name of the resource upon which to act.') }}
-
-{% call code.block('Example getItems usage:') -%}
-function getUsers(input) {
-  const spec = {
-    <hilite>modelName: 'User'</hilite>,
-    defaultOrderBy: '-created_at,username',
-  };
-
-  return joint.getItems(spec, input);
-}
-{%- endcall %}
 
 {{ api.optheader('spec.fields', 'spec-opt-fields') }}
 
@@ -970,40 +1039,3 @@ profileMethods.createProfile(input)
 <p>
   [TBC]
 </p>
-
-<h3 id="output">Output Values</h3>
-
-<p>
-  The <code>output</code> value configures the format of the returned payload.
-</p>
-
-<callout>
-  This setting can be configured globally on the Joint instance itself.
-  (See the <a href="{{ rootURI }}/api/joint-instance">Joint Instance API</a>)
-</callout>
-
-<br />
-<table>
-  <tr>
-    <th>Value</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td><a href="#output-value-native"><code>'native'</code></a></td>
-    <td>Returns the queried data in the format generated natively by the service. This is the default setting.</td>
-  </tr>
-  <tr>
-    <td><a href="#output-value-native"><code>'json-api'</code></a></td>
-    <td>Transforms the data into a <a href="http://jsonapi.org">JSON API Spec</a>-like format, making the data suitable for HTTP transport.</td>
-  </tr>
-</table>
-
-{{ api.valheader('output = \'native\'', 'output-value-native') }}
-
-{{ api.apidesc('Returns the payload in the format generated natively by the service. This is the default setting.') }}
-
-{{ api.valheader('output = \'json-api\'', 'output-value-json-api') }}
-
-{% call api.apidesc() -%}
-  Transforms the data into a <a href="http://jsonapi.org">JSON API Spec</a>-like format, making the data suitable for HTTP transport.
-{%- endcall %}
