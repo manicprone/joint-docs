@@ -1,0 +1,27 @@
+<div id="model-config-syntax"></div>
+<br /><br /><br />
+
+<h2>Model Config Syntax</h2>
+
+{% call code.block(heading='model config', raised=true) -%}
+[
+  {
+    name: 'User',
+    tableName: 'user_account',
+    associations: {
+      profile: {
+        type: 'toOne',
+        path: 'id => Profile.user_id', <comment>// one-to-one</comment>
+      },
+      pay_accounts: {
+        type: 'toMany',
+        path: 'id => PaymentAccount.user_id', <comment>// one-to-many</comment>
+      },
+      roles: {
+        type: 'toMany',
+        path: 'id => UserRoleRef.user_id => UserRoleRef.role_id => Role.id', <comment>// many-to-many</comment>
+      },
+    },
+  }
+]
+{%- endcall %}

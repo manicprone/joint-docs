@@ -58,7 +58,7 @@
     %}
     {{ nav.subnav(subHeader, items, leadingURI) }}
 
-    {# ------------------------------------------- Joint Instance - functions #}
+    {# ------------------------------------------ Joint Instance - functions  #}
     {%
       set subHeader = 'functions'
     %}
@@ -70,6 +70,42 @@
         { label: 'updateSettings', refID:'instance-func-updateSettings' },
         { label: 'buildAuthBundle', refID:'instance-func-buildAuthBundle' },
         { label: 'info', refID:'instance-func-info' }
+      ]
+    %}
+    {{ nav.subnav(subHeader, items, leadingURI) }}
+
+    {# ---------------------------------------------- Joint Instance - models #}
+    {%
+      set subHeader = 'models'
+    %}
+    {%
+      set items = [
+        { label: 'model', refID:'instance-obj-model' },
+        { label: 'modelByTable', refID:'instance-obj-modelByTable' },
+        { label: 'modelNameByTable', refID:'instance-obj-modelNameByTable' }
+      ]
+    %}
+    {{ nav.subnav(subHeader, items, leadingURI) }}
+
+    {# --------------------------------------------- Joint Instance - methods #}
+    {%
+      set subHeader = 'methods'
+    %}
+    {%
+      set items = [
+        { label: 'method', refID:'instance-func-method' },
+        { label: 'specByMethod', refID:'instance-obj-specByMethod' }
+      ]
+    %}
+    {{ nav.subnav(subHeader, items, leadingURI) }}
+
+    {# ---------------------------------------------- Joint Instance - router #}
+    {%
+      set subHeader = 'router'
+    %}
+    {%
+      set items = [
+        { label: 'router', refID:'instance-func-router' }
       ]
     %}
     {{ nav.subnav(subHeader, items, leadingURI) }}
@@ -170,15 +206,15 @@
 
   {#
   ------------------------------------------------------------------------------
-  Joint Authorization
+  Joint Action Authorization
   ------------------------------------------------------------------------------
   #}
   {%
-    set header = 'Joint Authorization'
+    set header = 'Joint Action Authorization'
   %}
 
   <div class="nav-group">
-    {{ nav.linkheader(header, leadingURI + '/#joint-authorization') }}
+    {{ nav.linkheader(header, leadingURI + '/#joint-action-authorization') }}
   </div>
 
   {#
@@ -187,11 +223,11 @@
   ------------------------------------------------------------------------------
   #}
   {%
-    set header = 'Joint Errors'
+    set header = 'Joint Action Errors'
   %}
 
   <div class="nav-group">
-    {{ nav.linkheader(header, leadingURI + '/#joint-errors') }}
+    {{ nav.linkheader(header, leadingURI + '/#joint-action-errors') }}
   </div>
 
   {#

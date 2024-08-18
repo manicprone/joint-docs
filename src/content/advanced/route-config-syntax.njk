@@ -1,0 +1,23 @@
+<div id="route-config-syntax"></div>
+<br /><br /><br />
+
+<h2>Route Config Syntax</h2>
+
+{% call code.block(heading='route config', raised=true) -%}
+[
+  {
+    uri: '/profile',
+    post: { method: 'Profile.createProfile', successStatus: 201, body: true },
+  },
+  {
+    uri: '/profile/:id',
+    get: { method: 'Profile.getProfile' },
+    post: { method: 'Profile.updateProfile', body: true },
+    delete: { method: 'Profile.deleteProfile', successStatus: 204 },
+  },
+  {
+    uri: '/profiles',
+    get: { method: 'Profile.getProfiles' },
+  },
+]
+{%- endcall %}

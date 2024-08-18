@@ -1,0 +1,136 @@
+{% extends "main.njk" %}
+
+{% block content %}
+
+<h2>Using Joint Kit</h2>
+
+<p>
+  To implement solutions with Joint Kit, you create <i>Joints</i>.
+</p>
+
+<callout>
+  You can think of joints as isolated data services.
+  A joint hooks to a database, interacts only with the data
+  it is permitted, and performs custom-configured behavior.
+</callout>
+
+<br />
+
+<p>
+  The Joint Kit module is an instantiable Class. Its instances are joints.
+</p>
+
+<p>
+  To instantiate a joint, you provide it with your database service, so it knows how to connect to your database.
+</p>
+
+<callout>
+  Currently, joint-kit only supports knex (with bookshelf enabled).
+</callout>
+
+<h3>Example Instantiation</h3>
+
+{% call code.block() -%}
+const Joint = require('joint-kit')
+const knex = require('./services/knex') <comment>// your configured knex service</comment>
+
+const joint = new Joint({
+  service: knex
+})
+{%- endcall %}
+
+<br />
+
+<div></div>
+<h3>Models</h3>
+
+<p>
+  To perform anything meaningful with a joint, you must define a set of models (at minimum).
+</p>
+
+<p>
+  Models are simply resource names (and relationship names) that map directly to the underlying database tables that store your data.
+</p>
+
+<p>
+  These models can be defined natively, via the bookshelf component of your knex configuration.
+  In this case, you just follow the documentation provided by Bookshelf.
+</p>
+
+<p>
+  However, joint-kit offers its own implementation, which includes a much simpler approach to defining relationships.
+</p>
+
+<div></div>
+<h3>Methods</h3>
+
+<p>
+  Methods are the core functional aspect of a joint.
+  They are your custom implementations of data actions that operate on your data.
+</p>
+
+<p>
+  You utilize joint methods to perform server-side logic, that in-turn can be leveraged for your exposed API.
+</p>
+
+<p>
+  But, you don't need to expose an API at all. You can simply use joint-kit to provide value and convenience for your backend logic.
+  In this case, <b>models</b> and <b>methods</b> are all you need.
+</p>
+
+<div></div>
+<h3>Routes</h3>
+
+<p>
+  Routes are customized router endpoints that enable a fully-functioning RESTful API without any coding necessary.
+  They are simply defined via JSON syntax and support robust endpoint capability when provided to your Express router.
+</p>
+
+<p>
+  Routes use the <b>models</b> and <b>methods</b> that you create.
+</p>
+
+<h3>Joint Configs</h3>
+
+<p>
+  Just as <b>routes</b> are defined using a JSON configuration syntax,
+  <b>models</b> and <b>methods</b> can be defined in the same manner.
+</p>
+
+<p>
+  Collectively, the configuration syntax approach is referred to as creating <b>joint configs</b>.
+</p>
+
+<p>
+  This is the recommended way to use joint-kit. The documentation is thus presented with this approach.
+</p>
+
+<h3>Example Usage</h3>
+
+{% call code.block() -%}
+const Joint = require('joint-kit')
+const express = require('express')
+const knex = require('../services/knex') <comment>// your configured knex service</comment>
+const modelConfig = require('./model-config') <comment>// your model config</comment>
+const methodConfig = require('./method-config') <comment>// your method config</comment>
+const routeConfig = require('./route-config') <comment>// your route config</comment>
+
+<comment>// Instantiate</comment>
+const joint = new Joint({
+  service: knex,
+  server: express,
+  output: 'json-api'
+})
+
+<comment>// Generate models, methods, and a router</comment>
+joint.generate({ modelConfig, methodConfig, routeConfig })
+{%- endcall %}
+
+<br />
+
+<p>
+  With a configured knex service file and JSON configuration for your models, methods, and routes...
+  the above code can provide a fully-functioning RESTful API.
+</p>
+
+{% endblock %}

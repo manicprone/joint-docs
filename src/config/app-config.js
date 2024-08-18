@@ -33,6 +33,7 @@ export default {
       about: 'overview',
       guide: 'installation',
       api: 'index',
+      advanced: 'index',
       examples: 'index',
     },
   },

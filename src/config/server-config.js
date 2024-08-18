@@ -17,8 +17,8 @@ export default {
     dist: '/dist',
     assets: '/public',
     styles: '/styles',
-    auth: '/auth',
-    api: '/api',
+    // auth: '/auth',
+    // api: '/api',
   },
 
   // -------------

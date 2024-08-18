@@ -8,17 +8,18 @@
   Multiple Joint instances can be utilized within a single application.
 </p>
 
+
 <h3>Example Instantiation</h3>
 
 {% call code.block() -%}
-const Joint = require('joint-kit')
-const express = require('express')
-const knex = require('./services/knex') <comment>// your configured knex service</comment>
+import express from 'express'
+import Joint from 'joint-kit'
+import bookshelf from './services/bookshelf' <comment>// your configured bookshelf service</comment>
 
 const joint = new Joint({
-  service: knex,
+  service: bookshelf,
   server: express,
-  output: 'json-api'
+  output: 'json-api',
 })
 {%- endcall %}
 
