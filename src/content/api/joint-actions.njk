@@ -8,51 +8,50 @@
 </p>
 
 <p>
-  Each Joint instance provides a robust set of abstract data actions that hook directly to your persistence layer, handling the core logic for common data operations.
+  Each joint instance includes a robust set of abstract data actions that hook directly to your database,
+  providing the core logic for common data operations.
 </p>
 
 <p>
-  The actions are implemented using a config-like JSON syntax.
+  To leverage joint actions, you implement custom methods that apply to your application needs.
+  Implementation is performed by creating <b>method configs</b>.
 </p>
-
-<h3>Action Syntax</h3>
 
 <p>
-  All Joint Actions return Promises, and have the signature:
+  A method config has essentially two parts: a <b>spec</b> and an <b>input</b>.
 </p>
 
-{% call code.block() -%}
-joint.&lt;<i>action</i>&gt;(spec, input, output)
-  .then((payload) => { <comment>...</comment> })
-  .catch((error) => { <comment>...</comment> });
-{%- endcall %}
+<h3 id="method-spec">Method Spec</h3>
 
-<br />
 <p>
-  <b>Action parameters:</b>
+  The <i>method spec</i> is created by your method config.
 </p>
-<table>
-  <tr>
-    <th>Parameter</th>
-    <th>Description</th>
-    <th style="text-align:center;">Required?</th>
-  </tr>
-  <tr>
-    <td><a href="#action-spec"><code>spec</code></a></td>
-    <td>Defines the functionality of the action.</td>
-    <td style="text-align:center;">Yes</td>
-  </tr>
-  <tr>
-    <td><a href="#action-input"><code>input</code></td>
-    <td>Supplies the data for an individual action request.</td>
-    <td style="text-align:center;">Yes</td>
-  </tr>
-  <tr>
-    <td><a href="#action-output"><code>output</code></td>
-    <td>Specifies the format of the returned payload. Defaults to <code class="code-ref">'native'</code>.</td>
-    <td style="text-align:center;">No</td>
-  </tr>
-</table>
+
+<p>
+  It defines what your methods can do and how they operate (e.g. permitted fields, sort order, authorization, etc).
+</p>
+
+<callout>
+  See <a href="#spec">spec options</a> for details and examples.
+</callout>
+
+<h3 id="method-input">Method Input</h3>
+
+<p>
+  The <i>method input</i> is what is provided dynamically when the method is being used.
+</p>
+
+<p>
+  If you are using them as server-side logic, you are specifying the data operation to perform.
+</p>
+
+<p>
+  If you are using them with a route config, they are the RESTful API requests made by the client.
+</p>
+
+<callout>
+  See <a href="#input">input options</a> for details and examples.
+</callout>
 
 <h3 id="CRUD">Base Actions (CRUD)</h3>
 
@@ -87,44 +86,19 @@ joint.&lt;<i>action</i>&gt;(spec, input, output)
   </tr>
 </table>
 
-<h3 id="relational">Association Actions (Relational)</h3>
-
-<table>
-  <tr>
-    <th>Action</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td><a href="#action-addAssociatedItems"><code>addAssociatedItems</code></a></td>
-    <td>Operation for associating one to many items of a type to a main resource.</td>
-  </tr>
-  <tr>
-    <td><a href="#action-hasAssociatedItem"><code>hasAssociatedItem</code></a></td>
-    <td>Operation for checking the existence of an association on a main resource.</td>
-  </tr>
-  <tr>
-    <td><a href="#action-getAllAssociatedItems"><code>getAllAssociatedItems</code></a></td>
-    <td>Operation for retrieving all associations of a type from a main resource.</td>
-  </tr>
-  <tr>
-    <td><a href="#action-removeAssociatedItems"><code>removeAssociatedItems</code></a></td>
-    <td>Operation for disassociating one to many items of a type from a main resource.</td>
-  </tr>
-  <tr>
-    <td><a href="#action-removeAllAssociatedItems"><code>removeAllAssociatedItems</code></a></td>
-    <td>Operation for removing all associations of a type from a main resource.</td>
-  </tr>
-</table>
-
 {{ api.funcheader('createItem', 'action-createItem') }}
-
-{{ api.actionsig('The newly created item.') }}
 
 {{ api.apidesc('Create operation for a single item.') }}
 
-<p>
-  [TBC]
-</p>
+{{ api.actionsig('The newly created item.') }}
+
+<b>Supported spec options</b>
+
+<ul>
+  <li>modelName</li>
+  <li>fields</li>
+  <li>auth</li>
+</ul>
 
 {{ api.funcheader('upsertItem', 'action-upsertItem') }}
 
@@ -142,9 +116,13 @@ joint.&lt;<i>action</i>&gt;(spec, input, output)
 
 {{ api.apidesc('Update operation for a single item.') }}
 
-<p>
-  [TBC]
-</p>
+<b>Supported spec options</b>
+
+<ul>
+  <li>modelName</li>
+  <li>fields</li>
+  <li>auth</li>
+</ul>
 
 {{ api.funcheader('getItem', 'action-getItem') }}
 
@@ -176,6 +154,35 @@ joint.&lt;<i>action</i>&gt;(spec, input, output)
   [TBC]
 </p>
 
+<h3 id="relational">Association Actions (Relational)</h3>
+
+<table>
+  <tr>
+    <th>Action</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><a href="#action-addAssociatedItems"><code>addAssociatedItems</code></a></td>
+    <td>Operation for associating one to many items of a type to a main resource.</td>
+  </tr>
+  <tr>
+    <td><a href="#action-hasAssociatedItem"><code>hasAssociatedItem</code></a></td>
+    <td>Operation for checking the existence of an association on a main resource.</td>
+  </tr>
+  <tr>
+    <td><a href="#action-getAllAssociatedItems"><code>getAllAssociatedItems</code></a></td>
+    <td>Operation for retrieving all associations of a type from a main resource.</td>
+  </tr>
+  <tr>
+    <td><a href="#action-removeAssociatedItems"><code>removeAssociatedItems</code></a></td>
+    <td>Operation for disassociating one to many items of a type from a main resource.</td>
+  </tr>
+  <tr>
+    <td><a href="#action-removeAllAssociatedItems"><code>removeAllAssociatedItems</code></a></td>
+    <td>Operation for removing all associations of a type from a main resource.</td>
+  </tr>
+</table>
+
 {{ api.funcheader('addAssociatedItems', 'action-addAssociatedItems') }}
 
 {{ api.actionsig('') }}
@@ -190,7 +197,7 @@ joint.&lt;<i>action</i>&gt;(spec, input, output)
 
 {{ api.actionsig('true -or- false') }}
 
-{{ api.apidesc('Operation for checking the existence of an association on a main resource..') }}
+{{ api.apidesc('Operation for checking the existence of an association on a main resource.') }}
 
 <p>
   [TBC]

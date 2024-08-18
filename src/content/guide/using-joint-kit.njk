@@ -28,7 +28,7 @@
   Currently, joint-kit only supports knex (with bookshelf enabled).
 </callout>
 
-<h3>Example Instantiation</h3>
+<h3>Basic Instantiation</h3>
 
 {% call code.block() -%}
 const Joint = require('joint-kit')
@@ -70,7 +70,7 @@ const joint = new Joint({
 </p>
 
 <p>
-  You utilize joint methods to perform server-side logic, that in-turn can be leveraged for your exposed API.
+  You utilize joint methods to perform server-side logic, that in-turn can be leveraged for an exposed API.
 </p>
 
 <p>
@@ -98,7 +98,11 @@ const joint = new Joint({
 </p>
 
 <p>
-  Collectively, the configuration syntax approach is referred to as creating <b>joint configs</b>.
+  Collectively, the configuration syntax approach is referred to as creating <i>joint configs</i>.
+</p>
+
+<p>
+  Specifically, there is a joint config for each layer: <b>model config</b>, <b>method config</b>, and <b>route config</b>.
 </p>
 
 <p>
