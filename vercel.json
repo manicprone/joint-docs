@@ -12,9 +12,5 @@
       "dest": "/dist/server.js"
     }
   ],
-  "build": {
-    "commands": {
-      "build": "npm run build"
-    }
-  }
+  "buildCommand": "npm run build"
 }
