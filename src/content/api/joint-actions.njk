@@ -53,7 +53,11 @@
   See <a href="#input"><b>input options</b></a> for details and examples.
 </callout>
 
-<br />
+<hr />
+
+{# -------------------------------------------------------------------------- #}
+{#                                                        Base Actions (CRUD) #}
+{# -------------------------------------------------------------------------- #}
 
 <h3 id="CRUD">Base Actions (CRUD)</h3>
 
@@ -92,9 +96,9 @@
 
 {{ api.funcheader('createItem', 'action-createItem') }}
 
-{{ api.apidesc('Create operation for a single item.') }}
+{{ api.apidesc('Create a single item.') }}
 
-{{ api.apireturn('The created item.') }}
+{{ api.apireturnsuccess('The created item.') }}
 
 {{ api.apisupportedspec(['fields', 'auth']) }}
 
@@ -111,7 +115,8 @@
           { name: 'email', type: 'String', required: true },
           { name: 'first_name', type: 'String', required: true },
           { name: 'last_name', type: 'String', required: true },
-          { name: 'title', type: 'String' }
+          { name: 'status', type: 'String', defaultValue: 'registered' },
+          { name: 'is_verified', type: 'Boolean', defaultValue: false }
         }
       }
     }
@@ -124,15 +129,15 @@
 
 {{ api.funcheader('upsertItem', 'action-upsertItem') }}
 
-{{ api.apidesc('Upsert operation for a single item.') }}
+{{ api.apidesc('Upsert for a single item.') }}
 
-{{ api.apireturn('The upserted item.') }}
+{{ api.apireturnsuccess('The upserted item.') }}
 
 {{ api.apisupportedspec(['fields', 'auth']) }}
 
 {% call code.block('Example method config:') -%}
 {
-  modelName: 'User',
+  modelName: 'UserInfo',
 
   methods: [
     {
@@ -140,6 +145,10 @@
       action: 'upsertItem',
       spec: {
         fields: {
+          { name: 'user_id', type: 'Number', required: true, lookup: true },
+          { name: 'title', type: 'String' },
+          { name: 'description', type: 'String' },
+          { name: 'prefs', type: 'JSON' }
         }
       }
     }
@@ -151,9 +160,9 @@
 
 {{ api.funcheader('updateItem', 'action-updateItem') }}
 
-{{ api.apidesc('Update operation for a single item.') }}
+{{ api.apidesc('Update a single item.') }}
 
-{{ api.apireturn('The updated item.') }}
+{{ api.apireturnsuccess('The updated item.') }}
 
 {{ api.apisupportedspec(['fields', 'auth']) }}
 
@@ -167,6 +176,12 @@
       action: 'updateItem',
       spec: {
         fields: {
+          { name: 'id', type: 'Number', requiredOr: true, lookupOr: true },
+          { name: 'email', type: 'String', requiredOr: true, lookupOr: true },
+          { name: 'first_name', type: 'String' },
+          { name: 'last_name', type: 'String' },
+          { name: 'status', type: 'String' },
+          { name: 'is_verified', type: 'Boolean' }
         }
       }
     }
@@ -178,11 +193,13 @@
 
 {{ api.funcheader('getItem', 'action-getItem') }}
 
-{{ api.apidesc('Read operation for retrieving a single item.') }}
+{{ api.apidesc('Retrieve a single item.') }}
 
-{{ api.apireturn('The requested item.') }}
+{{ api.apireturnsuccess('The requested item.') }}
 
-{{ api.apisupportedspec(['fields', 'auth']) }}
+{{ api.apireturnerror('JointStatusError (404) - if not found.') }}
+
+{{ api.apisupportedspec(['fields', 'fieldsToReturn', 'forceAssociations', 'forceLoadDirect', 'auth']) }}
 
 {% call code.block('Example method config:') -%}
 {
@@ -194,6 +211,8 @@
       action: 'getItem',
       spec: {
         fields: {
+          { name: 'id', type: 'Number', requiredOr: true },
+          { name: 'email', type: 'String', requiredOr: true }
         }
       }
     }
@@ -205,9 +224,9 @@
 
 {{ api.funcheader('getItems', 'action-getItems') }}
 
-{{ api.apidesc('Read operation for retrieving a collection of items.') }}
+{{ api.apidesc('Retrieve a collection of items.') }}
 
-{{ api.apireturn('An array of the requested items.') }}
+{{ api.apireturnsuccess('An array of items (if found), otherwise an empty array.') }}
 
 {{ api.apisupportedspec(['fields', 'auth']) }}
 
@@ -221,7 +240,11 @@
       action: 'getItems',
       spec: {
         fields: {
-        }
+          { name: 'id', type: 'Number' }, <comment>// retrieve explicitly with an input array</comment>
+          { name: 'status', type: 'String' },
+          { name: 'is_verified', type: 'Boolean' }
+        },
+        defaultOrderBy: 'last_name,first_name'
       }
     }
   ]
@@ -232,9 +255,11 @@
 
 {{ api.funcheader('deleteItem', 'action-deleteItem') }}
 
-{{ api.apidesc('Delete operation for single item.') }}
+{{ api.apidesc('Delete a single item.') }}
 
-{{ api.apireturn('An empty object.') }}
+{{ api.apireturnsuccess('An empty object.') }}
+
+{{ api.apireturnerror('JointStatusError (404) - if not found.') }}
 
 {{ api.apisupportedspec(['fields', 'auth']) }}
 
@@ -248,6 +273,8 @@
       action: 'deletItem',
       spec: {
         fields: {
+          { name: 'id', type: 'Number', requiredOr: true },
+          { name: 'email', type: 'String', requiredOr: true }
         }
       }
     }
@@ -255,7 +282,11 @@
 }
 {%- endcall %}
 
-<br />
+<hr />
+
+{# -------------------------------------------------------------------------- #}
+{#                                           Association Actions (Relational) #}
+{# -------------------------------------------------------------------------- #}
 
 <h3 id="relational">Association Actions (Relational)</h3>
 
@@ -278,7 +309,7 @@
   </tr>
   <tr>
     <td><a href="#action-removeAssociatedItems"><code>removeAssociatedItems</code></a></td>
-    <td>Operation for disassociating one to many items of a type from a main resource.</td>
+    <td>Operation for removing one to many associations of a type from a main resource.</td>
   </tr>
   <tr>
     <td><a href="#action-removeAllAssociatedItems"><code>removeAllAssociatedItems</code></a></td>
@@ -290,43 +321,39 @@
 
 {{ api.funcheader('addAssociatedItems', 'action-addAssociatedItems') }}
 
-{{ api.actionsig('') }}
-
-{{ api.apidesc('Operation for associating one to many items of a type to a main resource.') }}
+{{ api.apidesc('Associate one to many items of a type to a main resource.') }}
 
 {# -------------------------------------------------------- hasAssociatedItem #}
 
 {{ api.funcheader('hasAssociatedItem', 'action-hasAssociatedItem') }}
 
-{{ api.actionsig('true -or- false') }}
+{{ api.apidesc('Check the existence of an association on a main resource.') }}
 
-{{ api.apidesc('Operation for checking the existence of an association on a main resource.') }}
+{{ api.apireturnsuccess('true -or- false') }}
 
 {# ---------------------------------------------------- getAllAssociatedItems #}
 
 {{ api.funcheader('getAllAssociatedItems', 'action-getAllAssociatedItems') }}
 
-{{ api.actionsig('') }}
-
-{{ api.apidesc('Operation for retrieving all associations of a type from a main resource.') }}
+{{ api.apidesc('Retrieve all associations of a type from a main resource.') }}
 
 {# ---------------------------------------------------- removeAssociatedItems #}
 
 {{ api.funcheader('removeAssociatedItems', 'action-removeAssociatedItems') }}
 
-{{ api.actionsig('') }}
-
-{{ api.apidesc('Update operation for a single item.') }}
+{{ api.apidesc('Remove one to many associations of a type from a main resource.') }}
 
 {# ------------------------------------------------- removeAllAssociatedItems #}
 
 {{ api.funcheader('removeAllAssociatedItems', 'action-removeAllAssociatedItems') }}
 
-{{ api.actionsig('') }}
+{{ api.apidesc('Remove all associations of a type from a main resource.') }}
 
-{{ api.apidesc('Operation for removing all associations of a type from a main resource.') }}
+<hr />
 
-<br />
+{# -------------------------------------------------------------------------- #}
+{#                                                               Spec Options #}
+{# -------------------------------------------------------------------------- #}
 
 <h3 id="spec">Spec Options</h3>
 
@@ -423,36 +450,26 @@
 
 {{ api.optheader('spec.fields', 'spec-opt-fields') }}
 
+{{ api.apidesc('Declares all fields that are permitted for the method, and defines how they can be used.') }}
+
 {{ api.optsig(['Array'], 'all', 'Yes (except getItems)') }}
 
-{{ api.apidesc('Declares all fields that are accessible to the method, and defines how they can be used.') }}
-
-{% call code.block('Example updateItem usage:') -%}
-function markLogin(input) {
-  const spec = {
-    modelName: 'User',
-    <hilite>fields: [
-      { name: 'id', type: 'Number', required: true, lookup: true },
-      { name: 'last_login_at', type: 'String', locked: true, defaultValue: '% now %' },
-    ],</hilite>
-  };
-
-  return joint.updateItem(spec, input);
-}
-{%- endcall %}
-
 {% call code.block('Example getItem usage:') -%}
-function getUser(input) {
-  const spec = {
-    modelName: 'User',
-    <hilite>fields: [
-      { name: 'id', type: 'Number', requiredOr: true },
-      { name: 'username', type: 'String', requiredOr: true },
-      { name: 'external_id', type: 'String', requiredOr: true },
-    ],</hilite>
-  };
+{
+  modelName: 'User',
 
-  return joint.getItem(spec, input);
+  methods: [
+    {
+      name: 'getOne',
+      action: 'getItem',
+      spec: {
+        <hilite>fields: [
+          { name: 'id', type: 'Number', requiredOr: true },
+          { name: 'email', type: 'String', requiredOr: true }
+        ]</hilite>
+      }
+    }
+  ]
 }
 {%- endcall %}
 
@@ -882,6 +899,12 @@ function getUsers(input) {
 <p>
   [TBC]
 </p>
+
+<hr />
+
+{# -------------------------------------------------------------------------- #}
+{#                                                              Input Options #}
+{# -------------------------------------------------------------------------- #}
 
 <h3 id="input">Input Options</h3>
 

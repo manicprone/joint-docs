@@ -74,13 +74,24 @@
   {% endif %}
 {% endmacro %}
 
-{# ---------------------- #}
-{# apireturn - API Return #}
-{# ---------------------- #}
-{% macro apireturn(text) %}
+{# --------------------------------- #}
+{# apireturn - API Return On Success #}
+{# --------------------------------- #}
+{% macro apireturnsuccess(text) %}
   <apireturn>
-    <span>Returns</span>
+    <label>Returns (on success)</label>
     <span style="margin:0 8px 0 4px;">&#10132;</span>
+    {{ text }}
+  </apireturn>
+{% endmacro %}
+
+{# ------------------------------- #}
+{# apireturn - API Return On Error #}
+{# ------------------------------- #}
+{% macro apireturnerror(text) %}
+  <apireturn>
+    <label>Returns (on error)</label>
+    <span style="margin:0 8px 0 30px;">&#10132;</span>
     {{ text }}
   </apireturn>
 {% endmacro %}
@@ -93,7 +104,7 @@
     <label>Supported spec options</label>
     <ul>
     {% for specOpt in specOpts %}
-      <li>{{ specOpt }}</li>
+      <li><a href="#spec-opt-{{ specOpt }}">{{ specOpt }}</a></li>
     {% endfor %}
     </ul>
   </apisupportedspec>

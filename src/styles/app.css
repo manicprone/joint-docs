@@ -48,7 +48,7 @@ a.disabled {
   cursor: not-allowed;
 }
 
-/* -------------------------------------  Code */
+/* --------------------------------------------------------------------  Code */
 pre {
   margin: 10px;
 }
@@ -60,7 +60,7 @@ code i {
   padding: 0 1px 0 0;
 }
 
-/* -------------------------------------  Tables */
+/* ------------------------------------------------------------------  Tables */
 table {
   border-collapse: collapse;
   width: 100%;
@@ -161,219 +161,6 @@ td.code {
 .splash-content .links a:hover {
   color: #111111;
   border-bottom: 3px solid #0b5693;
-}
-
-/* -----------------------------------------------------------------------------
- * Custom Doc Elements
- * -------------------------------------------------------------------------- */
-
- m-sig {
-   font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
-   font-size: 16px;
-   line-height: 16px;
-   font-weight: 400;
- }
- m-sig .leading-mark {
-   color: #9c9c9c;
- }
- m-sig .m-sign {
-   color: #121212;
-   letter-spacing: 1.0px;
- }
- m-pipe {
-   color: #121212;
-   letter-spacing: 1.0px;
- }
- m-sig:hover m-pipe {
-   color: #727272;
- }
- m-sig:hover .m-sign {
-   color: #000000;
- }
-
-dangle {
-  display: block;
-  color: #9c9c9c;
-  margin: 30px 0 30px 25px;
-}
-dangle span {
-  color: #121212;
-  font-size: 17px;
-  padding-left: 3px;
-  padding-right: 3px;
-}
-
-hilite {
-  color: #0b5693;
-  font-weight: 600;
-}
-
-callout {
-  display: block;
-  color: #727272;
-  font-size: 15px;
-  line-height: 20px;
-  border-left: 4px solid #e5e5e5;
-  padding: 4px 0 4px 15px;
-  margin: 16px 0 12px 10px;
-}
-
-comment {
-  color: #9c9c9c;
-  font-weight: normal;
-  font-size: 90%;
-}
-callout code {
-  font-size: 13px;
-}
-
-/* -------------------------------------------------------------  API-related */
-/* apidesc {
-  display: block;
-  color: #525252;
-  line-height: 22px;
-  border-left: 4px solid #8cb0cc;
-  margin: 0 30px 32px 8px;
-  padding: 7px 0 7px 15px;
-} */
-apidesc {
-  display: block;
-  color: #525252;
-  font-size: 17px;
-  line-height: 22px;
-  margin: 0 30px 8px 0;
-  padding: 7px 0 7px 0;
-}
-
-apireturn {
-  display: block;
-  color: #525252;
-  line-height: 22px;
-  margin: 0 30px 24px 0;
-  padding: 7px 0 7px 0;
-}
-
-apisupportedspec {
-  display: block;
-  color: #525252;
-  line-height: 22px;
-  margin: 0 30px 32px 0;
-}
-apisupportedspec label {
-  font-weight: 600;
-}
-
-optsig {
-  display: block;
-  margin: 0 8px 35px 8px;
-}
-optsig .param {
-  color: #525252;
-  font-weight: 400;
-  margin-bottom: 10px;
-}
-optsig .param label {
-  display: inline-block;
-  color: #8f8f8f;
-  font-size: 95%;
-  font-weight: 400;
-  margin-right: 20px;
-  width: 80px;
-}
-optsig .param .type-value {
-  font-style: italic;
-}
-
-spec {
-  font-size: 17px;
-  font-weight: 900;
-  color: #000000;
-  margin-right: 10px;
-}
-
-tip, tip code, tip div {
-  font-size: 12px;
-}
-tip span {
-  font-size: 12px;
-  color: #AAAAAA;
-}
-
-func {
-  -webkit-font-smoothing: auto;
-  font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
-  color: #ffffff;
-  font-size: 14px;
-  line-height: 26px;
-  font-weight: 400;
-  background-color: #255f8e;
-  border-radius: 4px;
-  margin-left: 2px;
-  margin-right: 1px;
-  padding: 1px 8px 3px 7px;
-}
-
-prop {
-  -webkit-font-smoothing: auto;
-  font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
-  color: #ffffff;
-  font-size: 14px;
-  line-height: 17px;
-  font-weight: 400;
-  background-color: #5d819b;
-  border-radius: 4px;
-  margin-left: 2px;
-  margin-right: 1px;
-  padding: 1px 8px 2px 7px;
-}
-a:hover prop {
-  color: #ffffff;
-  background-color: #7594aa;
-}
-
-/* -------------------------------------  Legacy (from ema-blog) */
-owner {
-  font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
-  font-size: 14px;
-  font-weight: 400;
-  border-radius: 4px;
-  margin-left: 2px;
-  padding: 2px 8px 3px 8px;
-  color: #ffffff;
-  background-color: #2299CC;
-}
-
-role {
-  font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
-  font-size: 14px;
-  font-weight: 400;
-  border-radius: 4px;
-  padding: 2px 8px 3px 8px;
-  margin-left: 2px;
-  color: #ffffff;
-  background-color: #E18B00;
-}
-
-authed {
-  font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
-  font-size: 14px;
-  font-weight: 400;
-  border-radius: 4px;
-  padding: 2px 8px 3px 8px;
-  margin-left: 2px;
-  color: #ffffff;
-  background-color: #099700;
-}
-
-validation {
-  font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
-  font-size: 14px;
-  font-weight: 400;
-  border-radius: 4px;
-  padding: 2px 8px 3px 8px;
-  margin-left: 2px;
-  color: #ffffff;
-  background-color: #B40000;
 }
 
 /* -----------------------------------------------------------------------------
@@ -487,10 +274,11 @@ validation {
 }
 .page-nav .nav-link-header {
   font-size: 17px;
+  font-weight: 500;
   margin-bottom: 18px;
 }
 .page-nav .nav-link-header a {
-  color: #252525;
+  color: #3c3c3c;
 }
 .page-nav .nav-link-header a:hover {
   color: #525252;
@@ -498,13 +286,15 @@ validation {
 .page-nav .nav-sub-header {
   color: #727272;
   font-size: 15px;
-  font-style: italic;
+  /* font-style: italic; */
   font-weight: 400;
   margin: 0 0 15px 6px;
   padding-right: 4px;
 }
 .page-nav .nav-sub-header a {
-  color: #676767;
+  color: #525252;
+  font-weight: 500;
+  /* letter-spacing: 0.48px; */
   cursor: pointer;
   text-decoration: none;
 }
@@ -537,13 +327,13 @@ validation {
 }
 .page-nav .nav-sub-item {
   font-size: 14px;
-  margin: 0 0 10px 12px;
+  margin: 0 0 10px 15px;
 }
 .page-nav .nav-sub-item a {
-  color: #252525;
+  color: #676767;
 }
 .page-nav .nav-sub-item a:hover {
-  color: #525252;
+  color: #111111;
 }
 
 /* -----------------------------------------------------  Collapsible Details */
@@ -643,7 +433,7 @@ validation {
 /* ------------------------------------------------------------  Divider Line */
 .page-content hr {
   border-top: 1px solid #d9d9d9;
-  margin: 55px 0 50px 0;
+  margin: 60px 0 50px 0;
 }
 
 /* ----------------------------------------------------------  Navigable Cues */
@@ -882,7 +672,7 @@ table.layout .framed-block {
   margin-top: 0;
 }
 
-/* -------------------------------------  Diagrams */
+/* ----------------------------------------------------------------  Diagrams */
 .page-content .diagram {
   margin-top: 20px;
 }
@@ -892,4 +682,221 @@ table.layout .framed-block {
 .page-content .diagram-frame {
   border: 1px solid #d9d9d9;
   padding: 30px;
+}
+
+/* -----------------------------------------------------------------------------
+ * Custom Doc Elements
+ * -------------------------------------------------------------------------- */
+
+/* -----------------------------------------------------------  |M| signature */
+ m-sig {
+  font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 400;
+ }
+ m-sig .leading-mark {
+  color: #9c9c9c;
+ }
+ m-sig .m-sign {
+  color: #121212;
+  letter-spacing: 1.0px;
+ }
+ m-pipe {
+  color: #121212;
+  letter-spacing: 1.0px;
+ }
+ m-sig:hover m-pipe {
+  color: #727272;
+ }
+ m-sig:hover .m-sign {
+  color: #000000;
+ }
+
+ dangle {
+   display: block;
+   color: #9c9c9c;
+   margin: 30px 0 30px 25px;
+ }
+ dangle span {
+   color: #121212;
+   font-size: 17px;
+   padding-left: 3px;
+   padding-right: 3px;
+ }
+
+ hilite {
+   color: #0b5693;
+   font-weight: 600;
+ }
+
+ callout {
+   display: block;
+   color: #727272;
+   font-size: 15px;
+   line-height: 20px;
+   border-left: 4px solid #e5e5e5;
+   padding: 4px 0 4px 15px;
+   margin: 16px 0 12px 10px;
+ }
+
+ comment {
+   color: #9c9c9c;
+   font-weight: normal;
+   font-size: 90%;
+ }
+ callout code {
+   font-size: 13px;
+ }
+
+/* -------------------------------------------------------------  API related */
+/* apidesc {
+  display: block;
+  color: #525252;
+  line-height: 22px;
+  border-left: 4px solid #8cb0cc;
+  margin: 0 30px 32px 8px;
+  padding: 7px 0 7px 15px;
+} */
+apidesc {
+  display: block;
+  color: #525252;
+  font-size: 18px;
+  line-height: 22px;
+  margin: 0 30px 16px 0;
+  padding: 7px 0 7px 0;
+}
+
+apireturn {
+  display: block;
+  color: #525252;
+  line-height: 22px;
+  margin: 0 30px 8px 0;
+  padding: 7px 0 7px 0;
+}
+apireturn label {
+  font-weight: 500;
+}
+
+apisupportedspec {
+  display: block;
+  color: #525252;
+  line-height: 22px;
+  margin: 24px 30px 32px 0;
+}
+apisupportedspec label {
+  font-weight: 600;
+}
+
+optsig {
+  display: block;
+  margin: 0 8px 35px 0;
+}
+optsig .param {
+  color: #525252;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+optsig .param label {
+  display: inline-block;
+  color: #8f8f8f;
+  font-size: 95%;
+  font-weight: 400;
+  margin-right: 20px;
+  width: 80px;
+}
+optsig .param .type-value {
+  font-style: italic;
+}
+
+spec {
+  font-size: 17px;
+  font-weight: 900;
+  color: #000000;
+  margin-right: 10px;
+}
+
+tip, tip code, tip div {
+  font-size: 12px;
+}
+tip span {
+  font-size: 12px;
+  color: #AAAAAA;
+}
+
+func {
+  -webkit-font-smoothing: auto;
+  font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 26px;
+  font-weight: 400;
+  background-color: #255f8e;
+  border-radius: 4px;
+  margin-left: 2px;
+  margin-right: 1px;
+  padding: 1px 8px 3px 7px;
+}
+
+prop {
+  -webkit-font-smoothing: auto;
+  font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 400;
+  background-color: #5d819b;
+  border-radius: 4px;
+  margin-left: 2px;
+  margin-right: 1px;
+  padding: 1px 8px 2px 7px;
+}
+a:hover prop {
+  color: #ffffff;
+  background-color: #7594aa;
+}
+
+/* --------------------------------------------------  Legacy (from ema-blog) */
+owner {
+  font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+  font-size: 14px;
+  font-weight: 400;
+  border-radius: 4px;
+  margin-left: 2px;
+  padding: 2px 8px 3px 8px;
+  color: #ffffff;
+  background-color: #2299CC;
+}
+
+role {
+  font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+  font-size: 14px;
+  font-weight: 400;
+  border-radius: 4px;
+  padding: 2px 8px 3px 8px;
+  margin-left: 2px;
+  color: #ffffff;
+  background-color: #E18B00;
+}
+
+authed {
+  font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+  font-size: 14px;
+  font-weight: 400;
+  border-radius: 4px;
+  padding: 2px 8px 3px 8px;
+  margin-left: 2px;
+  color: #ffffff;
+  background-color: #099700;
+}
+
+validation {
+  font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+  font-size: 14px;
+  font-weight: 400;
+  border-radius: 4px;
+  padding: 2px 8px 3px 8px;
+  margin-left: 2px;
+  color: #ffffff;
+  background-color: #B40000;
 }

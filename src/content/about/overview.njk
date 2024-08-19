@@ -4,10 +4,10 @@
 
 <h2>Overview</h2>
 
-<h3>What is the Joint Kit?</h3>
+<h3>What is Joint Kit?</h3>
 
 <p>
-  At its core, the Joint Kit is a data operations layer.
+  At its core, Joint Kit is a data operations layer.
 </p>
 
 <p>
@@ -63,14 +63,16 @@
   </tr>
 </table>
 
+<br />
+
 <p>
-  that hook to your custom data schema:
+  These actions hook to your custom data schema:
 </p>
 
 {{ api.apidesc('Postgres, MySQL, SQLite') }}
 
 <p>
-  and provide composable, ready-to-use logic for your application:
+  And provide composable, ready-to-use logic for your application:
 </p>
 
 {{ api.apidesc('core operation, field filtering, association, pagination, data transformation, input validation, authorization, transactional safety, serialization') }}
@@ -105,6 +107,8 @@
 {%- endcall %}
 </p>
 
+<br />
+
 <p>
   Then, use it in your server-side code:
 </p>
@@ -127,6 +131,8 @@ const user = await <b>joint.method.User.getOne</b>(input)
 }
 {%- endcall %}
 
+<br />
+
 <p>
   And use it on the client-side:
 </p>
@@ -137,14 +143,16 @@ GET <span><b>/user/3</b></span>
 
 <br />
 
-{{ api.apidesc('The data result can be automatically serialized into JSON API spec format') }}
+<callout>
+  The data result is automatically serialized into JSON API spec format.
+</callout>
 
 <br />
 
 <h3>Where does it fit in my application?</h3>
 
 <p>
-  Architecturally, the Joint Kit sits between your persisted data service
+  Architecturally, Joint Kit sits between your persisted data service
   and your HTTP server framework.
 </p>
 
@@ -155,7 +163,7 @@ GET <span><b>/user/3</b></span>
 <br /><br />
 
 <p>
-  The Joint Kit leverages:
+  Joint Kit leverages:
 </p>
 
 {% call text.framedblock(maxWidth='490px', raised=true) -%}
@@ -176,7 +184,7 @@ GET <span><b>/user/3</b></span>
 <br />
 
 <callout>
-  Currently, only Bookshelf (db service) and Express (server framework) are supported.
+  Currently, only Knex (db service) and Express (server framework) are supported.
 </callout>
 
 <br />
