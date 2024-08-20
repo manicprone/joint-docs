@@ -1,4 +1,4 @@
-export default {
+module.exports = {
 
   // ----------------
   // App name & alias
@@ -15,7 +15,7 @@ export default {
   // App URI base paths
   // ------------------
   basePaths: {
-    docs: '/docs',
+    docs: '/docs'
   },
 
   // -------------------------------------------
@@ -34,8 +34,8 @@ export default {
       guide: 'installation',
       api: 'index',
       advanced: 'index',
-      examples: 'index',
-    },
-  },
+      examples: 'index'
+    }
+  }
 
-};
+}
