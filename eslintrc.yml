@@ -1,0 +1,5 @@
+env:
+  browser: true
+  ecmaVersion: 5
+rules:
+  camelcase: "off"
