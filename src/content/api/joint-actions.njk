@@ -18,7 +18,7 @@
 </p>
 
 <p>
-  A method config has essentially two parts: a <b>spec</b> and an <b>input</b>.
+  A method has essentially two parts: a <b>spec</b> and an <b>input</b>.
 </p>
 
 <h3 id="method-spec">Method Spec</h3>
@@ -115,6 +115,7 @@
           { name: 'email', type: 'String', required: true },
           { name: 'first_name', type: 'String', required: true },
           { name: 'last_name', type: 'String', required: true },
+          { name: 'avatar_url', type: 'String' },
           { name: 'status', type: 'String', defaultValue: 'registered' },
           { name: 'is_verified', type: 'Boolean', defaultValue: false }
         }
@@ -450,7 +451,7 @@
 
 {{ api.optheader('spec.fields', 'spec-opt-fields') }}
 
-{{ api.apidesc('Declares all fields that are permitted for the method, and defines how they can be used.') }}
+{{ api.apidesc('Declares the fields that are permitted for the method, and defines how they can be used.') }}
 
 {{ api.optsig(['Array'], 'all', 'Yes (except getItems)') }}
 
@@ -466,6 +467,29 @@
         <hilite>fields: [
           { name: 'id', type: 'Number', requiredOr: true },
           { name: 'email', type: 'String', requiredOr: true }
+        ]</hilite>
+      }
+    }
+  ]
+}
+{%- endcall %}
+
+{% call code.block('Example createItem usage:') -%}
+{
+  modelName: 'Project',
+
+  methods: [
+    {
+      name: 'createDraft',
+      action: 'createItem',
+      spec: {
+        <hilite>fields: [
+          { name: 'name', type: 'String', required: true },
+          { name: 'type', type: 'String', required: true },
+          { name: 'is_private', type: 'Boolean', defaultValue: false },
+          { name: 'description', type: 'String' },
+          { name: 'settings', type: 'JSON' },
+          { name: 'status', type: 'String', locked: true, defaultValue: 'draft' }
         ]</hilite>
       }
     }
@@ -609,8 +633,9 @@
 </table>
 
 <br />
+
 <p id="spec-concept-dynamicValues">
-  <b>Dynamic Values</b>
+  <h3>Dynamic Values</h3>
 </p>
 
 <p>
@@ -682,75 +707,97 @@ pascalCase(title) => 'TheVeryFirst'
   </tr>
 </table>
 
-<br />
-
-{% call api.apidesc() -%}
+<p>
   To call an operation, use a <i>String</i> that starts and ends with the
   <code class="code-ref" style="font-size:105%;">%</code> character.
-{%- endcall %}
+</p>
+
+<br />
 
 {% call code.block('For example:') -%}
-function createTag(input) {
-  const spec = {
-    modelName: 'Tag',
-    fields: {
-      { name: 'label', type: 'String', required: true },
-      { name: 'key', type: 'String', <hilite>defaultValue: '% kebabCase(label) %'</hilite> },
-    },
-  };
+{
+  modelName: 'Tag',
 
-  return joint.createItem(spec, input);
+  methods: [
+    {
+      name: 'create',
+      action: 'createItem',
+      spec: {
+        fields: {
+          { name: 'label', type: 'String', required: true },
+          { name: 'code', type: 'String', <hilite>defaultValue: '% kebabCase(label) %'</hilite> }
+        }
+      }
+    }
+  ]
 }
 {%- endcall %}
 
-<br /><br />
+<br />
 
-{% call api.apidesc() -%}
-  If the specified <code><i>fieldName</i></code> does not provide a value when the action request
-  is executed, or the operation is not recognized, a <i>null</i> value will be generated.
-{%- endcall %}
-
-{% call api.apidesc() -%}
+<p>
   To force the execution of the <code class="code-ref">defaultValue</code> option,
   you can use the <prop>locked</prop> property. The <code class="code-ref">locked</code>
-  property prevents the field from being updated by user input. Using the
-  <code class="code-ref">defaultValue</code> property in conjunction with
-  <code class="code-ref">locked</code> ensures it will always be executed.
-{%- endcall %}
+  property prevents the field from being updated by user input.
+</p>
+
+<p>
+  Hence, using the <code class="code-ref">defaultValue</code> property in conjunction with
+  <code class="code-ref">locked</code> ensures the value will always be executed.
+</p>
+
+<br />
 
 {% call code.block('For example:') -%}
-function markLogin(input) {
-  const spec = {
-    modelName: 'User',
-    { name: 'id', type: 'Number', required: true, lookup: true },
-    { name: 'last_login_at', type: 'String', <hilite>locked: true, defaultValue: '% now %'</hilite> },
-  };
+{
+  modelName: 'User',
 
-  return joint.updateItem(spec, input);
+  methods: [
+    {
+      name: 'markLogin',
+      action: 'updateItem',
+      spec: {
+        fields: {
+          { name: 'id', type: 'Number', required: true, lookup: true },
+          { name: 'last_login_at', type: 'String', <hilite>locked: true, defaultValue: '% now %'</hilite> }
+        }
+      }
+    }
+  ]
 }
 {%- endcall %}
 
 {{ api.optheader('spec.fieldsToReturn', 'spec-opt-fieldsToReturn') }}
 
-{{ api.optsig(['Array', 'Object'], 'getItem, getItems', 'No') }}
-
 {{ api.apidesc('Restricts the fields to return with the payload. When not provided, all fields are returned.') }}
 
-{% call code.block('Example usage:') -%}
-function getUsers(input) {
-  const spec = {
-    modelName: 'User',
-    <hilite>fieldsToReturn: ['id', 'username', 'display_name', 'avatar_url'],</hilite> <comment>// return public fields only</comment>
-    defaultOrderBy: '-created_at,username',
-  };
+{{ api.optsig(['Array', 'Object'], 'getItem, getItems', 'No') }}
 
-  return joint.getItems(spec, input);
+{% call code.block('Example usage:') -%}
+{
+  modelName: 'User',
+
+  methods: [
+    {
+      name: 'getManyForPublic',
+      action: 'getItems',
+      spec: {
+        fields: {
+          { name: 'status', type: 'String' },
+          { name: 'is_verified', type: 'Boolean' }
+        },
+        <hilite>fieldsToReturn: ['id', 'display_name', 'avatar_url'],</hilite> <comment>// return public fields only</comment>
+        defaultOrderBy: '-created_at'
+      }
+    }
+  ]
 }
 {%- endcall %}
 
 <br />
+
 <p id="spec-concept-fieldSets">
-  <b>Field Sets</b>
+  <h3>Field Sets</h3>
 </p>
 
 <p>
@@ -758,107 +805,148 @@ function getUsers(input) {
   to define multiple return field combinations.
 </p>
 
-{% call code.block('Example usage with field sets:') -%}
-function getUsers(input) {
-  const spec = {
-    modelName: 'User',
-    <hilite>fieldsToReturn: {
-      default: ['id', 'username', 'display_name', 'avatar_url'],
-      contact: ['id', 'email', 'display_name'],
-      full: ['id', 'external_id', 'username', 'email', 'display_name', 'avatar_url', 'preferred_locale', 'created_at', 'updated_at', 'last_login_at'],
-    },</hilite>
-    defaultOrderBy: '-created_at,username',
-  };
+<br />
 
-  return joint.getItems(spec, input);
+{% call code.block('Example usage with field sets:') -%}
+{
+  modelName: 'User',
+
+  methods: [
+    {
+      name: 'getMany',
+      action: 'getItems',
+      spec: {
+        fields: {
+          { name: 'status', type: 'String' },
+          { name: 'is_verified', type: 'Boolean' }
+        },
+        <hilite>fieldsToReturn: {
+          default: ['id', 'display_name', 'avatar_url'],
+          contact: ['email', 'first_name', 'last_name'],
+          full: ['id', 'email', 'first_name', 'last_name', 'display_name', 'avatar_url', 'prefs', 'created_at', 'updated_at', 'last_login_at']
+        },</hilite>
+        defaultOrderBy: '-created_at,last_name'
+      }
+    }
+  ]
 }
 {%- endcall %}
 
-<br /><br />
+<br />
 
-{% call api.apidesc() -%}
-  By using an <i>Object</i> value instead of an <i>Array</i>, multiple Field Sets are defined by
+<p>
+  By using an <i>Object</i> value instead of an <i>Array</i>, multiple field sets are defined by
   providing property names (as the aliases), and specifying the <i>Array</i> of fields to return
   as the values. The input request can then specify which fields to return,
   using the <a href="#input-opt-fieldSet"><prop>input.fieldSet</prop></a> property.
-{%- endcall %}
+</p>
 
-{% call api.apidesc() -%}
-  There is one special Field Set alias: <code class="code-ref">default</code>.
+<p>
+  There is one special field set alias: <code class="code-ref">default</code>.
   <lilp>
-  If the <code class="code-ref">default</code> Field Set is defined, this field combination will be returned whenever the input
+  If the <code class="code-ref">default</code> field set is defined, this field combination will be returned whenever the input
   does not use the <a href="#input-opt-fieldSet"><prop>input.fieldSet</prop></a> property
   or if an undefined set is requested.
   </lilp>
-{%- endcall %}
+</p>
 
 {{ api.optheader('spec.defaultOrderBy', 'spec-opt-defaultOrderBy') }}
-
-{{ api.optsig(['String'], 'getItems', 'No') }}
 
 {% call api.apidesc() -%}
   The default sort for a collection payload.
   Provide a comma-delimited string for specifying multiple field precedence.
+  <p>
+  Use a <code class="code-ref">-</code> sign to denote descending order, otherwise it is ascending.
+  </p>
 {%- endcall %}
 
-{% call code.block('Example usage:') -%}
-function getUsers(input) {
-  const spec = {
-    modelName: 'User',
-    <hilite>defaultOrderBy: '-created_at,username',</hilite> <comment>// created_at DESC, username ASC</comment>
-  };
+{{ api.optsig(['String'], 'getItems', 'No') }}
 
-  return joint.getItems(spec, input);
+{% call code.block('Example usage:') -%}
+{
+  modelName: 'User',
+
+  methods: [
+    {
+      name: 'getMany',
+      action: 'getItems',
+      spec: {
+        fields: {
+          { name: 'status', type: 'String' },
+          { name: 'is_verified', type: 'Boolean' }
+        },
+        <hilite>defaultOrderBy: '-created_at,last_name'</hilite> <comment>// created_at DESC, last_name ASC</comment>
+      }
+    }
+  ]
 }
 {%- endcall %}
 
 {{ api.optheader('spec.forceAssociations', 'spec-opt-forceAssociations') }}
 
-{{ api.optsig(['Array'], 'getItem, getItems', 'No') }}
-
 {% call api.apidesc() -%}
-  Binds the <code class="code-ref">associations</code> to return, for all action requests.
-  <lilp>
+  Forces the <code class="code-ref">associations</code> to return for all action requests.
+  <p>
   See <a href="#input-opt-associations"><prop>input.associations</prop></a> for more details.
-  </lilp>
+  </p>
 {%- endcall %}
 
-{% call code.block('Example usage:') -%}
-function getProfiles(input) {
-  const spec = {
-    modelName: 'Profile',
-    defaultOrderBy: '-created_at,title',
-    <hilite>forceAssociations: ['user', 'posts', 'tags'],</hilite>
-  };
+{{ api.optsig(['Array'], 'getItem, getItems', 'No') }}
 
-  return joint.getItems(spec, input);
+{% call code.block('Example usage:') -%}
+{
+  modelName: 'Profile',
+
+  methods: [
+    {
+      name: 'getMany',
+      action: 'getItems',
+      spec: {
+        <hilite>forceAssociations: ['user', 'posts', 'tags'],</hilite>
+        defaultOrderBy: '-updated_at'
+      }
+    }
+  ]
 }
 {%- endcall %}
 
 {{ api.optheader('spec.forceLoadDirect', 'spec-opt-forceLoadDirect') }}
 
-{{ api.optsig(['Array'], 'getItem, getItems', 'No') }}
-
 {% call api.apidesc() -%}
-  Binds the <code class="code-ref">loadDirect</code> associations to return, for all action requests.
-  <lilp>
+  Forces the <code class="code-ref">loadDirect</code> associations to return for all action requests.
+  <p>
   See <a href="#input-opt-loadDirect"><prop>input.loadDirect</prop></a> for more details.
-  </lilp>
+  </p>
 {%- endcall %}
 
-{% call code.block('Example usage:') -%}
-function getUsers(input) {
-  const spec = {
-    modelName: 'User',
-    defaultOrderBy: '-created_at,username',
-    <hilite>forceLoadDirect: ['roles:name'],</hilite>
-  };
+{{ api.optsig(['Array'], 'getItem, getItems', 'No') }}
 
-  return joint.getItems(spec, input);
+{% call code.block('Example usage:') -%}
+{
+  modelName: 'User',
+
+  methods: [
+    {
+      name: 'getMany',
+      action: 'getItems',
+      spec: {
+        fields: {
+          { name: 'status', type: 'String' },
+          { name: 'is_verified', type: 'Boolean' }
+        },
+        <hilite>forceLoadDirect: ['roles:name'],</hilite>
+        defaultOrderBy: 'display_name'
+      }
+    }
+  ]
 }
 {%- endcall %}
 
 {{ api.optheader('spec.auth', 'spec-opt-auth') }}
+
+{% call api.apidesc() -%}
+  TBC
+{%- endcall %}
 
 <br />
 <p>
@@ -884,21 +972,17 @@ function getUsers(input) {
   </tr>
 </table>
 
-<p>
-  [TBC]
-</p>
-
 {{ api.optheader('spec.main', 'spec-opt-main') }}
 
-<p>
-  [TBC]
-</p>
+{% call api.apidesc() -%}
+  TBC
+{%- endcall %}
 
 {{ api.optheader('spec.association', 'spec-opt-association') }}
 
-<p>
-  [TBC]
-</p>
+{% call api.apidesc() -%}
+  TBC
+{%- endcall %}
 
 <hr />
 
@@ -984,81 +1068,68 @@ function getUsers(input) {
 
 {{ api.optheader('input.fields', 'input-opt-fields') }}
 
-{{ api.optsig(['Object'], 'all', 'Yes (except getItems)') }}
-
 {{ api.apidesc('Provides the field data for an action request.') }}
 
-{% call code.block(filename='/methods/profile.js') -%}
-export function createProfile(input) {
-  const spec = {
-    modelName: 'Profile',
-    fields: [
-      { name: 'user_id', type: 'Number', required: true },
-      { name: 'title', type: 'String', required: true },
-      { name: 'tagline', type: 'String' },
-      { name: 'is_live', type: 'Boolean', defaultValue: false },
-    ],
-  };
+{{ api.optsig(['Object'], 'all', 'Yes (except getItems)') }}
 
-  return joint.createItem(spec, input);
+{% call code.block(filename='/methodConfigs/profile.js') -%}
+{
+  modelName: 'Profile',
+
+  methods: [
+    {
+      name: 'create',
+      action: 'createItem',
+      spec: {
+        fields: {
+          { name: 'user_id', type: 'Number', required: true },
+          { name: 'title', type: 'String', required: true },
+          { name: 'tagline', type: 'String' },
+          { name: 'is_live', type: 'Boolean', defaultValue: false }
+        }
+      }
+    }
+  ]
 }
 {%- endcall %}
 
-{% call code.block('Example usage:') -%}
-import * as profileMethods from '../methods/profile';
+<br />
 
-const input = {
+{% call code.block('Example usage:') -%}
+const profile = await joint.method.Profile.create({
   <hilite>fields: {
     user_id: 333,
     title: 'Functional Fanatic',
     tagline: 'I don\'t have habits, I have algorithms.',
-    is_live: true,
-  },</hilite>
-};
-
-profileMethods.createProfile(input)
-  .then((payload) => { <comment>...</comment> }) <comment>// returns the created Profile resource</comment>
-  .catch((error) => { <comment>...</comment> }); <comment>// or returns an error</comment>
+    is_live: true
+  }</hilite>
+})
 {%- endcall %}
 
 {{ api.optheader('input.fieldSet', 'input-opt-fieldSet') }}
 
-<p>
-  [TBC]
-</p>
+{{ api.apidesc('TBC') }}
 
 {{ api.optheader('input.orderBy', 'input-opt-orderBy') }}
 
-<p>
-  [TBC]
-</p>
+{{ api.apidesc('TBC') }}
 
 {{ api.optheader('input.associations', 'input-opt-associations') }}
 
-<p>
-  [TBC]
-</p>
+{{ api.apidesc('TBC') }}
 
 {{ api.optheader('input.loadDirect', 'input-opt-loadDirect') }}
 
-<p>
-  [TBC]
-</p>
+{{ api.apidesc('TBC') }}
 
 {{ api.optheader('input.paginate', 'input-opt-paginate') }}
 
-<p>
-  [TBC]
-</p>
+{{ api.apidesc('TBC') }}
 
 {{ api.optheader('input.trx', 'input-opt-trx') }}
 
-<p>
-  [TBC]
-</p>
+{{ api.apidesc('TBC') }}
 
 {{ api.optheader('input.authBundle', 'input-opt-authBundle') }}
 
-<p>
-  [TBC]
-</p>
+{{ api.apidesc('TBC') }}
