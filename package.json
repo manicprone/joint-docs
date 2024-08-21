@@ -10,7 +10,7 @@
   },
   "scripts": {
     "dev": "NODE_ENV=development node src/index.js",
-    "start": "NODE_ENV=production node src/index.js",
+    "start": "node src/index.js",
     "lint": "standard src/index.js src/config/* src/routers/* --verbose",
     "flint": "yarn lint --fix",
     "precommit-message": "echo 'Pre-commit checks (linting)...' && exit 0"
