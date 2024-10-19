@@ -8,6 +8,7 @@
     "type": "git",
     "url": "git@github.com:manicprone/joint-docs.git"
   },
+  "main": "index.js",
   "scripts": {
     "dev": "NODE_ENV=development node src/index.js",
     "start": "node src/index.js",
@@ -31,5 +32,6 @@
   "devDependencies": {
     "pre-commit": "^1.2.2",
     "standard": "16.0.3"
-  }
+  },
+  "packageManager": "yarn@4.5.0+sha512.837566d24eec14ec0f5f1411adb544e892b3454255e61fdef8fd05f3429480102806bac7446bc9daff3896b01ae4b62d00096c7e989f1596f2af10b927532f39"
 }
