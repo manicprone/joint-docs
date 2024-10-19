@@ -10,7 +10,7 @@ module.exports = {
 
   port: {
     development: 3000,
-    production: 8080
+    production: 3000
   },
 
   basePaths: {
