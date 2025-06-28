@@ -63,6 +63,28 @@ function buildSplashPage() {
   }
 }
 
+// Build docs index page (redirect to default section)
+function buildDocsIndexPage() {
+  console.log('\n📖 Building docs index page...')
+  const defaultSection = appConfig.appSettings.defaultSection
+  const defaultRootPage = appConfig.appSettings.rootPages[defaultSection]
+  const redirectPath = `${basePathDocs}/${defaultSection}/${defaultRootPage}`
+  
+  const html = `<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Joint Kit Documentation</title>
+    <meta http-equiv="refresh" content="0;url=${redirectPath}">
+</head>
+<body>
+    <p>Redirecting to <a href="${redirectPath}">documentation</a>...</p>
+</body>
+</html>`
+  
+  writeHtmlFile('./dist/docs/index.html', html)
+}
+
 // Build section pages
 function buildSectionPages() {
   console.log('\n📚 Building section pages...')
@@ -104,12 +126,27 @@ function buildSectionPages() {
         console.error(`    ✗ Error building ${section}/index:`, error.message)
       }
     } else {
-      // For sections without an index template, build all individual templates
+      // For sections without an index template, create a redirect index.html
       const defaultRootPage = rootPages[section]
-      if (defaultRootPage !== 'index' && !contentFiles.includes(defaultRootPage)) {
-        contentFiles.unshift(defaultRootPage)
+      if (defaultRootPage !== 'index') {
+        const redirectPath = `${basePathDocs}/${section}/${defaultRootPage}`
+        const html = `<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Joint Kit - ${section.charAt(0).toUpperCase() + section.slice(1)}</title>
+    <meta http-equiv="refresh" content="0;url=${redirectPath}">
+</head>
+<body>
+    <p>Redirecting to <a href="${redirectPath}">${section} documentation</a>...</p>
+</body>
+</html>`
+        
+        const outputPath = `./dist${basePathDocs}/${section}/index.html`
+        writeHtmlFile(outputPath, html)
       }
       
+      // Build all individual templates
       contentFiles.forEach(content => {
         try {
           const contentURI = `${section}/${content}`
@@ -172,6 +209,7 @@ async function build() {
   
   // Build all pages
   buildSplashPage()
+  buildDocsIndexPage()
   buildSectionPages()
   build404Page()
   
