@@ -75,10 +75,12 @@ function buildDocsIndexPage() {
 <head>
     <meta charset="utf-8">
     <title>Joint Kit Documentation</title>
-    <meta http-equiv="refresh" content="0;url=${redirectPath}">
+    <script>window.location.href = '${redirectPath}';</script>
 </head>
 <body>
-    <p>Redirecting to <a href="${redirectPath}">documentation</a>...</p>
+    <noscript>
+        <p>Please enable JavaScript or <a href="${redirectPath}">click here</a> to continue.</p>
+    </noscript>
 </body>
 </html>`
   
@@ -135,10 +137,12 @@ function buildSectionPages() {
 <head>
     <meta charset="utf-8">
     <title>Joint Kit - ${section.charAt(0).toUpperCase() + section.slice(1)}</title>
-    <meta http-equiv="refresh" content="0;url=${redirectPath}">
+    <script>window.location.href = '${redirectPath}';</script>
 </head>
 <body>
-    <p>Redirecting to <a href="${redirectPath}">${section} documentation</a>...</p>
+    <noscript>
+        <p>Please enable JavaScript or <a href="${redirectPath}">click here</a> to continue.</p>
+    </noscript>
 </body>
 </html>`
         
@@ -185,10 +189,12 @@ function build404Page() {
 <head>
     <meta charset="utf-8">
     <title>Page Not Found</title>
-    <meta http-equiv="refresh" content="0;url=/">
+    <script>window.location.href = '/';</script>
 </head>
 <body>
-    <p>Redirecting to <a href="/">home page</a>...</p>
+    <noscript>
+        <p>Please enable JavaScript or <a href="/">click here</a> to go home.</p>
+    </noscript>
 </body>
 </html>`
   
