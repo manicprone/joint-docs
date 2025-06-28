@@ -10,12 +10,18 @@
   },
   "main": "index.js",
   "scripts": {
-    "build": "echo 'Build step not required'",
+    "build": "node build.js",
+    "serve": "node serve-static.js",
     "dev": "NODE_ENV=development node src/index.js",
     "start": "node src/index.js",
     "lint": "standard src/index.js src/config/* src/routers/* --verbose",
-    "flint": "yarn lint --fix",
-    "precommit-message": "echo 'Pre-commit checks (linting)...' && exit 0"
+    "flint": "npm run lint -- --fix",
+    "precommit-message": "echo 'Pre-commit checks (linting)...' && exit 0",
+    "deploy": "node deploy.js",
+    "deploy:netlify": "node deploy.js netlify",
+    "deploy:vercel": "node deploy.js vercel",
+    "deploy:github": "node deploy.js github",
+    "deploy:s3": "node deploy.js s3"
   },
   "pre-commit": [
     "precommit-message",
@@ -26,6 +32,7 @@
     "compression": "^1.7.1",
     "cookie-parser": "^1.4.3",
     "express": "^4.15.3",
+    "fs-extra": "^11.1.1",
     "lodash": "4.17.15",
     "nunjucks": "^3.0.1",
     "serve-favicon": "^2.4.5"
@@ -33,6 +40,5 @@
   "devDependencies": {
     "pre-commit": "^1.2.2",
     "standard": "16.0.3"
-  },
-  "packageManager": "yarn@4.5.0+sha512.837566d24eec14ec0f5f1411adb544e892b3454255e61fdef8fd05f3429480102806bac7446bc9daff3896b01ae4b62d00096c7e989f1596f2af10b927532f39"
+  }
 }
